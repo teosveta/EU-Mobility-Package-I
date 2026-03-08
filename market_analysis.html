@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пазарен анализ — SaaS за съответствие на български превозвачи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #121212;
+            --steel: #1e3a5f;
+            --steel-light: #2d5282;
+            --amber: #d97706;
+            --amber-light: #fef3c7;
+            --red: #b91c1c;
+            --green: #166534;
+            --bg: #f8f8f6;
+            --white: #ffffff;
+            --border: #e2ddd5;
+            --muted: #5f5f5f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; font-size: 15px; }
+        .page { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+
+        .doc-header {
+            background: var(--steel);
+            color: white;
+            padding: 28px 20px;
+            margin: 0 -16px 28px;
+            border-bottom: 5px solid var(--amber);
+            position: relative;
+            overflow: hidden;
+        }
+        .doc-header::before {
+            content: 'АНАЛИЗ';
+            position: absolute;
+            right: -10px; top: 10px;
+            font-size: 60px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.04);
+            letter-spacing: -2px;
+            font-family: 'Playfair Display', serif;
+        }
+        .doc-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+        .doc-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 12px; }
+        .doc-subtitle { font-size: 13px; color: rgba(255,255,255,0.72); font-weight: 300; }
+
+        .lead-box { background: white; border-left: 4px solid var(--amber); padding: 18px 20px; margin-bottom: 28px; border-radius: 0 6px 6px 0; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .lead-box p { font-size: 15px; font-weight: 500; line-height: 1.65; color: var(--steel); }
+
+        .section { margin-bottom: 44px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--steel); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .section-num { background: var(--steel); color: var(--amber); font-family: 'Source Sans 3', sans-serif; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 3px; letter-spacing: 1px; white-space: nowrap; }
+
+        p { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+
+        /* Stat grid — 2 col on mobile, 4 on desktop */
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+        .stat-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .stat-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--steel); line-height: 1.1; }
+        .stat-num.neg { color: var(--red); }
+        .stat-num.pos { color: var(--green); }
+        .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px; line-height: 1.4; }
+
+        /* Tables — scrollable */
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; border-radius: 8px; }
+        .styled-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 14px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .styled-table thead tr { background: var(--steel); color: white; }
+        .styled-table th { padding: 12px 14px; text-align: left; font-weight: 600; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .styled-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+        .styled-table tr:last-child td { border-bottom: none; }
+        .styled-table tr:nth-child(even) td { background: #f8f7f4; }
+        .check { color: var(--green); font-weight: 700; }
+        .cross { color: var(--red); font-weight: 700; }
+        .partial { color: var(--amber); font-weight: 700; }
+
+        /* Funnel */
+        .funnel { background: white; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .funnel-step { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+        .funnel-step:last-child { border-bottom: none; }
+        .funnel-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+        .funnel-label { font-size: 13px; font-weight: 600; color: var(--steel); }
+        .funnel-num { font-size: 16px; font-weight: 700; color: var(--steel); white-space: nowrap; font-family: 'Playfair Display', serif; }
+        .funnel-desc { font-size: 13px; color: #555; margin-bottom: 8px; }
+        .funnel-bar { height: 5px; background: var(--border); border-radius: 3px; }
+        .funnel-fill { height: 5px; background: var(--steel); border-radius: 3px; }
+
+        /* Scenario blocks */
+        .scenario-block { background: white; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .scenario-header { padding: 12px 16px; font-size: 14px; font-weight: 600; }
+        .scenario-header.conservative { background: #fef2f2; color: var(--red); }
+        .scenario-header.base { background: var(--amber-light); color: #92400e; }
+        .scenario-header.optimistic { background: #f0fdf4; color: var(--green); }
+
+        /* Risk grid — 1 col mobile */
+        .risk-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 18px; }
+        .risk-card { border-radius: 8px; padding: 16px; }
+        .risk-card.high { background: #fef2f2; border: 1px solid #fecaca; }
+        .risk-card.medium { background: var(--amber-light); border: 1px solid #fde68a; }
+        .risk-card.low { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .risk-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .risk-card.high .risk-title { color: var(--red); }
+        .risk-card.medium .risk-title { color: #92400e; }
+        .risk-card.low .risk-title { color: var(--green); }
+        .risk-body { font-size: 13px; line-height: 1.6; color: #444; }
+
+        .callout { background: var(--amber-light); border: 1px solid #fde68a; border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.6; }
+        .callout strong { color: var(--steel); }
+        .callout-blue { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.6; }
+        .callout-blue strong { color: var(--steel); }
+        .callout-red { background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.6; }
+
+        .verdict-box { background: linear-gradient(135deg, var(--steel) 0%, var(--steel-light) 100%); color: white; padding: 24px 20px; border-radius: 8px; margin-top: 20px; }
+        .verdict-box h3 { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 10px; color: #fef3c7; }
+        .verdict-box p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); margin-bottom: 10px; }
+        .verdict-box p:last-child { margin-bottom: 0; }
+
+        .bullet-list { list-style: none; margin: 10px 0; padding: 0; }
+        .bullet-list li { padding: 5px 0 5px 20px; position: relative; font-size: 14px; color: #444; line-height: 1.6; }
+        .bullet-list li::before { content: '▸'; position: absolute; left: 0; color: var(--amber); font-size: 12px; top: 6px; }
+
+        /* Enforcement — stack on mobile */
+        .enforcement-wrap { border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid var(--border); margin: 14px 0; }
+        .enforcement-row { padding: 14px 16px; border-bottom: 1px solid var(--border); background: white; }
+        .enforcement-row:last-child { border-bottom: none; }
+        .e-country { font-weight: 700; color: var(--steel); font-size: 15px; margin-bottom: 6px; }
+        .e-desc { font-size: 13px; color: #444; line-height: 1.55; margin-bottom: 8px; }
+        .e-fine { font-size: 14px; font-weight: 700; color: var(--red); font-family: 'Playfair Display', serif; }
+
+        /* Tipping points */
+        .tip-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+        .tip-num { display: inline-block; background: var(--steel); color: var(--amber); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 3px; margin-bottom: 8px; }
+        .tip-title { font-weight: 700; color: var(--steel); font-size: 14px; margin-bottom: 6px; }
+        .tip-body { font-size: 13px; color: #555; line-height: 1.6; }
+
+        .reg-link { display: inline-block; font-size: 12px; color: #1a5a8a; text-decoration: none; font-weight: 600; word-break: break-all; }
+        .reg-link::before { content: '↗ '; }
+
+        /* Cross-doc navigation */
+        .doc-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .doc-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 4px;
+            border: 2px solid var(--border);
+            background: var(--white);
+            color: var(--steel);
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .doc-nav a:hover { background: var(--amber-light); border-color: var(--amber); }
+        .doc-nav a.active {
+            background: var(--steel);
+            color: white;
+            border-color: var(--steel);
+        }
+
+        /* DESKTOP overrides */
+        @media (min-width: 768px) {
+            .page { padding: 48px 40px; }
+            .doc-header { padding: 40px 48px; margin: 0 -40px 48px; }
+            .doc-title { font-size: 34px; }
+            .doc-label { font-size: 11px; letter-spacing: 3px; }
+            .doc-subtitle { font-size: 15px; max-width: 620px; }
+            .lead-box { padding: 22px 28px; margin-bottom: 44px; }
+            .lead-box p { font-size: 16px; }
+            .section { margin-bottom: 52px; }
+            .section-title { font-size: 22px; gap: 12px; }
+            .stat-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+            .risk-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .funnel-step { display: grid; grid-template-columns: 200px 1fr auto; align-items: start; gap: 16px; padding: 14px 20px; }
+            .funnel-top { display: contents; }
+            .funnel-desc { font-size: 13px; }
+            .styled-table { min-width: unset; }
+            .verdict-box { padding: 28px 32px; }
+            .verdict-box h3 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="doc-header">
+        <div class="doc-label">Пазарно проучване · България и ЦИЕ · Март 2026</div>
+        <h1 class="doc-title">SaaS за съответствие на български превозвачи<br>Пазарен анализ</h1>
+        <p class="doc-subtitle">Реална оценка на броя на потенциалните платещи клиенти, правоприлагането, конкурентната картина и инвестиционната осъществимост.</p>
+    </div>
+
+    <nav class="doc-nav">
+        <a href="index.html"> Регламенти</a>
+        <a href="market_analysis.html" class="active"> Пазарен анализ</a>
+        <a href="business_strategy.html"> Бизнес стратегия</a>
+    </nav>
+
+    <div class="lead-box">
+        <p>Възможността е реална, но по-ограничена от първоначалния поглед. Реалистичната клиентска база за специализиран SaaS за съответствие вероятно е <strong>1 500–3 500 активни международни превозвачи</strong> — а не често цитираните 13 000–17 000 лицензополучатели. Международните автомобилни превози отбелязаха <strong>−18,6% само през 2024 г.</strong> — най-лошият резултат в целия ЕС, при среден годишен спад от <strong>−10,0% за 2020–2024 г.</strong> Натискът от правоприлагането е реален и нарастващ. Нито един доставчик не предлага интегрирана платформа. Но дигиталното усвояване в България е <strong>най-ниското в ЕС</strong> (29,3% срещу средно 54,6%), а ценовата чувствителност е крайна. Прозорецът е 2–3 години.</p>
+    </div>
+
+    <!-- РЕЧНИК -->
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:16px 18px;margin-bottom:28px;font-size:13px;line-height:1.65;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:10px;">📖 Ключови термини</div>
+        <ul class="bullet-list" style="margin:0;">
+            <li><strong>Каботаж:</strong> Вътрешни превози в чужда страна — максимум 3 операции за 7 дни, след 4-дневно изчакване. Нарушение = имобилизация на място.</li>
+            <li><strong>Кроструд:</strong> Превоз между две чужди страни без връщане у нас. Задейства правилата за командироване и заплащане по ставките на приемащата страна.</li>
+            <li><strong>Командироване:</strong> При каботаж/кроструд водачът получава минималната заплата на приемащата страна за тези периоди.</li>
+            <li><strong>G2V2 тахограф:</strong> Интелигентен тахограф Gen 2 с Galileo GNSS, DSRC дистанционен контрол и 56-дневно архивиране. Задължителен за нови ТПС от авг. 2023 г., за ЛТП от юли 2026 г.</li>
+            <li><strong>IMI/ИСВП декларация:</strong> Подава се онлайн (postingdeclaration.eu) преди всяко командироване. Разполага с публичен API.</li>
+        </ul>
+    </div>
+
+    <!-- РАЗДЕЛ 1: РЕАЛЕН РАЗМЕР НА ПАЗАРА -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">01</span> Колко голям е пазарът всъщност?</h2>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-num">5 000–8 000</div>
+                <div class="stat-label">Активни оператори на международен транспорт</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num neg">−18,6%</div>
+                <div class="stat-label">Спад на международните превози 2024 г. — най-лош в ЕС</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num neg">−10%</div>
+                <div class="stat-label">Средногодишен спад 2020–2024 — най-лош в ЕС</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num pos">+9,1%</div>
+                <div class="stat-label">Среден годишен ръст на вътрешния транспорт 2020–2024</div>
+            </div>
+        </div>
+      <div class="stat-grid" style="grid-template-columns:1fr 1fr; margin-top:0;">
+      <div class="stat-card" style="border-left:3px solid var(--teal,#0f766e);">
+        <div class="stat-num" style="color:#0f766e;">€3 млрд.</div>
+        <div class="stat-label">Годишна стойност на транспортната индустрия за България</div>
+      </div>
+      <div class="stat-card" style="border-left:3px solid var(--teal,#0f766e);">
+        <div class="stat-num" style="color:#0f766e;">~6%</div>
+        <div class="stat-label">от БВП на България — международен транспорт (пряк принос)</div>
+      </div>
+    </div>
+    <div class="stat-grid" style="grid-template-columns:1fr 1fr; margin-top:0;">
+      <div class="stat-card" style="border-left:3px solid var(--green);">
+        <div class="stat-num" style="color:var(--green);">28 000+</div>
+        <div class="stat-label">Валидни лиценза на Общността (РТА, 2026) — ръст от 14 191 (авг. 2022)</div>
+      </div>
+      <div class="stat-card" style="border-left:3px solid var(--green);">
+        <div class="stat-num" style="color:var(--green);">30 000+</div>
+        <div class="stat-label">Работни места — СМП членки: 1 200+ фирми, 18 000+ камиона, >€2 млрд. оборот</div>
+      </div>
+    </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Секторът преди и след Пакета за мобилност</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Показател</th><th>Преди (2018 г.)</th><th>Сега (2024–2026)</th></tr></thead>
+            <tbody>
+            <tr><td>Валидни лицензи на Общността (РТА регистър)</td><td>~14 191 (08.08.2022)</td><td style="color:var(--green);font-weight:600"><strong>28 000+ (2026)</strong> — ръст въпреки спада в обемите</td></tr>
+            <tr><td>Компании в международния транспорт</td><td>~13 000 (KPMG/СМП данни)</td><td>~5 000–7 000 активни оператори (оценка 2026)</td></tr>
+            <tr><td>Занети в сектора</td><td>~42 500 (преки); до 120 000 (вкл. свързани)</td><td>Намаляват — конкретни актуални данни липсват</td></tr>
+            <tr><td>Структура на флота</td><td>75% с ≤5 камиона</td><td>Структурата остава фрагментирана</td></tr>
+            <tr><td>Годишен оборот</td><td>~2,8–3 млрд. евро</td><td>Свит поради обемния спад</td></tr>
+            <tr><td>Дял на международния транспорт</td><td>&gt;77% от дейността</td><td>Намалява — секторът се оттегля</td></tr>
+            <tr><td>Дял на кроструда</td><td>44,3% (CNR данни)</td><td>Спаднал с −1,7 пр. пункта само в 2024 (най-голям спад за страна)</td></tr>
+            <tr><td>Общ превоз (тон-км)</td><td>–</td><td>26,97 млрд. тон-км (2024) — спад −18,6% от 2023</td></tr>
+            <tr><td>Пререгистрации в чужбина</td><td>Единични случаи</td><td>Значителен брой оператори се пререгистрират в ЕС (БНР)</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Цифрова готовност — фундаментален ограничаващ фактор</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Показател</th><th>България</th><th>ЕС средно</th></tr></thead>
+            <tbody>
+            <tr><td>Предприятия с напреднали цифрови технологии</td><td style="color:var(--red);font-weight:600">29,3%</td><td>54,6%</td></tr>
+            <tr><td>Усвояване на облачни изчисления</td><td style="color:var(--red);font-weight:600">14,2%</td><td>38,9%</td></tr>
+            <tr><td>МСП с базова цифрова интензивност</td><td style="color:var(--red);font-weight:600">25%</td><td>~55%</td></tr>
+            <tr><td>Електронни продажби (% от оборота)</td><td style="color:var(--red);font-weight:600">6% — най-ниско в ЕС</td><td>~18%</td></tr>
+            <tr><td>Предприятия с ИКТ обучение</td><td style="color:var(--red);font-weight:600">9,1%</td><td>~22%</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p style="font-size:12px;color:var(--muted);">Източник: Доклад за цифровото десетилетие 2025</p>
+
+        <div class="callout">
+            <strong>Важен парадокс:</strong> Въпреки спада, оцеляващите оператори са точно тези, най-вероятни да се дигитализират. Операторите, напускащи международния пазар, са предимно тези с двустранни превози — без сложни изисквания за съответствие. Оцеляващите дългосрочно извършват кроструд и каботаж — дейностите с <strong>най-много задължения за командироване и най-висок регулаторен риск</strong>.
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Анализ на фунията — кой реално ще плати за SaaS?</h3>
+        <div class="funnel">
+            <div class="funnel-step">
+                <div class="funnel-top">
+                    <div class="funnel-label">Валидни лицензи на Общността (РТА, 2026)</div>
+                    <div class="funnel-num">28 000+</div>
+                </div>
+                <div class="funnel-desc">Регистрирани лицензи за товарни превози в ЕС — ръст от ~13 000 фирми (2018) и 14 191 лиценза (авг. 2022). Важно: броят на лицензите надхвърля броя на активно опериращите международно. Много притежатели са намалили или спрели международна дейност след 2020 г.</div>
+                <div class="funnel-bar"><div class="funnel-fill" style="width:100%"></div></div>
+            </div>
+            <div class="funnel-step">
+                <div class="funnel-top">
+                    <div class="funnel-label">Активни международни оператори 2026</div>
+                    <div class="funnel-num">5 000–7 000</div>
+                </div>
+                <div class="funnel-desc">С документираните спадове −11,8% (2023) и −18,6% (2024), консервативна прогноза за 2026 г. — включва камионни и бус оператори.</div>
+                <div class="funnel-bar"><div class="funnel-fill" style="width:54%"></div></div>
+            </div>
+            <div class="funnel-step">
+                <div class="funnel-top">
+                    <div class="funnel-label">Цифрово готови (ползват телематика)</div>
+                    <div class="funnel-num">2 000–3 000</div>
+                </div>
+                <div class="funnel-desc">Frotcom България: 1 300+ клиенти. Добавяйки GPS Systems, GPS Control и др. — прокси за дигитална готовност (проникване ~15–25% от всички превозвачи).</div>
+                <div class="funnel-bar"><div class="funnel-fill" style="width:30%"></div></div>
+            </div>
+            <div class="funnel-step">
+                <div class="funnel-top">
+                    <div class="funnel-label">Жизнеспособни SaaS клиенти</div>
+                    <div class="funnel-num">1 500–2 500</div>
+                </div>
+                <div class="funnel-desc">Критерии: 3+ камиона/бусове, цифрова готовност, готовност за плащане, изложеност на командироване. Реалистично ранно усвояване 10–30% → 100–600 плащащи клиенти в рамките на 3–5 години.</div>
+                <div class="funnel-bar"><div class="funnel-fill" style="width:20%"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 2: СВИВАНЕТО -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">02</span> Свиването е реално — количествен поглед</h2>
+
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Показател</th><th>Период</th><th>Промяна</th></tr></thead>
+            <tbody>
+            <tr><td>Международен пътен товарен транспорт (среден годишен)</td><td>2020–2024</td><td style="color:var(--red);font-weight:700">−10%/год. — <strong>най-лош в ЕС</strong></td></tr>
+            <tr><td>Общ пътен товарен транспорт</td><td>2023 → 2024</td><td style="color:var(--red);font-weight:700">−18,6% — <strong>най-голям спад в ЕС</strong></td></tr>
+            <tr><td>Дял на кроструда</td><td>2024 г.</td><td style="color:var(--red);font-weight:700">−1,7 пр. пункта — <strong>най-голям спад за страна</strong> (Евростат)</td></tr>
+            <tr><td>Вътрешен товарен транспорт (среден годишен)</td><td>2020–2024</td><td style="color:var(--green);font-weight:700">+9,1%/год. — ръст</td></tr>
+            <tr><td>Румъния (сравнение)</td><td>2020–2024</td><td style="color:var(--green);font-weight:700">+5,2%/год. — ръст</td></tr>
+            <tr><td>Обща цена на транспорт на камион</td><td>CNR данни</td><td style="color:var(--red);font-weight:700">~€108 000/год. при €0,84/км при ~129 500 км/год.</td></tr>
+            <tr><td>Разходи за труд (транспорт, ЕС)</td><td>2021–2023</td><td style="color:var(--red);font-weight:700">+16–17%</td></tr>
+            <tr><td>Разходи за труд (транспорт, ЕС)</td><td>2023–2024</td><td style="color:var(--red);font-weight:700">+10%</td></tr>
+            <tr><td>Разходи за труд в България (услуги)</td><td>Q4 2024, год. на год.</td><td style="color:var(--red);font-weight:700">~+13%</td></tr>
+            <tr style="background:#f0fdf4!important"><td style="color:var(--green);font-weight:600">Вътрешен пътен товарен транспорт</td><td>Q4 2024 → Q4 2025</td><td style="color:var(--green);font-weight:700">+34,4% — силен ръст (НСИ)</td></tr>
+            <tr style="background:#f0fdf4!important"><td style="color:var(--green);font-weight:600">Общи сухопътни товари (тона)</td><td>Q4 2025</td><td style="color:var(--green);font-weight:700">+14,6% / 33 468 млн. тона (НСИ)</td></tr>
+            <tr><td>Международен пътен товарен транспорт</td><td>Q4 2024 → Q4 2025</td><td style="color:var(--red);font-weight:700">−18,9% (НСИ)</td></tr>
+            <tr style="background:#f0fdf4!important"><td style="color:var(--green);font-weight:600">Сухопътен/воден товарен транспорт</td><td>Q1 2025 год. на год.</td><td style="color:var(--green);font-weight:700">+5,8% (НСИ)</td></tr>
+            <tr><td>Тонкилометри (сухопътен/воден)</td><td>Q1 2025 год. на год.</td><td style="color:var(--red);font-weight:700">−2,5% (НСИ)</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout-blue">
+            <strong>Q4 2025 — положителен обрат при вътрешния транспорт:</strong> Въпреки продължаващия спад при международните превози (−18,9% Q4 2024→Q4 2025), вътрешните пътни товари отбелязаха <strong>+34,4%</strong>, а общият сухопътен товарен обем нарасна с <strong>+14,6%</strong> (33 468 млн. тона). Секторът като цяло се преструктурира: международните оператори намаляват, но вътрешният пазар поглъща ресурсите. За SaaS продукт за съответствие с ЕС Пакет за мобилност I, оцеляващите международни оператори стават все по-ценни клиенти — именно те носят кроструд и каботаж с максимална регулаторна изложеност.
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Модел на свиване</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Година</th><th>При −10%/год.</th><th>При −5%/год.</th></tr></thead>
+            <tbody>
+            <tr><td>2024</td><td>~5 265 оператора</td><td>~5 866 оператора</td></tr>
+            <tr><td>2026</td><td>~4 265 оператора</td><td>~5 294 оператора</td></tr>
+            <tr><td>2028</td><td>~3 454 оператора</td><td>~4 778 оператора</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout-blue">
+            <strong>Разширяването към ЛТП частично компенсира спада:</strong> ~16 000 български бусове в международния транспорт ще попаднат под пълния режим от юли 2026 г. Те са нова клиентска група — но и изключително ценово чувствителни микрофирми с нулев опит с тахографи и транспортни регулации на ЕС.
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 3: ЦЕНОВА ЧУВСТВИТЕЛНОСТ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">03</span> Ценовата чувствителност — реалните числа</h2>
+
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Текуща разходна позиция</th><th>Платено на</th><th>Прибл. разход</th></tr></thead>
+            <tbody>
+            <tr><td>GPS проследяване/месец/превозно средство</td><td>TollPass Fleet и др.</td><td>€4,55–15</td></tr>
+            <tr><td>Пълни счетоводни/ТРЗ услуги/месец</td><td>Счетоводители</td><td>€180–360</td></tr>
+            <tr><td>Подготовка на A1 удостоверение</td><td>Vesta Consult и др.</td><td>€100–250 на заявление</td></tr>
+            <tr><td>Услуги за командироване/год.</td><td>Move Expert</td><td>€200–2 000 (в зависимост от флота)</td></tr>
+            <tr><td>Декларации за командироване (пакет)</td><td>Arletti Partners</td><td>от €96 с ДДС</td></tr>
+            <tr><td>Тахографски анализ SaaS (аналог TachoScan)</td><td>Tachogram</td><td>€3,99/водач/месец</td></tr>
+            <tr><td>Български ТРЗ софтуер (Плюс Минус)</td><td>–</td><td>~€15–40/месец</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout">
+            <strong>Реален таван на готовността за плащане:</strong> Микрооператор с 3–5 камиона генерира ~€250 000–650 000 годишен приход с 2–5% нетни маржове (€10 000–40 000 нетна печалба/год.). SaaS за съответствие на €100/месец би погълнал 3–12% от годишната печалба. Реалистичен ценови таван: <strong>€50–150/месец на компания</strong> или €10–25/превозно средство/месец. Единична глоба от €4 000 покрива абонамент за 20-камионен флот за повече от година — това е единственият лост за увеличаване на готовността за плащане.
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 4: ПРАВОПРИЛАГАНЕ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">04</span> Правоприлагането — двигателят на търсенето</h2>
+
+        <p>Режимът се измества от „ниска вероятност за засичане" към <strong>почти универсален автоматизиран скрининг</strong>. Ръчна електронна таблица не може да устои на алгоритмичен одит.</p>
+
+        <div class="callout-blue" style="margin-bottom:16px;">
+            <strong>Какво проверяват инспекторите при пътна проверка:</strong> (1) данни от тахографа — управление, почивки; (2) каботажни операции — max 3 за 7 дни; (3) IMI декларации за командироване; (4) ведомост за заплати — съответствие с минималните ставки; (5) A1 удостоверение — социална сигурност; (6) данни за законния представител в страната. Липсата на <em>всеки един</em> е самостоятелно нарушение. При каботажно нарушение: <strong>превозното средство се имобилизира на място.</strong>
+        </div>
+
+        <div class="enforcement-wrap">
+            <div class="enforcement-row">
+                <div class="e-country">🇩🇪 Германия — BALM (Bundesamt für Logistik und Mobilität)</div>
+                <div class="e-desc">
+                    Германия приема ~51,3% от целия каботаж в ЕС. BALM е най-агресивният контролен орган. <strong>13 февруари 2025 г.</strong>: BALM обяви национално внедряване на DSRC сензорен цифров контрол — дистанционно изтегляне на 25 параметъра от G2V2 тахографи без спиране на превозното средство.
+                    <br><br>
+                    Ключови числа: 750 000 сензорни проверки в пилота за 2023 г.; над 1 милион сензорни проверки януари–октомври 2024 г.; национално внедряване 2025 г. Традиционни проверки: 170 645 чуждестранни превозни средства (2023 г.). Процент нарушения при чуждестранни камиони: <strong>26,4% срещу 15,7% за местните</strong>. 93% от нарушенията за седмична почивка в превозното средство са чуждестранни водачи — преобладаващо от Източна Европа.
+                    <br><br>
+                    <strong>Конкретни български случаи:</strong> Български камион с гръцки водач, използващ две карти на водач — глоби ~€18 000 за водача и <strong>€200 000 за българския превозвач</strong>; €12 000 за манипулация на тахограф на A3 близо до Нюрнберг; €105 000 в единична акция юли 2025 г. Каботажни нарушения: средно ~€2 120 с гаранционни депозити €76 000–€114 000 при контролни действия.
+                </div>
+                <div class="e-fine">До €500 000 (MiLoG) · €2 000–20 000 (каботаж/командироване)</div>
+            </div>
+            <div class="enforcement-row">
+                <div class="e-country">🇫🇷 Франция — DREAL</div>
+                <div class="e-desc">
+                    Най-строгият режим за командироване. Системно задържа превозни средства. Липсваща декларация за командироване: <strong>€4 000/работник</strong> (€8 000 при повторно нарушение). От 2025 г.: <strong>едногодишни забрани за каботаж</strong> на повторни нарушители — три превозвачи от ЦИЕ забранени декември 2025 г. Усилени системи за пътни проверки с декрет от 2025 г. с напреднали ИТ инструменти.
+                </div>
+                <div class="e-fine">€4 000/командирован работник · До €500 000 кумулативно · Едногодишни забрани</div>
+            </div>
+            <div class="enforcement-row">
+                <div class="e-country">🇦🇹 Австрия — Финансова полиция (Finanzpolizei)</div>
+                <div class="e-desc">
+                    Специализираното звено на МФ за трудово законодателство и демпинг на заплатите. Строги документални проверки на ключови транзитни пунктове (проход Бренер). Липсващи A1 удостоверения или декларации за командироване = незабавна имобилизация. Съвместна инспекция на ЕОТ в Каринтия (септември 2024 г.): <strong>1 451 административни и съдебни нарушения при ~500 проверени камиона</strong>.
+                </div>
+                <div class="e-fine">€1 000–50 000 на засегнат служител</div>
+            </div>
+            <div class="enforcement-row">
+                <div class="e-country">🇪🇺 Европейски орган по труда (ЕОТ / ELA)</div>
+                <div class="e-desc">
+                    ЕОТ координира трансгранични проверки. 8 Седмици на действие в 2024 г.; 236 трансгранични инспекции от 2021 г. с ~19 000 проверени работници. <strong>Февруари 2025 г.:</strong> 420 превозни средства в 7 страни, 240 000 евро глоби. <strong>Седмица на действие 2025 г.</strong> в 11 страни: 564 превозни средства, 774 нарушения, 210 000+ евро. <strong>Ноември 2025 г.</strong> в 13 страни: 172 000+ евро глоби. Планирани разширени дейности за ЛТП от юли 2026 г.
+                    <br><br>
+                    Предложеният засилен мандат би дал на ЕОТ кръстосан достъп до ИСВП, EESSI, ERRU и тахографски данни за рисково насочване на инспекциите. Декларациите за командироване, несъвпадащи с реалните движения от тахографа, ще бъдат автоматично маркирани — непропорционално натоварвайки операторите от страни с неефективно вътрешно правоприлагане като България.
+                </div>
+                <div class="e-fine">Координация на санкциите · Насочени инспекции · ERRU точкова система</div>
+            </div>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Годишна рискова изложеност за оператор с 10 камиона</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Сценарий</th><th>Годишна изложеност</th></tr></thead>
+            <tbody>
+            <tr><td>Консервативен (2–3 незначителни нарушения)</td><td>€2 000 – €10 000</td></tr>
+            <tr><td>Вероятен (1 голям случай + 5–10 по-малки)</td><td>€10 000 – €30 000</td></tr>
+            <tr><td>Умерен (нарушения в няколко страни)</td><td>€20 000 – €50 000</td></tr>
+            <tr><td>Сериозен (системно несъответствие)</td><td>€100 000 – €500 000+</td></tr>
+            <tr style="background:#fef2f2!important"><td style="color:var(--red);font-weight:700;background:#fef2f2">Катастрофален (ERRU прагова точки → спрян лиценз)</td><td style="color:var(--red);font-weight:700;background:#fef2f2">Пълна загуба на бизнеса</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout-red">
+            <strong>Януари 2026 г. — повратна точка:</strong> За първи път в ЕС е спрян транспортен лиценз по ERRU точковата система. Точките остават активни 2 години. Превишаването на прага прекратява пригодността на транспортния мениджър и фактически затваря бизнеса. При нетен марж ~€30 000–40 000/год. за 10-камионен флот, годишна загуба от €25 000–60 000 от санкции <strong>може напълно да заличи печалбата</strong>.
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 5: КОНКУРЕНТНА КАРТИНА -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">05</span> Конкурентна картина — нито един интегриран продукт</h2>
+
+        <p>Проучването разкрива дълбоко разединена пазарна структура. <strong>Нито един доставчик не обединява декларации за командироване, изчисляване на заплати в приемащата страна, управление на тахографи и A1 удостоверения в единна платформа.</strong></p>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:18px 0 12px;">Матрица на функционалностите</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Функционалност</th><th>GPS Bulgaria/ Frotcom</th><th>Eurowag/ TachoScan</th><th>Move Expert</th><th>GoTacho</th><th>TachoSafe</th></tr></thead>
+            <tbody>
+            <tr><td>GPS проследяване на флота</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>Изтегляне и архивиране на тахографи</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Калкулатор за заплати (командировани)</td><td class="cross">✗</td><td class="partial">⚡ Частично</td><td class="cross">✗</td><td class="check">✓ (ПЛ)</td><td class="cross">✗</td></tr>
+            <tr><td>Автоматизация на IMI декларации</td><td class="cross">✗</td><td class="cross">✗</td><td class="partial">⚡ Ръчно</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>Управление на A1 удостоверения</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>Мониторинг на съответствие в реално време</td><td class="cross">✗</td><td class="partial">⚡ Частично</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>Интерфейс на български език</td><td class="partial">⚡ Частично</td><td class="partial">⚡ Частично</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>Облачен/SaaS модел</td><td class="check">✓</td><td class="cross">✗ (десктоп)</td><td class="cross">✗ (услуга)</td><td class="check">✓</td><td class="partial">⚡</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Профили на ключови участници</h3>
+
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Участник</th><th>Специалност / Силни страни</th><th>Критична слабост</th><th>Ниво на заплаха</th></tr></thead>
+            <tbody>
+            <tr>
+                <td><strong>Frotcom България</strong><br><span style="font-size:12px;color:#666">1 300+ клиента от 2008 г. (Пловдив)</span><br><a class="reg-link" href="https://www.frotcom.com/contacts/bulgaria">frotcom.com</a></td>
+                <td>Дълбоко пазарно проникване, TIS-Web интеграция, реално управление на флот, мониторинг на управление</td>
+                <td>Нулеви функции за командироване или заплати. Централата в Португалия е малко вероятно да приоритизира тази ниша.</td>
+                <td class="partial">Среден — потенциален партньор</td>
+            </tr>
+            <tr>
+                <td><strong>GPS Bulgaria / Truck Expert</strong><br><span style="font-size:12px;color:#666">20+ сервизни точки</span><br><a class="reg-link" href="https://www.gps.bg/en/">gps.bg</a></td>
+                <td>GPS проследяване, дистанционно изтегляне на тахограф, тол/ДДС/гориво услуги</td>
+                <td>Без функции за командироване или заплати</td>
+                <td class="partial">Среден — потенциален партньор</td>
+            </tr>
+            <tr>
+                <td><strong>Eurowag / TachoScan (Inelo)</strong><br><span style="font-size:12px;color:#666">Придобиване за ~€306 млн. (2022–23). 10 000+ компании, 87 000+ камиона, ползван от 48+ агенции в 23+ страни</span><br><a class="reg-link" href="https://www.eurowag.com/">eurowag.com</a></td>
+                <td>TachoScan 6.2.3: модул „Чуждестранни заплати" — автоматично изчислява от тахографски данни, различава двустранен/кроструд/каботаж/транзит, импортира ставки по страни. Eurowag Bulgaria EOOD регистрирано в Sofia. Румъния — „критичен пазар".</td>
+                <td>Само десктоп (не облачен). <strong>НЕ обработва IMI декларации.</strong> Ценообразуване: премиум, непрозрачно, само чрез търговски представители. Не рекламиран на български.</td>
+                <td class="cross" style="color:var(--red)">ВИСОК — най-сериозна заплаха</td>
+            </tr>
+            <tr>
+                <td><strong>Move Expert</strong><br><span style="font-size:12px;color:#666">14 000+ оператори, 18 страни, 24 год. опит</span><br><a class="reg-link" href="https://move-expert.com/">move-expert.com</a></td>
+                <td>Декларации за командироване на 9 езика вкл. БГ. Пакети: €200 (1–10 водача) до €2 000 (100+)/год. Екип за Изт. Европа от 40+ профес.</td>
+                <td>Управлявани услуги, не SaaS. Скъпо за микропревозвачи. Създава зависимост, не автоматизация.</td>
+                <td class="partial">Среден — потвърждава търсенето</td>
+            </tr>
+            <tr>
+                <td><strong>GoTacho „Foreign Pay"</strong><br><span style="font-size:12px;color:#666">Полша — облачен</span><br><a class="reg-link" href="https://docs.gotacho.com/en/employment/foreign_pay">gotacho.com</a></td>
+                <td>Изрично изчислява чуждестранно заплащане за делегирани водачи, ползва официални портали и КТД. Облачен. Технически преносим към ЦИЕ пазари.</td>
+                <td>Проектиран за полски превозвачи. Без интерфейс на БГ. Без IMI декларации.</td>
+                <td class="partial">Среден — потенциален конкурент при навлизане в България</td>
+            </tr>
+            <tr>
+                <td><strong>TachoSafe / SVT</strong><br><span style="font-size:12px;color:#666">Румъния — ~28 000 ЛТП</span><br><a class="reg-link" href="https://tachosafe.info/">tachosafe.info</a></td>
+                <td>Изтегляне и анализ на тахограф, засичане на нарушения. „Lite" версия за ЛТП пазара. Силна позиция в Румъния.</td>
+                <td>Без командироване или заплати. Ориентиран към румънски пазар.</td>
+                <td class="partial">Нисък–среден за България</td>
+            </tr>
+            <tr>
+                <td><strong>WorkisrOund</strong><br><a class="reg-link" href="https://workisround.eu/">workisround.eu</a></td>
+                <td>Специализиран декларации за командировани работници</td>
+                <td>Без тахографска интеграция или заплати</td>
+                <td class="partial">Нисък</td>
+            </tr>
+            <tr>
+                <td><strong>Паневропейски (Webfleet, Samsara, Trimble)</strong></td>
+                <td>Огромен мащаб. Samsara Smart Compliance (края на 2025): 17–21 страни — само управление на времето.</td>
+                <td>Нито един не адресира изчисляване на заплати на командировани водачи. Нишата е твърде специфична за тях.</td>
+                <td class="check" style="color:var(--green)">НИСЪк</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Три критични пропуска в пазара</h3>
+
+        <div class="callout-blue">
+            <strong>Пропуск 1 — Управление на декларации за командироване:</strong> Нито един базиран в България доставчик не автоматизира IMI декларациите. Порталът RTPD на postingdeclaration.eu разполага с <strong>публичен API</strong> (api.postingdeclaration.eu/api-docs/) с удостоверяване чрез API ключ, позволяващ програмно подаване. Това премахва основна структурна бариера.
+        </div>
+        <div class="callout-blue">
+            <strong>Пропуск 2 — Изчисляване на заплати в приемащата държава:</strong> Нито един български доставчик не автоматизира изчислението. Само Eurowag/TachoScan предлага частичен модул, но не е рекламиран на BG. Проблемът: счетоводителите нямат GPS/тахографски данни за точния момент на граничното преминаване. Доставчиците на телематика имат данните, но нямат трудовоправни алгоритми. МСА и ETF са поискали официален калкулатор от ЕК — и са получили потвърждение, че такъв не съществува.
+        </div>
+        <div class="callout-blue">
+            <strong>Пропуск 3 — Интегрирано цялостно съответствие:</strong> Нито един доставчик в България не комбинира управление на тахографи + декларации за командироване + изчисляване на заплати + документация в единна платформа. Текущото решение: 3–4 отделни услуги, плащани на различни доставчици.
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Как се решава изчисляването на заплатите при командироване днес</h3>
+        <ul class="bullet-list">
+            <li>Ръчни електронни таблици + GPS/тахографски експорти</li>
+            <li>Външни счетоводители (Vesta Consult, Document Express) за заплати и А1</li>
+            <li>Ad hoc съвети от СМП, АЕБТРИ</li>
+            <li>Частични услуги от Truckpoint, Move Expert — без интегриран модул за изчисляване</li>
+            <li><strong>Широкоразпространеното несъответствие е базовото състояние</strong> — ITF Global: „Шансът да бъдеш хванат е малък и дори при хващане, глобата е незначителна."</li>
+        </ul>
+    </div>
+
+    <!-- РАЗДЕЛ 6: СЦЕНАРИИ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">06</span> Три сценария за размера на пазара</h2>
+
+        <div class="scenario-block">
+            <div class="scenario-header conservative">
+                🔴 Консервативен — Нишов бизнес за оцеляване
+            </div>
+            <div style="padding:0;font-size:13px;color:#666;padding:10px 16px;">Секторът продължава −10%/год. Ниско цифрово усвояване. Eurowag локализира за България в рамките на 18 мес. Без катализатор от ЛТП.</div>
+            <div class="table-wrap">
+            <table class="styled-table" style="border-radius:0;margin:0;box-shadow:none;">
+                <thead><tr><th>Показател</th><th>2026</th><th>2027</th><th>2028</th></tr></thead>
+                <tbody>
+                <tr><td>Платещи клиенти</td><td>~30–41</td><td>–</td><td>–</td></tr>
+                <tr style="background:#fef2f2!important"><td style="font-weight:700;background:#fef2f2">ARR (само България)</td><td style="font-weight:700;background:#fef2f2">€18–30 хил.</td><td colspan="2" style="background:#fef2f2">Неинвестируемо</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="scenario-block">
+            <div class="scenario-header base">
+                🟡 Базов — Жизнеспособен нишов продукт
+            </div>
+            <div style="padding:10px 16px;font-size:13px;color:#666;">Спадът се забавя до −5%. ЛТП крайният срок добавя 300–500 нови оператора. 7–10% пазарно проникване. Без локализиране на голям конкурент за 2 год.</div>
+            <div class="table-wrap">
+            <table class="styled-table" style="border-radius:0;margin:0;box-shadow:none;">
+                <thead><tr><th>Показател</th><th>2026</th><th>2027</th><th>2028</th></tr></thead>
+                <tbody>
+                <tr><td>Платещи клиенти (България)</td><td>~134</td><td>~161</td><td>+</td></tr>
+                <tr><td>ARR (само България)</td><td>€84–100 хил.</td><td>~€174 хил.</td><td>–</td></tr>
+                <tr style="background:var(--amber-light)!important"><td style="font-weight:700;background:var(--amber-light)">ARR с разширяване в Румъния</td><td colspan="3" style="font-weight:700;background:var(--amber-light)">~€324 хил. до 3-та год. — поддържа малък самофинансиращ се екип</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="scenario-block">
+            <div class="scenario-header optimistic">
+                🟢 Оптимистичен — Регионална игра с партньорства
+            </div>
+            <div style="padding:10px 16px;font-size:13px;color:#666;">Крайният срок за ЛТП предизвиква скок в информираността. Видими санкционни репресии → паническо усвояване. Разширяване в Румъния (47 000+ оп.) и Литва (970+ оп.).</div>
+            <div class="table-wrap">
+            <table class="styled-table" style="border-radius:0;margin:0;box-shadow:none;">
+                <thead><tr><th>Пазар</th><th>Клиенти 2028</th><th>ARR</th></tr></thead>
+                <tbody>
+                <tr><td>България</td><td>270</td><td>~€540 хил.</td></tr>
+                <tr><td>Румъния</td><td>500</td><td>~€1 млн.</td></tr>
+                <tr><td>Литва</td><td>80</td><td>~€160 хил.</td></tr>
+                <tr style="background:#f0fdf4!important"><td style="font-weight:700;background:#f0fdf4">Общо</td><td style="font-weight:700;background:#f0fdf4">~850</td><td style="font-weight:700;background:#f0fdf4">~€1,1 млн. ARR</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Алтернативен оптимистичен анализ (с дълбоки партньорства):</strong> Интеграция с Frotcom + пакетно съответствие като услуга може да генерира 800–1 200 български клиенти при €2 000/год. ARPC → €1,6–2,4 млн. ARR за България до 2028 г. С регионално разширяване потенциално €8–12 млн. за 5–8 години. Изисква силни партньорства и внешни „шокови" събития.
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 7: РУМЪНИЯ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">07</span> Румъния — реалната пазарна възможност</h2>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-num pos">47 000+</div>
+                <div class="stat-label">Лицензирани оператори в Румъния</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num pos">+5,2%</div>
+                <div class="stat-label">Годишен ръст на румънски транспорт (2020–2024)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">~28 000</div>
+                <div class="stat-label">Румънски бусове в международния транспорт (ЛТП)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">3–4×</div>
+                <div class="stat-label">По-голям пазар от България</div>
+            </div>
+        </div>
+
+        <div class="callout-blue">
+            <strong>Стратегическа логика:</strong> Румъния има 47 000+ лицензирани оператора (растяща с +5,2%/год.), сходна фрагментирана структура от микрооператори, идентични задължения по Пакета за мобилност и <strong>без местна SaaS платформа за съответствие</strong>. Разработването за България и разширяването към Румъния обръща рисковия профил — България е доказване на концепцията за далеч по-големия румънски пазар. Литва добавя трети пазар (970+ компании, 93% международни, 11% от каботажа в ЕС). Комбиниран TAM на България + Румъния + Литва: над 50 000 оператора.
+        </div>
+
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Страна</th><th>~Международни оператори</th><th>Множител vs. БГ</th><th>Бележки</th></tr></thead>
+            <tbody>
+            <tr><td style="font-weight:600">Румъния</td><td>47 000+</td><td>3–4×</td><td>Растяща +5,2%/год. Фрагментиран пазар. Приоритетна цел.</td></tr>
+            <tr><td style="font-weight:600">Литва</td><td>970+ компании</td><td>~1×</td><td>93% международни, 11% от каботажа в ЕС. Висока международна концентрация.</td></tr>
+            <tr><td style="font-weight:600">Унгария</td><td>8 000–12 000</td><td>1,5–2×</td><td>Непълно обслужван. EKAER добавя сложност.</td></tr>
+            <tr><td style="font-weight:600">Полша</td><td>40 000–60 000</td><td>8–10×</td><td>Доминиран от Eurowag/Inelo — изключително трудно навлизане.</td></tr>
+            <tr style="background:#eff6ff!important"><td style="font-weight:700;color:var(--steel);background:#eff6ff">ЦИЕ общо (без Полша)</td><td colspan="3" style="font-weight:700;background:#eff6ff">TAM: €5–15 млн. ARR при успешно регионално разширяване</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 8: КЛЮЧОВИ ПОВРАТНИ ТОЧКИ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">08</span> Пет повратни точки</h2>
+        <p>Пет конкретни събития преместват вероятността между сценариите:</p>
+
+        <div class="tip-card">
+            <div class="tip-num">01</div>
+            <div class="tip-title">Eurowag локализира TachoScan за България (→ консервативен)</div>
+            <div class="tip-body">Eurowag Bulgaria EOOD вече съществува и Румъния е „критичен пазар". Локализация може да се случи в рамките на 12–18 месеца. Едно продуктово обявление би изпреварило възможността.</div>
+        </div>
+        <div class="tip-card">
+            <div class="tip-num">02</div>
+            <div class="tip-title">Высокопрофилен фалит от глоби за съответствие (→ оптимистичен)</div>
+            <div class="tip-body">Медийно отразяване в българската транспортна преса и Facebook групи би катализирало страхово-движено усвояване. Случаят с €200 000 глоба за български превозвач (BALM 2024) е подобен прецедент.</div>
+        </div>
+        <div class="tip-card">
+            <div class="tip-num">03</div>
+            <div class="tip-title">България транспонира Директива 2020/1057 (→ смесено)</div>
+            <div class="tip-body">Намалява несигурността за превозвачите, но изяснява задълженията. Не решава техническото предизвикателство за изчисляване на заплати.</div>
+        </div>
+        <div class="tip-card">
+            <div class="tip-num">04</div>
+            <div class="tip-title">Frotcom България добавя модул за съответствие (→ консервативен)</div>
+            <div class="tip-body">1 300+ клиентска база създава мигновена дистрибуция. Централата в Португалия трябва да приоритизира — не е сигурно.</div>
+        </div>
+        <div class="tip-card">
+            <div class="tip-num">05</div>
+            <div class="tip-title">EU порталът за е-Декларации стартира като мощен самообслужващ се инструмент (→ консервативен)</div>
+            <div class="tip-body">Ако единният портал опрости достатъчно подаването на декларации, стойностното предложение за управление на декларации за командироване се отслабва. Но той не решава изчисляването на заплати или тахографската интеграция.</div>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 9: РИСКОВЕ И СКРИТИ ВЪЗМОЖНОСТИ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">09</span> Ключови рискове и скрити възможности</h2>
+
+        <div class="risk-grid">
+            <div class="risk-card high">
+                <div class="risk-title">Риск 1: Свиване</div>
+                <div class="risk-body">−10%/год. може да намали адресируемия пазар до 2 000–3 000 оператора преди значителен мащаб. Пазар, губещ клиенти по-бързо от придобиването, е изключително труден за SaaS.</div>
+            </div>
+            <div class="risk-card high">
+                <div class="risk-title">Риск 2: Eurowag действа бързо</div>
+                <div class="risk-body">Eurowag похарчи ~€306 млн. за Inelo именно за интегрирана платформа. Ако „Eurowag Office" пусне облачен модул за съответствие 2026–27, конкурирането е изключително трудно.</div>
+            </div>
+            <div class="risk-card high">
+                <div class="risk-title">Риск 3: Валидационна аномалия</div>
+                <div class="risk-body">Нито един чисто SaaS стартъп за съответствие с командироването в транспорта не е успял нигде в Европа. Пропускът на пазара може да съществува не поради възможност, а защото интелигентните компании са го оценили и отхвърлили.</div>
+            </div>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:24px 0 12px;">Скрити възможности</h3>
+        <ul class="bullet-list">
+            <li><strong>G2V2 тахографът като данна инфраструктура.</strong> Автоматичното GNSS записване на гранични преминавания генерира суровите данни за командироване без човешка намеса. Това е технологията, правеща автоматизираното управление на декларации технически осъществимо.</li>
+            <li><strong>ЛТП пазарът е напълно необслужен.</strong> ~16 000 български бусове с нулева инфраструктура за съответствие, изправени пред краен срок юли 2026 г. Много не знаят за него. Първите в тази ниша ги придобиват преди конкурентите да я идентифицират.</li>
+            <li><strong>Счетоводителите са каналът, не конкуренцията.</strong> Продавайте на Vesta Consult и хилядите независими счетоводители, затрупани с документация. Ако софтуерът улесни живота на счетоводителя, те ще накарат клиентите си да го купят.</li>
+            <li><strong>е-Декларацията засилва аргумента за интегрирани инструменти.</strong> Тя опростява механизмите за подаване, но НЕ решава дали водачът е командирован, не изчислява заплати и не се интегрира с ТРЗ. Единна интеграция с EU eDeclaration API — от тахографски данни към подадена декларация — е ясна ценностна пропозиция.</li>
+            <li><strong>Западноевропейският обратен пазар.</strong> По силата на чл. 6 от Директива 2020/1057, западноевропейските товародатели носят отговорност при несъвместими подизпълнители. Не съществува нито един европейски инструмент за верификация на превозвачи — потенциален приходен поток от двете страни.</li>
+            <li><strong>Шенген е характеристика.</strong> Изключването на България от сухопътния Шенген увеличава нуждата от съответствие — повече гранични преминавания, по-сложни сценарии за заплащане.</li>
+        </ul>
+
+        <div class="verdict-box">
+            <h3>Честната оценка и пътят напред</h3>
+            <p>Пропускът в съответствието е реален. Правоприлагащият натиск е реален и нарастващ. Но самият български пазар — вероятно 1 000–2 500 жизнеспособни SaaS клиенти в цифрово изоставащ, ценово чувствителен, свиващ се сектор — не може сам да поддържа мащабиран софтуерен бизнес.</p>
+            <p>Възможността е интересна при конкретни условия: (1) Румъния е основният целеви пазар, България — доказване на концепцията; (2) платформата е проектирана от ден 1 за многоезично, многодържавно разгръщане; (3) излизането на пазара ползва съществуваща дистрибуция (Frotcom, счетоводители), не директно привличане; (4) екипът приема, че таванът е €1–3 млн. ARR на ЦИЕ пазара, не рисков капитал мащаб.</p>
+            <p><strong>Не изграждайте софтуер само на базата на теоретичен анализ.</strong> Валидирайте с реални разговори с клиенти първо.</p>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 10: КЛЮЧОВИ ДОСТАВЧИЦИ В БЪЛГАРИЯ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">10</span> Доставчици на услуги за съответствие в България</h2>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Компания</th><th>Специалност</th><th>Линк</th></tr></thead>
+            <tbody>
+            <tr><td><strong>GPS Bulgaria (Truck Expert)</strong></td><td>Проследяване на флот, дистанционно изтегляне на тахограф</td><td><a class="reg-link" href="https://www.gps.bg/en/">gps.bg</a></td></tr>
+            <tr><td><strong>TaDa</strong></td><td>Тахографски услуги, G2V2 преоборудване, партньор на Frotcom/VDO</td><td><a class="reg-link" href="https://tada.bg/en/home/">tada.bg</a></td></tr>
+            <tr><td><strong>TachoNet BG</strong></td><td>Най-голяма тахографска сервизна мрежа в България</td><td><a class="reg-link" href="https://tachonetbg.com/">tachonetbg.com</a></td></tr>
+            <tr><td><strong>Evrotest 2001</strong></td><td>Лицензиран тахографски сервиз (София/Перник/Сливен)</td><td><a class="reg-link" href="https://evrotest.com/">evrotest.com</a></td></tr>
+            <tr><td><strong>Frotcom България</strong></td><td>Управление на флот, TIS-Web интеграция (1 300+ клиента)</td><td><a class="reg-link" href="https://www.frotcom.com/contacts/bulgaria">frotcom.com</a></td></tr>
+            <tr><td><strong>Truckpoint</strong></td><td>Консултации, горивни карти, тол, обжалване на глоби, пътни нареждания</td><td><a class="reg-link" href="https://truckpoint.co/">truckpoint.co</a></td></tr>
+            <tr><td><strong>Move Expert</strong></td><td>Декларации за командироване на 9 езика вкл. БГ, 14 000+ оператора</td><td><a class="reg-link" href="https://move-expert.com/">move-expert.com</a></td></tr>
+            <tr><td><strong>Vesta Consult</strong></td><td>Заплати/ТРЗ, А1 удостоверения (~€77 консултация, ~€26–51/работник)</td><td><a class="reg-link" href="https://vesta-bg.eu/bg">vesta-bg.eu</a></td></tr>
+            <tr><td><strong>WorkisrOund</strong></td><td>软件за декларации за командировани работници</td><td><a class="reg-link" href="https://workisround.eu/">workisround.eu</a></td></tr>
+            <tr><td><strong>Eurowag / TachoScan</strong></td><td>Управление на флот, тол, модул за чуждестранни заплати, 10 000+ компании</td><td><a class="reg-link" href="https://www.eurowag.com/">eurowag.com</a></td></tr>
+            <tr><td><strong>GoTacho Foreign Pay</strong></td><td>Изчисляване на чуждестранно заплащане (Полша, облачен)</td><td><a class="reg-link" href="https://docs.gotacho.com/en/employment/foreign_pay">gotacho.com</a></td></tr>
+            <tr><td><strong>TachoSafe / SVT</strong></td><td>Изтегляне/анализ на тахограф, Румъния (~28 000 ЛТП)</td><td><a class="reg-link" href="https://tachosafe.info/">tachosafe.info</a></td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--steel);margin:20px 0 12px;">Основни справочни източници</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Ресурс</th><th>Линк</th></tr></thead>
+            <tbody>
+            <tr><td>Евростат — статистика за автомобилни товарни превози</td><td><a class="reg-link" href="https://ec.europa.eu/eurostat/statistics-explained/">eurostat.ec.europa.eu</a></td></tr>
+            <tr><td>CNR — проучване на булг. автомобилен товарен сектор (2021)</td><td><a class="reg-link" href="https://www.cnr.fr/en/bulgarian-road-freight-transport-sector-2021">cnr.fr</a></td></tr>
+            <tr><td>ЕОТ — Кампания ЛТП 2026</td><td><a class="reg-link" href="https://www.ela.europa.eu/assets/lcv2026/index.html">ela.europa.eu</a></td></tr>
+            <tr><td>Trans.info — Новини от транспортната индустрия</td><td><a class="reg-link" href="https://trans.info/en/">trans.info</a></td></tr>
+            <tr><td>Truck Mobility Info — Новини за правоприлагането</td><td><a class="reg-link" href="https://truckmobility-info.com/">truckmobility-info.com</a></td></tr>
+            <tr><td>БТА — Производство за нарушение окт. 2025</td><td><a class="reg-link" href="https://www.bta.bg/bg/news/bulgaria/oficial-messages/983570-ek-protseduri-za-narushenie-ot-mesets-oktomvri-2025-g-">bta.bg</a></td></tr>
+            <tr><td>АЕБТРИ</td><td><a class="reg-link" href="https://aebtri.com/">aebtri.com</a></td></tr>
+            <tr><td>СМП — Съюз на международните превозвачи</td><td><a class="reg-link" href="https://smp-eu.org/">smp-eu.org</a></td></tr>
+            <tr><td>IMI Портал за декларации за командироване</td><td><a class="reg-link" href="https://www.postingdeclaration.eu/">postingdeclaration.eu</a></td></tr>
+            <tr><td>ЕОТ — Автомобилен транспорт</td><td><a class="reg-link" href="https://www.ela.europa.eu/en/topics/social-aspects-international-road-transport">ela.europa.eu</a></td></tr>
+            <tr><td>Министерство на транспорта и съобщенията (МТС)</td><td><a class="reg-link" href="https://www.mtitc.government.bg/">mtitc.government.bg</a></td></tr>
+            <tr><td>ИА Автомобилна администрация (РТА) — Регистър на лицензите</td><td><a class="reg-link" href="https://rta.government.bg/">rta.government.bg</a></td></tr>
+            <tr><td>РТА — Пълен списък лицензирани превозвачи</td><td><a class="reg-link" href="https://rta.government.bg/upload/15905/mt.htm">rta.government.bg/upload/15905/mt.htm</a></td></tr>
+            <tr><td>Национален статистически институт (НСИ) — Транспорт и съобщения</td><td><a class="reg-link" href="https://www.nsi.bg/">nsi.bg</a></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

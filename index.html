@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕС Пакет за мобилност I — Регламенти и директиви</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0f1f3d;
+            --navy-mid: #1a3260;
+            --gold: #c9a84c;
+            --gold-light: #f0d896;
+            --cream: #faf8f3;
+            --text: #1e1e1e;
+            --muted: #6b6b6b;
+            --border: #ddd8c9;
+            --red-soft: #b94040;
+            --green-soft: #2e7d52;
+            --blue-soft: #1a5a8a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        .doc-header {
+            border-top: 5px solid var(--gold);
+            background: var(--navy);
+            color: white;
+            padding: 28px 20px;
+            margin: 0 -16px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; right: -30px;
+            width: 160px; height: 160px;
+            border: 30px solid rgba(201,168,76,0.10);
+            border-radius: 50%;
+        }
+        .doc-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .doc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+        .doc-subtitle {
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            font-weight: 300;
+        }
+
+        .lead-box {
+            background: white;
+            border-left: 4px solid var(--gold);
+            padding: 18px 20px;
+            margin-bottom: 32px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .lead-box p {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.65;
+            color: var(--navy);
+        }
+
+        .section { margin-bottom: 44px; }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .section-num {
+            background: var(--navy);
+            color: var(--gold);
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .reg-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .reg-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--navy-mid);
+        }
+        .reg-num {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--blue-soft);
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        .reg-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        .reg-body { font-size: 14px; color: #444; line-height: 1.65; }
+        .reg-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--blue-soft);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .reg-link::before { content: '↗ '; }
+
+        .bullet-list {
+            list-style: none;
+            margin: 10px 0;
+            padding: 0;
+        }
+        .bullet-list li {
+            padding: 5px 0 5px 20px;
+            position: relative;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+        }
+        .bullet-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 12px;
+            top: 6px;
+        }
+
+        /* Timeline — mobile-first vertical */
+        .timeline-wrap { position: relative; padding-left: 20px; border-left: 2px solid var(--border); margin-left: 8px; }
+        .timeline-item { margin-bottom: 20px; position: relative; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px; top: 14px;
+            width: 10px; height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--gold);
+        }
+        .tl-date {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .tl-content {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .tl-content strong { color: var(--navy); font-weight: 600; }
+        .tl-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+        .badge-done { background: #d4edda; color: #2e7d52; }
+        .badge-coming { background: #fff3cd; color: #856404; }
+        .badge-future { background: #e8f0fe; color: #1a3260; }
+        .badge-key { background: #fde8e8; color: var(--red-soft); }
+
+        /* Tables — scrollable on mobile */
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; border-radius: 8px; }
+        .styled-table {
+            width: 100%;
+            min-width: 480px;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .styled-table thead tr { background: var(--navy); color: white; }
+        .styled-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .styled-table td {
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            line-height: 1.55;
+        }
+        .styled-table tr:last-child td { border-bottom: none; }
+        .styled-table tr:nth-child(even) td { background: #f9f7f3; }
+
+        .verdict-box {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+            color: white;
+            padding: 24px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .verdict-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            margin-bottom: 10px;
+            color: var(--gold-light);
+        }
+        .verdict-box p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); margin-bottom: 10px; }
+        .verdict-box p:last-of-type { margin-bottom: 0; }
+
+        .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+        .tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(201,168,76,0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(201,168,76,0.3);
+            font-weight: 500;
+        }
+
+        .callout {
+            background: #fff8e6;
+            border: 1px solid #f0d896;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .callout strong { color: var(--navy); }
+
+        .two-col { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 14px; }
+        .info-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .info-card h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; }
+        .info-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+        /* Glossary */
+        .glossary-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 16px 0; }
+        .glossary-term { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+        .glossary-term dt { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .glossary-term dt .term-tag { font-size: 10px; background: var(--navy); color: var(--gold); padding: 2px 7px; border-radius: 3px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .glossary-term dd { font-size: 13px; color: #555; line-height: 1.6; margin: 0; }
+
+        /* Explanation callout */
+        .explain-box { background: #eef4ff; border: 1px solid #bfdbfe; border-left: 4px solid var(--blue-soft); border-radius: 0 6px 6px 0; padding: 12px 16px; margin: 12px 0; font-size: 13px; line-height: 1.65; color: #334; }
+        .explain-box strong { color: var(--navy); }
+        .explain-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-soft); margin-bottom: 5px; }
+
+        /* Penalty box */
+        .penalty-box { background: #fff0f0; border: 1px solid #fecaca; border-radius: 8px; padding: 16px 18px; margin: 16px 0; }
+        .penalty-box h4 { font-size: 14px; font-weight: 700; color: var(--red-soft); margin-bottom: 10px; }
+        .penalty-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px dashed #fecaca; font-size: 13px; flex-wrap: wrap; gap: 4px; }
+        .penalty-row:last-child { border-bottom: none; }
+        .penalty-amount { font-weight: 700; color: var(--red-soft); font-family: 'Playfair Display', serif; font-size: 16px; }
+
+        p { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+
+        /* Cross-doc navigation */
+        .doc-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .doc-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 4px;
+            border: 2px solid var(--border);
+            background: white;
+            color: var(--navy);
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .doc-nav a:hover { background: var(--gold-light); border-color: var(--gold); }
+        .doc-nav a.active {
+            background: var(--navy);
+            color: white;
+            border-color: var(--navy);
+        }
+
+        /* DESKTOP overrides */
+        @media (min-width: 768px) {
+            .page { padding: 48px 40px; }
+            .doc-header { padding: 40px 48px; margin: 0 -40px 48px; }
+            .doc-title { font-size: 34px; }
+            .doc-label { font-size: 11px; letter-spacing: 3px; }
+            .doc-subtitle { font-size: 15px; max-width: 620px; }
+            .lead-box { padding: 22px 28px; margin-bottom: 44px; }
+            .lead-box p { font-size: 16px; }
+            .section { margin-bottom: 52px; }
+            .section-title { font-size: 22px; gap: 12px; }
+            .reg-card { padding: 24px 28px; }
+            .glossary-grid { grid-template-columns: 1fr 1fr; }
+            .two-col { grid-template-columns: 1fr 1fr; }
+
+            /* Desktop timeline */
+            .timeline-wrap { padding-left: 0; border-left: none; margin-left: 0; }
+            .timeline-item { display: grid; grid-template-columns: 160px 1fr; gap: 0 24px; margin-bottom: 6px; align-items: start; position: relative; }
+            .timeline-item::before { display: none; }
+            .tl-date {
+                text-align: right;
+                padding: 14px 0;
+                font-size: 13px;
+                position: relative;
+                margin-bottom: 0;
+            }
+            .tl-date::after {
+                content: '';
+                position: absolute;
+                right: -13px; top: 20px;
+                width: 10px; height: 10px;
+                background: var(--gold);
+                border-radius: 50%;
+                border: 2px solid white;
+                box-shadow: 0 0 0 2px var(--gold);
+                z-index: 1;
+            }
+            .tl-line {
+                position: absolute;
+                left: 157px;
+                top: 20px; bottom: 20px;
+                width: 2px;
+                background: var(--border);
+            }
+            .tl-content { margin-bottom: 10px; padding: 12px 18px; }
+            .verdict-box { padding: 28px 32px; }
+            .verdict-box h3 { font-size: 18px; }
+            .styled-table { min-width: unset; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="doc-header">
+        <div class="doc-label">Регулаторен преглед · Юли 2020 – Юли 2026+</div>
+        <h1 class="doc-title">ЕС Пакет за мобилност I<br>Регламенти, директиви и хронология</h1>
+        <p class="doc-subtitle">Трите основни законодателни акта, хронология на прилагането, решението на Съда на ЕС и предстоящото разширяване от юли 2026 г. върху леките търговски превозни средства.</p>
+    </div>
+
+    <nav class="doc-nav">
+        <a href="index.html" class="active"> Регламенти</a>
+        <a href="market_analysis.html"> Пазарен анализ</a>
+        <a href="business_strategy.html"> Бизнес стратегия</a>
+    </nav>
+
+    <div class="lead-box">
+        <p>През юли 2020 г. Европейският съюз прие три закона — известни като <strong>Пакет за мобилност I</strong> — приети на <strong>15 юли 2020 г.</strong> и публикувани в Официален вестник (OJ L 249, 31.7.2020). За България, където международният автомобилен транспорт генерира пряко <strong>~6% от БВП</strong> и осигурява заетост на <strong>~42 500 до 120 000 работници</strong> с годишен оборот от <strong>~2,8–3 млрд. евро</strong>, пакетът предизвика средногодишен спад на международния транспорт от <strong>−10%</strong> (2020–2024). Последната голяма фаза влиза в сила на <strong>1 юли 2026 г.</strong>, когато леките фургони над 2,5 тона са включени в същите правила.</p>
+    </div>
+
+    <!-- РЕЧНИК НА ТЕРМИНИТЕ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">00</span> Речник — Ключови термини</h2>
+        <p style="font-size:14px;color:#555;margin-bottom:14px;">Транспортното законодателство на ЕС използва специфичен жаргон. Ето обяснение на основните понятия.</p>
+        <div class="glossary-grid">
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Ключово</span> Каботаж</dt>
+                <dd>Когато чужд камион (напр. български) извършва <strong>вътрешни превози в друга страна</strong> — от Хамбург до Мюнхен без да напуска Германия. Позволени са макс. 3 операции за 7 дни след международно влизане, след което 4-дневен период на изчакване. Нарушение = €2 000–4 000 + задържане.</dd>
+            </dl>
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Ключово</span> Кроструд (кръстосан транспорт)</dt>
+                <dd>Когато български камион превозва стока <strong>между две чужди страни</strong> — от Франция за Белгия, без да се връща в България. При тези операции се прилагат правилата за командироване (заплата по стандартите на приемащата страна).</dd>
+            </dl>
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Ключово</span> Командироване на водач</dt>
+                <dd>Когато водач работи при <strong>каботаж или кроструд</strong>, той е „командирован работник" и трябва да получава минималната заплата на приемащата страна за тези периоди. Двустранният транспорт (директно от/до България) и транзитът са освободени.</dd>
+            </dl>
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Ключово</span> Тахограф</dt>
+                <dd>Задължително бордово устройство, записващо времето на управление, почивките, скоростта и маршрута. Новото <strong>Gen 2V2</strong> използва Galileo GNSS с OSNMA (криптографско удостоверяване) — автоматично записва гранични преминавания, товарене/разтоварване и позволява дистанционен контрол чрез DSRC технология. Съхранява <strong>56 дни</strong> данни за водача.</dd>
+            </dl>
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Важно</span> Транзит</dt>
+                <dd>Преминаване през страна без товарене или разтоварване. <strong>Не се третира като командироване</strong> — не задейства изисквания за заплащане.</dd>
+            </dl>
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Важно</span> Удостоверение A1</dt>
+                <dd>Официален документ, доказващ в коя страна е осигурен водачът (пенсия, здравно, социално). Задължителен при пътни проверки. Издава се от НАП в България.</dd>
+            </dl>
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Важно</span> IMI / ИСВП декларация</dt>
+                <dd><strong>Задължителният онлайн портал</strong> (postingdeclaration.eu), чрез който операторите декларират командировки преди всяко командироване. Разполага с публичен API за програмно подаване. Шофьорът носи копие при себе си.</dd>
+            </dl>
+            <dl class="glossary-term">
+                <dt><span class="term-tag">Важно</span> ERRU</dt>
+                <dd><em>European Register of Road Transport Undertakings</em> — паневропейска база данни с всички лицензирани транспортни компании и техните нарушения. При достатъчно наказателни точки лицензът може да бъде спрян в целия ЕС. През <strong>януари 2026 г.</strong> за пръв път е спрян лиценз по тази система.</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 1: ТРИТЕ ЗАКОНА -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">01</span> Трите основни закона (Пазарен, Социален, Прилагащ стълб)</h2>
+        <p style="margin-bottom:18px; color:#555; font-size:14px;">И трите акта са приети на <strong>15 юли 2020 г.</strong> и публикувани в Официален вестник на ЕС (OJ L 249, 31.7.2020). Проектирани са да затворят вратичките, свързани с „дружества-пощенски кутии", и да наложат принципа на равно третиране.</p>
+
+        <div class="reg-card">
+            <div class="reg-num">Пазарен стълб · Регламент (ЕС) 2020/1055</div>
+            <div class="reg-title">Достъп до пазара, каботаж и правила за установяване</div>
+            <div class="reg-body">
+                Изменя Регламенти (ЕО) № 1071/2009, (ЕО) № 1072/2009 и (ЕС) № 1024/2012. Урежда условията за установяване на транспортно предприятие и правилата за каботаж:
+                <ul class="bullet-list" style="margin-top:10px;">
+                    <li><strong>Критерии за установяване:</strong> Предприятията трябва да докажат реално и непрекъснато присъствие в държавата на установяване — помещения, административен персонал, оперативно оборудване. Целта е да се елиминират фиктивните „пощенски кутии".</li>
+                    <li><strong>Период на изчакване при каботаж:</strong> След 3 каботажни операции за 7 дни, следващи международно натоварено влизане, същото превозно средство не може да извършва допълнителни каботажни операции в същата държава в продължение на <strong>4 календарни дни</strong>.</li>
+                    <li><strong>Разширяване към ЛТП:</strong> Правилата за професионален достъп се разширяват към предприятия с превозни средства над 2,5 тона в международен товарен транспорт (от 21 май 2022 г.).</li>
+                    <li><strong>Задължение за връщане на превозното средство (отменено):</strong> Изискването камионите да се връщат в оперативния център на всеки 8 седмици беше отменено от СЕС на 4 октомври 2024 г. (вж. Раздел 03).</li>
+                </ul>
+            </div>
+            <a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32020R1055">Пълен текст на EUR-Lex</a>
+        </div>
+
+        <div class="reg-card">
+            <div class="reg-num">Социален стълб · Регламент (ЕС) 2020/1054</div>
+            <div class="reg-title">Социални правила за водачите — управление, почивка, тахографи</div>
+            <div class="reg-body">
+                <div class="explain-box" style="margin-bottom:12px;">
+                    <div class="explain-label">ℹ️ Пояснение</div>
+                    <strong>Регламент (ЕО) 561/2006</strong> от 2006 г. е базовият закон за работното време и почивките. Регламент 2020/1054 <strong>актуализира</strong> тези правила. Двата действат заедно.
+                </div>
+                Изменя Регламент (ЕО) № 561/2006 и Регламент (ЕС) № 165/2014:
+                <ul class="bullet-list" style="margin-top:10px;">
+                    <li><strong>Забрана за почивка в кабината:</strong> Водачите не могат да ползват редовни седмични почивки (45 часа+) в кабината. Задължително настаняване с подходящи спални и санитарни условия, за сметка на работодателя.</li>
+                    <li><strong>Задължение за връщане на водача:</strong> Операторите организират работата така, че водачите да могат да се върнат в оперативния център или местоживеенето на всеки <strong>3 или 4 седмици</strong>.</li>
+                    <li><strong>Разширен период на проверка:</strong> При пътни проверки периодът за обратен преглед е увеличен от 28 на <strong>56 дни</strong>.</li>
+                    <li><strong>Интелигентен тахограф Gen 2V2:</strong> Автоматично записване на гранични преминавания чрез Galileo GNSS с OSNMA, регистриране на товарене/разтоварване, дистанционен контрол чрез DSRC. Съхранява 56 дни данни.</li>
+                    <li>Максимум <strong>9 ч. управление на ден</strong> (удължаване до 10 ч. два пъти седмично); <strong>56 ч. седмично</strong>; <strong>90 ч. за две седмици</strong>; задължителна 45-минутна почивка.</li>
+                    <li>От <strong>1 юли 2026 г.:</strong> всички правила за управление/отдих и тахографи се разпростират върху ЛТП над 2,5 тона в международен транспорт.</li>
+                </ul>
+            </div>
+            <a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32020R1054">Пълен текст на EUR-Lex</a>
+        </div>
+
+        <div class="reg-card">
+            <div class="reg-num">Прилагащ стълб · Директива (ЕС) 2020/1057</div>
+            <div class="reg-title">Специфични правила за командироване на водачи в автомобилния транспорт</div>
+            <div class="reg-body">
+                Определя специфични за сектора правила (<em>lex specialis</em>), разграничавайки видовете операции:
+                <ul class="bullet-list" style="margin-top:10px;">
+                    <li><strong>Двустранен транспорт</strong> — от/до държавата на установяване, с до 2 допълнителни спирки — <strong>освободен</strong> от правилата за командироване.</li>
+                    <li><strong>Кроструд</strong> — между две страни, нито една от които не е държавата на установяване — <strong>представлява командироване.</strong> Водачът има право на минимална заплата в приемащата страна.</li>
+                    <li><strong>Каботаж</strong> — вътрешен транспорт в приемащата страна — <strong>винаги представлява командироване.</strong></li>
+                    <li><strong>Транзит</strong> — без товарене/разтоварване — <strong>не е командироване.</strong></li>
+                    <li>Декларации се подават чрез <strong>postingdeclaration.eu</strong> (API: api.postingdeclaration.eu/api-docs/) преди всяко командироване.</li>
+                    <li>Всяка приемаща страна изисква <strong>законен представител</strong> — местно лице, получаващо официална кореспонденция.</li>
+                    <li>Краен срок за транспониране: <strong>2 февруари 2022 г.</strong> Изчисляването на заплати е комплексно: ~16 страни ползват законоустановен минимум, 11 — секторни КТД (Австрия, Белгия, Дания, Финландия, Франция, Италия, Люксембург, Нидерландия, Швеция и др.).</li>
+                </ul>
+                <div class="explain-box" style="margin-top:12px;">
+                    <div class="explain-label">💡 Защо изчислението е толкова трудно?</div>
+                    Водач може да бъде „командирован" в Германия за 4 часа, след това „командирован" във Франция за 6 часа, след това „транзит" през Белгия (не е командиров.), след това „двустранен" до България. Това изисква поминутен анализ на местоположението. МСА и ETF съвместно са поискали от ЕК „общ калкулатор на заплатите за командировани водачи" — изрично потвърждавайки, че такъв официален инструмент не съществува.
+                </div>
+            </div>
+            <a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32020L1057">Пълен текст на EUR-Lex</a>
+        </div>
+
+        <!-- Допълнителни регламенти -->
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin:24px 0 12px;">Основни прилагащи регламенти</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Документ</th><th>Съдържание</th><th>EUR-Lex</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Рег. (ЕС) 2021/1228</strong></td><td>Технически спецификации на G2V2 — Galileo GNSS/OSNMA, DSRC дистанционен контрол, 56-дневно съхранение</td><td><a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R1228">↗</a></td></tr>
+            <tr><td><strong>Рег. (ЕС) 2021/2179</strong></td><td>Функционалности на публичния интерфейс на ИСВП за декларации за командироване</td><td><a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2179">↗</a></td></tr>
+            <tr><td><strong>Рег. (ЕО) 561/2006</strong></td><td>Базов регламент — максимално управление 9 ч./ден, 56 ч./седмица, 90 ч./2 седмици; почивки, отдих</td><td><a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32006R0561">↗</a></td></tr>
+            <tr><td><strong>Рег. (ЕС) № 165/2014</strong></td><td>Проектиране, монтаж, одобрение и контрол на цифрови и интелигентни тахографи</td><td><a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0165">↗</a></td></tr>
+            <tr><td><strong>Рег. (ЕО) № 1071/2009</strong></td><td>Достъп до професията оператор на автомобилен транспорт</td><td><a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009R1071">↗</a></td></tr>
+            <tr><td><strong>Рег. (ЕО) № 1072/2009</strong></td><td>Каботаж и достъп до пазара</td><td><a class="reg-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009R1072">↗</a></td></tr>
+            <tr><td><strong>Рег. (ЕС) 2023/980</strong></td><td>Преходни мерки за G2V2 по отношение на Galileo OSNMA удостоверяване</td><td>–</td></tr>
+            <tr><td><strong>Рег. (ЕС) 2024/1258</strong></td><td>Изменение на правилата за управление/отдих за случайни автобусни услуги</td><td><a class="reg-link" href="https://eur-lex.europa.eu/EN/legal-content/summary/driving-time-and-rest-periods-in-the-road-transport-sector.html">↗</a></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 2: ХРОНОЛОГИЯ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">02</span> Пълна хронология на прилагането</h2>
+
+        <div class="timeline-wrap" style="position:relative;">
+            <div class="tl-line"></div>
+
+            <div class="timeline-item">
+                <div class="tl-date">20 авг. 2020</div>
+                <div class="tl-content">
+                    <span class="tl-badge badge-done">✓ Изпълнено</span>
+                    <strong>Социалните правила влизат в сила.</strong> Нови ограничения на времето за управление и почивка, забрана за редовен нощен престой в кабина, хотел за сметка на работодателя, водачите се връщат вкъщи на всеки 3–4 седмици. Ръчно записване на гранични преминавания в тахографите стана задължително. Регламент 2020/1054 е директно приложим.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="tl-date">2 февр. 2022</div>
+                <div class="tl-content">
+                    <span class="tl-badge badge-done">✓ Изпълнено</span>
+                    <strong>Пазарните правила и командироването влизат в сила.</strong> Стартира 4-дневният период на изчакване при каботаж (Рег. 2020/1055). IMI порталът за декларации за командироване заработва. Краен срок за транспониране на Директива 2020/1057 в националното законодателство. Задължението за връщане на превозното средство (впоследствие отменено) влезе в сила.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="tl-date">21 май 2022</div>
+                <div class="tl-content">
+                    <span class="tl-badge badge-done">✓ Изпълнено</span>
+                    <strong>Общностен лиценз за ЛТП над 2,5 т.</strong> Международният товарен транспорт с фургони вече изисква официален транспортен лиценз на ЕС.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="tl-date">21 авг. 2023</div>
+                <div class="tl-content">
+                    <span class="tl-badge badge-done">✓ Изпълнено</span>
+                    <strong>G2V2 задължителен за нови тежки камиони.</strong> Всички новорегистрирани превозни средства над 3,5 т трябва да имат тахографи Gen 2V2 с Galileo GNSS и DSRC. Основни модели: Continental VDO DTCO 4.1 и Stoneridge SE5000 Smart 2.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="tl-date">4 окт. 2024</div>
+                <div class="tl-content">
+                    <span class="tl-badge badge-key">⚖ Решение на Голямата камара</span>
+                    <strong>СЕС отменя задължението за връщане на превозното средство.</strong> Голямата камара (ECLI:EU:C:2024:818) обяви за недействителен чл. 5, пар. 1, б. б) от Рег. 1071/2009. Разпоредбата не е оценена за въздействие и е намерена за непропорционална. Отмяната е ретроактивна. Всички останали разпоредби — потвърдени. Комисар Цицикостас потвърди: не се планира повторно въвеждане.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="tl-date">31 дек. 2024</div>
+                <div class="tl-content">
+                    <span class="tl-badge badge-done">✓ Изпълнено</span>
+                    <strong>Краен срок за преоборудване: аналогови и цифрови тахографи Gen 1.</strong> Всички превозни средства над 3,5 т в трансграничен транспорт с аналогови или първо-поколение цифрови тахографи преминаха към G2V2. Договорен 2-месечен гратисен период (до 28 февр. 2025 г.) поради ограничен капацитет на сервизите.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="tl-date">18–19 авг. 2025</div>
+                <div class="tl-content">
+                    <span class="tl-badge badge-done">✓ Изпълнено</span>
+                    <strong>Финална вълна: преоборудване на тахографи Gen 1 Smart.</strong> Превозните средства с интелигентен тахограф от първо поколение (напр. DTCO 4.0) преминаха към Gen 2. Европейската комисия отбеляза тази дата като завършване на програмата за преоборудване на тежкотоварните превозни средства. Превозни средства, пропуснали крайния срок, оперират незаконно при международен кроструд и подлежат на тежки санкции.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="tl-date" style="color: var(--red-soft); font-weight: 700;">1 юли 2026</div>
+                <div class="tl-content" style="border-color: #f0d896; background: #fffbf0;">
+                    <span class="tl-badge badge-coming">📅 ОСНОВЕН КРАЕН СРОК</span>
+                    <strong>Пълно разширяване върху ЛТП над 2,5 тона.</strong> Всички правила за управление/почивка, задължителен монтаж на G2V2 тахограф и правилата за командировани работници се прилагат за фургони в международен товарен транспорт или каботаж. Разходи: 1 700–2 200 евро/бус само за хардуер. ЕОТ оценява 300 000 до 2–3 милиона засегнати превозни средства в Европа. Глобите: 1 500 евро (Германия) до 30 000 евро (Франция) за несъответствие.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 3: ДЕЛО В СЪДА -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">03</span> Битката в съда — България срещу Пакета за мобилност</h2>
+
+        <p style="margin-bottom:16px; font-size:14px; color:#444;">Между октомври 2020 г. и началото на 2021 г. <strong>7 страни членки</strong> подадоха 15 иска за отмяна (Литва, България, Румъния, Кипър, Унгария, Малта, Полша). Белгия, Естония и Латвия встъпиха в подкрепа. България подаде три отделни дела.</p>
+
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Дело</th><th>Оспорено правило</th><th>Резултат (4 окт. 2024)</th></tr></thead>
+            <tbody>
+            <tr>
+                <td><strong>C-543/20</strong><br><span style="font-size:12px;color:#666">Рег. 2020/1054</span></td>
+                <td>Забрана за спане в кабина, задължение за връщане на водача на 3–4 седмици, ускорен график за тахографи</td>
+                <td><span style="color:var(--red-soft); font-weight:600;">❌ Отхвърлено</span><br><span style="font-size:12px">Всички разпоредби потвърдени като пропорционални</span></td>
+            </tr>
+            <tr>
+                <td><strong>C-544/20</strong><br><span style="font-size:12px;color:#666">Директива 2020/1057</span></td>
+                <td>Третирането на водачите като „командировани работници" при каботаж и кроструд — 5 основания: пропорционалност, равно третиране, неправилно използване на чл. 91 ДФЕС</td>
+                <td><span style="color:var(--red-soft); font-weight:600;">❌ Отхвърлено</span><br><span style="font-size:12px">Правилата за командироване потвърдени; по-високите разходи за периферни превозвачи не са дискриминация</span></td>
+            </tr>
+            <tr>
+                <td><strong>C-545/20</strong><br><span style="font-size:12px;color:#666">Рег. 2020/1055</span></td>
+                <td>Задължение за връщане на камиона на 8 седмици, период на изчакване при каботаж, разширяване към ЛТП</td>
+                <td><span style="color:var(--green-soft); font-weight:600;">✓ Частична победа</span><br><span style="font-size:12px">Задължението за връщане на камиона <strong>отменено</strong>; каботажният период потвърден</span></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout">
+            <strong>Защо беше отменено задължението за връщане на камиона?</strong> Разпоредбата не е фигурирала в оригиналното предложение на Комисията от 2017 г., въведена е по време на преговорите и никога не е оценена за въздействие. Съдът я намери за непропорционална — генерира огромни CO₂ емисии и не е необходима за борба с „дружествата-пощенски кутии". Ретроактивно отменена — сякаш никога не е съществувала. Комисар Цицикостас: не се планира повторно въвеждане.
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 4: СПЕЦИФИЧНА ПРАВНА ИЗЛОЖЕНОСТ НА БЪЛГАРИЯ -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">04</span> Специфичната правна изложеност на България</h2>
+
+        <div class="callout" style="background:#fff0f0; border-color:#fecaca;">
+            <strong style="color:#b94040;">⚠ България е сред само 2 страни в ЕС, неизпълнили задълженията си:</strong> Заедно с <strong>Португалия</strong>, България е единствените две страни членки, не транспонирали напълно Директива 2020/1057 (Пакет за мобилност I). Производство за установяване на нарушение: <strong>INFR(2022)0196</strong>.
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin:20px 0 12px;">Хронология на нарушението</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Дата</th><th>Действие</th></tr></thead>
+            <tbody>
+            <tr><td><strong>2 февр. 2022</strong></td><td>Краен срок за транспониране. България пропуска срока.</td></tr>
+            <tr><td><strong>Юли 2022</strong></td><td>Комисията открива производство за установяване на нарушение INFR(2022)0196.</td></tr>
+            <tr><td><strong>Юли 2023</strong></td><td>Комисията издава мотивирано становище — официална констатация за неизпълнение.</td></tr>
+            <tr><td><strong>8 окт. 2025</strong></td><td>Комисията <strong>отнася делото до СЕС</strong> с искане за финансови санкции.</td></tr>
+            <tr style="background:#fff0f0!important"><td style="color:var(--red-soft);font-weight:700;background:#fff0f0">Предстои</td><td style="background:#fff0f0">Потенциална присъда: <strong>еднократна сума от €2 млн.+</strong> и <strong>текущи дневни глоби от €20 000–25 000</strong> до пълно транспониране</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout">
+            <strong>Ключово разбиране:</strong> Неизпълнението от страна на България <em>не защитава</em> българските компании. Германия, Франция, Австрия прилагат собствените си закони чрез пътни проверки. Тъй като България не е транспонирала директивата, тя не е изградила вътрешна административна рамка за подпомагане на съответствието — превозвачите трябва сами да навигират в западноевропейски системи.
+        </div>
+
+        <div class="two-col" style="margin-top:0">
+            <div class="info-card" style="border-left:4px solid var(--red-soft);">
+                <h4>Контрол в приемащите страни</h4>
+                <p>BALM (Германия), DREAL (Франция), Финансова полиция (Австрия) прилагат правилата чрез пътни проверки и DSRC дистанционен скрининг. На тях им е <em>без значение</em> дали България е транспонирала директивата.</p>
+            </div>
+            <div class="info-card" style="border-left:4px solid var(--navy);">
+                <h4>Контрол в България</h4>
+                <p><strong>ИА „Автомобилна администрация"</strong> (rta.government.bg) — главният орган за лицензиране и проверки (27 регионални офиса, 80 инспекционни екипа, ~26 000 цифрови тахографски карти годишно). За разлика от Германия или Франция, няма специализиран орган за командироване.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 5: РАЗШИРЯВАНЕ 2026 -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">05</span> Какво се променя за леките фургони от юли 2026 г.</h2>
+
+        <div class="callout">
+            <strong>Засегнати превозни средства:</strong> Всеки фургон с комбинирана маса (превозно средство + ремарке) над <strong>2,5 тона</strong>, използван за международен товарен транспорт или каботаж. ЕОТ оценява 300 000 до 2–3 милиона засегнати превозни средства в цяла Европа. За България индустриалният анализ оценява <strong>~16 000 бусове</strong> в международния транспорт. Чисто вътрешният транспорт остава освободен.
+        </div>
+
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Ново задължение</th><th>Какво означава на практика</th></tr></thead>
+            <tbody>
+            <tr>
+                <td><strong>Интелигентен тахограф G2V2</strong></td>
+                <td>Задължителен монтаж. Повечето бусове нямат фабрична подготовка за тахограф — изисква индивидуално преоборудване. Цена: <strong>1 700–2 200 евро</strong>/превозно средство само за хардуер.</td>
+            </tr>
+            <tr>
+                <td><strong>Правила за управление и почивка</strong></td>
+                <td>Пълните правила по Рег. 561/2006: макс. 9 ч./ден управление (10 ч. два пъти седмично), 56 ч./седмица, 90 ч./2 седмици, 45-минутни почивки, забрана за редовна седмична почивка в кабината.</td>
+            </tr>
+            <tr>
+                <td><strong>Карти на водача и предприятието</strong></td>
+                <td>Карта на водач (~60 евро), карта на предприятие (~100 евро). Данните от тахографа се изтеглят и архивират. 56-дневен обратен преглед.</td>
+            </tr>
+            <tr>
+                <td><strong>Правила за командироване</strong></td>
+                <td>Водачите на ЛТП при каботаж/кроструд са командировани работници. Декларации в IMI, правила за заплащане в приемащата страна. Каботажните ограничения (3 за 7 дни, след което 4-дневно изчакване) важат идентично.</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif; font-size:17px; color:var(--navy); margin:20px 0 12px;">Очаквани разходи за преоборудване на превозно средство</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Разходна позиция</th><th>Приблизителен диапазон</th></tr></thead>
+            <tbody>
+            <tr><td>Хардуер — интелигентен тахограф G2V2</td><td>€1 700 – €2 200</td></tr>
+            <tr><td>Монтаж, калибриране и адаптери</td><td>€300 – €600</td></tr>
+            <tr><td>Карта на водача</td><td>~€60</td></tr>
+            <tr><td>Карта на предприятие</td><td>~€100</td></tr>
+            <tr><td>Обучение на водача</td><td>€100 – €500</td></tr>
+            <tr><td>Софтуер, архивиране на данни, администрация</td><td>€200 – €500</td></tr>
+            <tr style="background:var(--navy)!important"><td style="color:var(--gold-light);font-weight:700;background:var(--navy)">За 10 ЛТП (само хардуер)</td><td style="color:var(--gold-light);font-weight:700;background:var(--navy)">€17 000 – €25 000+</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="two-col" style="margin-top:18px;">
+            <div class="info-card">
+                <h4>Освобождавания</h4>
+                <p>Превозни средства до 7,5 т за занаятчии/търговци в радиус 100 км от базата (управлението не е основна дейност) · Международен превоз за собствена сметка при не-основна дейност · Нетърговски частен транспорт. На практика повечето български ЛТП куриерски флотове <strong>не отговарят на условията</strong>.</p>
+            </div>
+            <div class="info-card">
+                <h4>Капацитет на сервизите</h4>
+                <p>България разполага с <strong>~20–40 лицензирани тахографски сервизи</strong>, концентрирани предимно в София и Пловдив. Крайният срок за тежкотоварните превозни средства (дек. 2024 г.) вече предизвика общоевропейски недостиг на капацитет. Достъпът до сервизи ще бъде критично ограничение преди юли 2026 г.</p>
+            </div>
+        </div>
+
+        <p style="margin-top:14px; font-size:13px; color:#666;">Глобите за нарушения при ЛТП: <strong>€1 500 (Германия)</strong>, <strong>€30 000 (Франция)</strong>, <strong>€1 000–20 000 (Австрия)</strong>. Кампания на ЕОТ „Леки търговски превозни средства — Големи промени": <a class="reg-link" href="https://www.ela.europa.eu/assets/lcv2026/index.html">ela.europa.eu</a></p>
+    </div>
+
+    <!-- РАЗДЕЛ 6: СЛЕД 2026 -->
+    <div class="section">
+        <h2 class="section-title"><span class="section-num">06</span> След юли 2026 г. — Потвърдени бъдещи развития</h2>
+        <p style="font-size:14px;color:#444;margin-bottom:16px;">Регулаторната среда не замръзва след юли 2026 г. Няколко развития са потвърдени или обявени:</p>
+
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Инициатива</th><th>Съдържание</th><th>Срок</th></tr></thead>
+            <tbody>
+            <tr>
+                <td><strong>Пакет за справедлива трудова мобилност</strong><br><span style="font-size:12px;color:#666">COM(2025) 87</span></td>
+                <td>Три компонента: (1) ESSPASS — Европейски социалноосигурителен паспорт (дигитализиране на А1 удостоверенията в ЕС Цифров портфейл); (2) Засилен мандат на ЕОТ с достъп до ИСВП, EESSI, ERRU и тахографски системи; (3) Инициатива за преносимост на уменията</td>
+                <td>Q3 2026 (есен)</td>
+            </tr>
+            <tr>
+                <td><strong>Система за е-Декларации за командировани работници</strong><br><span style="font-size:12px;color:#666">COM(2024)531</span></td>
+                <td>Единен портал за декларации за командироване — обещава 73% намаление на административното време и 81% намаление на административните разходи. Разширен обхват до социалноосигурителна информация и командироване от трети страни.</td>
+                <td>Края на 2026</td>
+            </tr>
+            <tr>
+                <td><strong>Ревизиран Регламент за координация на социалното осигуряване</strong><br><span style="font-size:12px;color:#666">Изменя Рег. 883/2004</span></td>
+                <td>В процедура от 2016 г. KPMG неофициално съобщава за евентуално споразумение в H1 2026. Може да промени процедурите за А1 удостоверения.</td>
+                <td>Евентуално H1 2026</td>
+            </tr>
+            <tr>
+                <td><strong>Разширени дейности на ЕОТ за ЛТП</strong></td>
+                <td>ЕОТ планира проверки, насочени специално към съответствието на ЛТП от юли 2026 г. Текущо: ноември 2025 г. — съвместни инспекции в 13 страни, 172 000+ евро глоби.</td>
+                <td>От юли 2026</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout" style="margin-top:16px;">
+            <strong>Относно „Пакет за мобилност II":</strong> Не съществува обявен „Пакет за мобилност II" за автомобилния транспорт. Терминът се използва политически, но Комисията не е предложила пакет-наследник за товарните автомобилни превози. Ясната тенденция е: засилен трансграничен обмен на данни, дистанционен контрол чрез G2V2 и дигитализация на декларациите (ИСВП, ESSPASS).
+        </div>
+
+        <!-- ОБОБЩИТЕЛНА ТАБЛИЦА -->
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin:24px 0 12px;">Обобщение на целия регулаторен стек</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Регулация</th><th>Какво изисква</th><th>Последствие при неспазване</th></tr></thead>
+            <tbody>
+            <tr>
+                <td><strong>Директива 2020/1057</strong><br><span style="font-size:12px;color:#666">Командироване</span></td>
+                <td>Минимална заплата на приемащата страна при каботаж и кроструд; IMI декларации преди командироване; законен представител в страната домакин; документи в превозното средство или в ИСВП</td>
+                <td>Доплащане на заплати + глоби при пътна проверка (до €500 000 Франция)</td>
+            </tr>
+            <tr>
+                <td><strong>Регламент 2020/1055</strong><br><span style="font-size:12px;color:#666">Каботаж</span></td>
+                <td>Максимум 3 каботажни операции за 7 дни; 4-дневен период на изчакване преди повторно влизане</td>
+                <td>€2 000–4 000 + <strong>имобилизация на място</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Регламент (ЕО) 561/2006</strong><br><span style="font-size:12px;color:#666">Работно време</span></td>
+                <td>Ограничения: 9 ч./ден управление, 56 ч./седмица, 90 ч./2 седмици; задължителни почивки; проследяване чрез тахограф</td>
+                <td>Глоби + наказателни точки по ERRU</td>
+            </tr>
+            <tr>
+                <td><strong>G2V2 мандат</strong><br><span style="font-size:12px;color:#666">Тахографи</span></td>
+                <td>Преоборудване с G2V2 (Galileo GNSS, DSRC дистанционен контрол); изтегляне на данни мин. на 28 дни; 56-дневно архивиране</td>
+                <td>Невъзможност за международна дейност; автоматизирано разкриване на нарушения</td>
+            </tr>
+            <tr>
+                <td><strong>IMI декларации</strong><br><span style="font-size:12px;color:#666">27 национални портала</span></td>
+                <td>Уведомяване преди командироване (RTPD за ЕС, SIPSI за Франция и др.)</td>
+                <td>До €500 000 административни глоби (Франция)</td>
+            </tr>
+            <tr>
+                <td><strong>Удостоверения A1</strong><br><span style="font-size:12px;color:#666">Социална сигурност</span></td>
+                <td>Доказателство коя страна осигурява водача; носи се при пътни проверки</td>
+                <td>Задължения за вноски в приемащата страна + глоби (€1 000–20 000 Австрия)</td>
+            </tr>
+            <tr style="background:#fff0f0!important">
+                <td style="background:#fff0f0"><strong>INFR(2022)0196</strong><br><span style="font-size:12px;color:#666">Само за България</span></td>
+                <td>Пълно транспониране на Директива 2020/1057. Делото е пред СЕС от 8 окт. 2025 г.</td>
+                <td style="color:var(--red-soft);font-weight:600;">€2 млн. еднократна сума + €20 000–25 000/ден</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="verdict-box">
+            <h3>Заключение — Пакет за мобилност I</h3>
+            <p>Пакетът за мобилност I е трайно вграден в правото на ЕС. Съдът на ЕС потвърди почти всички разпоредби. Комисията не планира ново законодателство в замяна на отменената разпоредба за връщане на превозното средство. Основните изисквания — заплащане на командировани водачи, ограничения на каботажа, G2V2 тахографи и социалните правила — са трайни характеристики на европейския пазар в обозримото бъдеще.</p>
+            <p>За българските оператори разширяването от юли 2026 г. върху ЛТП въвежда хиляди оператори на фургони в регулаторна среда, с която никога досега не са се сблъсквали. Траекторията на правоприлагане — BALM DSRC скрининг, ЕОТ съвместни проверки, ERRU точкова система — е решително към повече натиск.</p>
+            <div class="tag-row">
+                <span class="tag">Социалните правила са постоянни</span>
+                <span class="tag">Задължението за връщане на камиона е отменено</span>
+                <span class="tag">ЛТП краен срок: 1 юли 2026</span>
+                <span class="tag">ERRU: спрян лиценз от яну. 2026</span>
+                <span class="tag">ESSPASS — Q3 2026</span>
+                <span class="tag">е-Декларации — края на 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 7: ОФИЦИАЛНИ ИЗТОЧНИЦИ -->
+    <div class="section">
+        <h2 class="section-title">Официални източници и ресурси</h2>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin:20px 0 12px;">Законодателни текстове на ЕС (EUR-Lex)</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Документ</th><th>Линк</th></tr></thead>
+            <tbody>
+            <tr><td>Регламент (ЕС) 2020/1054 (управление/отдих, тахографи)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32020R1054" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Регламент (ЕС) 2020/1055 (достъп до пазара, каботаж)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32020R1055" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Директива (ЕС) 2020/1057 (командироване на водачи)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32020L1057" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Прилагащ регламент (ЕС) 2021/1228 (G2V2 спецификации)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R1228" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Прилагащ регламент (ЕС) 2021/2179 (IMI интерфейс)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2179" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Регламент (ЕО) 561/2006 (базови правила)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32006R0561" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Регламент (ЕС) № 165/2014 (тахографи)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0165" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Регламент (ЕО) № 1071/2009 (достъп до професията)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009R1071" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Регламент (ЕО) № 1072/2009 (каботаж)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009R1072" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Регламент (ЕС) 2024/1258 (гъвкавост автобуси)</td><td><a href="https://eur-lex.europa.eu/EN/legal-content/summary/driving-time-and-rest-periods-in-the-road-transport-sector.html" class="reg-link">EUR-Lex</a></td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin:24px 0 12px;">Портали на Европейската комисия и ЕОТ</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Ресурс</th><th>Линк</th></tr></thead>
+            <tbody>
+            <tr><td>Пакет за мобилност I — главен портал на ЕК</td><td><a href="https://transport.ec.europa.eu/transport-modes/road/mobility-package-i_en" class="reg-link">transport.ec.europa.eu</a></td></tr>
+            <tr><td>Правила за командироване + Q&A</td><td><a href="https://transport.ec.europa.eu/transport-modes/road/mobility-package-i/posting-rules_en" class="reg-link">transport.ec.europa.eu</a></td></tr>
+            <tr><td>Q&A за командироването на водачи</td><td><a href="https://transport.ec.europa.eu/transport-modes/road/mobility-package-i/posting-rules/questions-and-answers-posting-drivers-under-directive-eu-20201057_en" class="reg-link">transport.ec.europa.eu</a></td></tr>
+            <tr><td>Заключение за преоборудването (авг. 2025)</td><td><a href="https://transport.ec.europa.eu/news-events/news/stronger-and-more-unified-enforcement-eu-rules-international-road-transport-smart-tachograph-2025-08-19_en" class="reg-link">transport.ec.europa.eu</a></td></tr>
+            <tr><td>ESSPASS — Европейски социалноосигурителен паспорт</td><td><a href="https://employment-social-affairs.ec.europa.eu/policies-and-activities/moving-working-europe/eu-social-security-coordination/digitalisation-social-security-coordination/european-social-security-pass_en" class="reg-link">ec.europa.eu</a></td></tr>
+            <tr><td>е-Декларация — законодателна карта</td><td><a href="https://www.europarl.europa.eu/legislative-train/carriage/e-declaration-portal-for-posting-workers-in-the-eu/report" class="reg-link">europarl.europa.eu</a></td></tr>
+            <tr><td>ЕОТ — Автомобилен транспорт</td><td><a href="https://www.ela.europa.eu/en/topics/social-aspects-international-road-transport" class="reg-link">ela.europa.eu</a></td></tr>
+            <tr><td>ЕОТ — Кампания ЛТП 2026</td><td><a href="https://www.ela.europa.eu/assets/lcv2026/index.html" class="reg-link">ela.europa.eu</a></td></tr>
+            <tr><td>IMI Портал за декларации за командироване</td><td><a href="https://www.postingdeclaration.eu/" class="reg-link">postingdeclaration.eu</a></td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin:24px 0 12px;">Дела на Съда на ЕС</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Дело / Документ</th><th>Линк</th></tr></thead>
+            <tbody>
+            <tr><td>Дело C-543/20 (България — Рег. 2020/1054)</td><td><a href="https://curia.europa.eu/juris/liste.jsf?num=C-543/20" class="reg-link">curia.europa.eu</a></td></tr>
+            <tr><td>Дело C-544/20 (България — Директива 2020/1057)</td><td><a href="https://curia.europa.eu/juris/liste.jsf?num=C-544/20" class="reg-link">curia.europa.eu</a></td></tr>
+            <tr><td>Дело C-545/20 (България — Рег. 2020/1055)</td><td><a href="https://curia.europa.eu/juris/liste.jsf?num=C-545/20" class="reg-link">curia.europa.eu</a></td></tr>
+            <tr><td>Съединени дела C-541/20 до C-555/20 (пълно решение)</td><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:62020CJ0541" class="reg-link">EUR-Lex</a></td></tr>
+            <tr><td>Прессъобщение на СЕС № 173/24</td><td><a href="https://curia.europa.eu/jcms/upload/docs/application/pdf/2024-10/cp240173en.pdf" class="reg-link">curia.europa.eu</a></td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin:24px 0 12px;">Български институции и браншови организации</h3>
+        <div class="table-wrap">
+        <table class="styled-table">
+            <thead><tr><th>Организация</th><th>Линк</th></tr></thead>
+            <tbody>
+            <tr><td>ИА „Автомобилна администрация"</td><td><a href="https://www.rta.government.bg/" class="reg-link">rta.government.bg</a></td></tr>
+            <tr><td>Министерство на транспорта и съобщенията</td><td><a href="https://www.mtc.government.bg/en/" class="reg-link">mtc.government.bg</a></td></tr>
+            <tr><td>АЕБТРИ (Асоциация на бълг. предприятия за международни превози)</td><td><a href="https://aebtri.com/" class="reg-link">aebtri.com</a></td></tr>
+            <tr><td>СМП — Съюз на международните превозвачи</td><td><a href="https://smp-eu.org/" class="reg-link">smp-eu.org</a></td></tr>
+            <tr><td>Камара на българските автомобилни превозвачи</td><td><a href="https://bghauliers.eu/en/" class="reg-link">bghauliers.eu</a></td></tr>
+            <tr><td>CNR — Проучване на булг. сектор (2021)</td><td><a href="https://www.cnr.fr/en/bulgarian-road-freight-transport-sector-2021" class="reg-link">cnr.fr</a></td></tr>
+            <tr><td>БТА — Производство за нарушение окт. 2025</td><td><a href="https://www.bta.bg/bg/news/bulgaria/oficial-messages/983570-ek-protseduri-za-narushenie-ot-mesets-oktomvri-2025-g-" class="reg-link">bta.bg</a></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,2720 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadGuard — Бизнес стратегия и конкурентно позициониране</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest: #14422a;
+            --forest-mid: #1e5c3a;
+            --emerald: #10b981;
+            --emerald-light: #d1fae5;
+            --lime: #86efac;
+            --bg: #f5faf7;
+            --white: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #d1e8db;
+            --red: #b91c1c;
+            --amber: #d97706;
+            --blue: #1e40af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* ── Header ── */
+        .doc-header {
+            background: var(--forest);
+            color: white;
+            padding: 28px 20px 32px;
+            margin: 0 -16px 32px;
+            border-bottom: 5px solid var(--emerald);
+            position: relative;
+            overflow: hidden;
+        }
+        .doc-header::before {
+            content: 'STRATEGY';
+            position: absolute;
+            right: -8px; top: 8px;
+            font-size: 56px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.04);
+            letter-spacing: -2px;
+            font-family: 'Playfair Display', serif;
+        }
+        .doc-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 10px;
+        }
+        .doc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+        .doc-subtitle {
+            font-size: 13px;
+            color: rgba(255,255,255,0.70);
+            font-weight: 300;
+        }
+
+        /* ── Cross-doc navigation ── */
+        .doc-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .doc-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 4px;
+            border: 2px solid var(--border);
+            background: var(--white);
+            color: var(--forest);
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .doc-nav a:hover { background: var(--emerald-light); border-color: var(--emerald); }
+        .doc-nav a.active {
+            background: var(--forest);
+            color: white;
+            border-color: var(--forest);
+        }
+        .doc-nav .nav-icon { font-size: 14px; }
+
+        /* ── Lead box ── */
+        .lead-box {
+            background: white;
+            border-left: 4px solid var(--emerald);
+            padding: 18px 20px;
+            margin-bottom: 28px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .lead-box p {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.65;
+            color: var(--forest);
+        }
+
+        /* ── Sections ── */
+        .section { margin-bottom: 48px; }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--forest);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .section-num {
+            background: var(--forest);
+            color: var(--lime);
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        p { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+
+        /* ── Story / Journey ── */
+        .story-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 20px 0;
+            position: relative;
+        }
+        .story-step {
+            display: flex;
+            gap: 16px;
+            padding: 0 0 28px 0;
+            position: relative;
+        }
+        .story-step::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .story-step:last-child::before { display: none; }
+        .step-dot {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--forest);
+            color: var(--lime);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .step-dot.highlight { background: var(--emerald); color: white; }
+        .step-body { flex: 1; padding-top: 8px; }
+        .step-body h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 5px;
+        }
+        .step-body p { margin-bottom: 0; }
+
+        /* ── Stat grid ── */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 14px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .stat-val {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--forest);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        .stat-val.green { color: var(--emerald); }
+        .stat-label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.3px; line-height: 1.4; }
+
+        /* ── Pricing cards ── */
+        .pricing-wrap {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .price-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .price-card.featured { border-color: var(--emerald); }
+        .price-head {
+            background: var(--forest);
+            color: white;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .price-card.featured .price-head { background: var(--emerald); }
+        .price-name { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+        .price-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .price-sub { font-size: 11px; opacity: 0.8; }
+        .price-body { padding: 14px 18px; }
+        .price-feature {
+            font-size: 13px;
+            color: #444;
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .price-feature:last-child { border-bottom: none; }
+        .price-feature::before { content: '✓'; color: var(--emerald); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+        .price-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: var(--emerald-light);
+            color: var(--forest);
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-left: auto;
+        }
+
+        /* ── Channels ── */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .channel-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .channel-icon {
+            font-size: 26px;
+            flex-shrink: 0;
+            width: 44px;
+            text-align: center;
+        }
+        .channel-body h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 4px;
+        }
+        .channel-body p { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+        .channel-kpi {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--emerald);
+            letter-spacing: 0.3px;
+        }
+
+        /* ── Phases timeline ── */
+        .phases {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 18px 0;
+        }
+        .phase-row {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .phase-head {
+            background: var(--forest);
+            color: white;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .phase-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--lime);
+        }
+        .phase-period { font-size: 13px; font-weight: 600; }
+        .phase-goal {
+            font-size: 12px;
+            color: rgba(255,255,255,0.72);
+            margin-left: auto;
+        }
+        .phase-body { padding: 12px 16px; }
+        .phase-body ul { padding-left: 18px; }
+        .phase-body li { font-size: 13px; color: #444; margin-bottom: 5px; }
+
+        /* ── Marketplace diagram ── */
+        .marketplace {
+            background: white;
+            border-radius: 10px;
+            border: 2px solid var(--emerald);
+            padding: 20px;
+            margin: 18px 0;
+        }
+        .marketplace-title {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--forest);
+            margin-bottom: 20px;
+        }
+        .market-sides {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .market-side {
+            background: var(--forest);
+            color: white;
+            border-radius: 8px;
+            padding: 16px 18px;
+            text-align: center;
+            flex: 1;
+            min-width: 130px;
+        }
+        .market-side-icon { font-size: 28px; margin-bottom: 8px; }
+        .market-side-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .market-side-desc { font-size: 11px; opacity: 0.78; line-height: 1.5; }
+        .market-middle {
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .market-middle-icon { font-size: 28px; color: var(--emerald); }
+        .market-middle-label { font-size: 10px; font-weight: 700; color: var(--forest); letter-spacing: 0.5px; margin-top: 4px; }
+        .marketplace-features {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .mp-feature {
+            background: var(--emerald-light);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: var(--forest);
+            font-weight: 500;
+        }
+        .mp-feature::before { content: '→ '; font-weight: 700; color: var(--emerald); }
+
+        /* ── Moats ── */
+        .moats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .moat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--emerald);
+        }
+        .moat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: var(--emerald-light);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .moat-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 6px;
+        }
+        .moat-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+        /* ── Competitor matrix / table ── */
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 18px 0; border-radius: 8px; }
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 480px;
+            background: white;
+        }
+        .styled-table thead tr { background: var(--forest); color: white; }
+        .styled-table th {
+            padding: 11px 14px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .styled-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f0ece4;
+            vertical-align: top;
+        }
+        .styled-table tr:last-child td { border-bottom: none; }
+        .styled-table tr:nth-child(even) td { background: #f8fbf9; }
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+        .badge-green { background: var(--emerald-light); color: var(--forest); }
+        .badge-red { background: #fee2e2; color: var(--red); }
+        .badge-amber { background: #fef3c7; color: #92400e; }
+        .badge-gray { background: #f3f4f6; color: #6b7280; }
+        .check { color: var(--emerald); font-weight: 700; }
+        .cross { color: var(--red); font-weight: 700; }
+
+        /* ── Financial scenarios ── */
+        .scenarios {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 18px 0;
+        }
+        .scenario {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .scenario-head {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .scenario-head.conservative { background: #fef3c7; }
+        .scenario-head.base { background: var(--emerald-light); }
+        .scenario-head.optimistic { background: #dbeafe; }
+        .scenario-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .scenario-head.conservative .scenario-label { color: #92400e; }
+        .scenario-head.base .scenario-label { color: var(--forest); }
+        .scenario-head.optimistic .scenario-label { color: #1e40af; }
+        .scenario-arr {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .scenario-head.conservative .scenario-arr { color: #78350f; }
+        .scenario-head.base .scenario-arr { color: var(--forest); }
+        .scenario-head.optimistic .scenario-arr { color: #1d4ed8; }
+        .scenario-body {
+            padding: 12px 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .sc-kv { font-size: 12px; }
+        .sc-kv strong { color: var(--forest); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1px; }
+
+        /* ── Risk table ── */
+        .risk-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 18px 0;
+        }
+        .risk-row {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            border-left: 4px solid #ddd;
+            padding: 12px 16px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+        .risk-row.high { border-left-color: var(--red); }
+        .risk-row.medium { border-left-color: var(--amber); }
+        .risk-row.low { border-left-color: var(--emerald); }
+        .risk-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .risk-name { font-size: 14px; font-weight: 700; color: var(--text); }
+        .risk-level {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-left: auto;
+        }
+        .high .risk-level { background: #fee2e2; color: var(--red); }
+        .medium .risk-level { background: #fef3c7; color: #92400e; }
+        .low .risk-level { background: var(--emerald-light); color: var(--forest); }
+        .risk-desc { font-size: 13px; color: var(--muted); }
+        .risk-mitigation { font-size: 13px; color: var(--forest); }
+        .risk-mitigation::before { content: '↳ Митигация: '; font-weight: 600; }
+
+        /* ── Checklist ── */
+        .checklist {
+            background: white;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin: 18px 0;
+        }
+        .checklist-head {
+            background: var(--forest);
+            color: white;
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 11px 18px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+            color: var(--text);
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item .ci-num {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--forest);
+            color: var(--lime);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 1px;
+        }
+        .ci-content { flex: 1; }
+        .ci-content strong { color: var(--forest); display: block; margin-bottom: 2px; }
+        .ci-content span { font-size: 12px; color: var(--muted); }
+
+        /* ── Partnership ── */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .partner-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 14px;
+        }
+        .partner-type {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 5px;
+        }
+        .partner-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 5px;
+        }
+        .partner-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+        /* ── Vision callout ── */
+        .vision-box {
+            background: var(--forest);
+            color: white;
+            border-radius: 10px;
+            padding: 28px 24px;
+            margin: 28px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .vision-box::before {
+            content: '"';
+            position: absolute;
+            top: -10px; left: 8px;
+            font-size: 120px;
+            font-family: 'Playfair Display', serif;
+            color: rgba(16,185,129,0.15);
+            line-height: 1;
+        }
+        .vision-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            line-height: 1.55;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        .vision-sub {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--lime);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* ── Callout / highlight boxes ── */
+        .callout {
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .callout-green { background: var(--emerald-light); border-left: 4px solid var(--emerald); color: #064e3b; }
+        .callout-amber { background: #fef3c7; border-left: 4px solid var(--amber); color: #78350f; }
+        .callout-red { background: #fee2e2; border-left: 4px solid var(--red); color: #7f1d1d; }
+        .callout strong { font-weight: 700; display: block; margin-bottom: 3px; }
+
+        /* ── Breakeven path ── */
+        .breakeven {
+            background: white;
+            border: 2px solid var(--forest);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 18px 0;
+        }
+        .breakeven-title {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--forest);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .breakeven-bar {
+            margin-bottom: 12px;
+        }
+        .breakeven-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+        .breakeven-bar-track {
+            background: var(--border);
+            border-radius: 99px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .breakeven-bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: var(--emerald);
+        }
+        .breakeven-note {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* ── Reg link ── */
+        .reg-link {
+            color: var(--emerald);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .reg-link:hover { text-decoration: underline; }
+
+        /* ── Source tag ── */
+        .source-tag {
+            display: inline-block;
+            font-size: 10px;
+            color: var(--muted);
+            background: #f3f4f6;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-left: 4px;
+            font-style: italic;
+        }
+        .source-tag a { color: inherit; text-decoration: none; }
+        .source-tag a:hover { text-decoration: underline; }
+
+        /* ── Before/After compare ── */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .compare-card { border-radius: 8px; padding: 16px; }
+        .compare-card.bad { background: #fee2e2; border: 2px solid #fca5a5; }
+        .compare-card.good { background: var(--emerald-light); border: 2px solid var(--emerald); }
+        .compare-head {
+            font-size: 12px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 12px;
+        }
+        .compare-card.bad .compare-head { color: var(--red); }
+        .compare-card.good .compare-head { color: var(--forest); }
+        .compare-item {
+            font-size: 13px; padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.07);
+            display: flex; align-items: flex-start; gap: 6px;
+        }
+        .compare-item:last-child { border-bottom: none; }
+        .compare-card.bad .compare-item { color: #7f1d1d; }
+        .compare-card.bad .compare-item::before { content: '✗'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+        .compare-card.good .compare-item { color: #064e3b; }
+        .compare-card.good .compare-item::before { content: '✓'; color: var(--emerald); font-weight: 700; flex-shrink: 0; }
+        .compare-total {
+            margin-top: 12px; font-size: 13px; font-weight: 700;
+            padding-top: 10px; border-top: 2px solid rgba(0,0,0,0.1);
+        }
+        .compare-card.bad .compare-total { color: var(--red); }
+        .compare-card.good .compare-total { color: var(--forest); }
+
+        /* ── Why Bulgaria grid ── */
+        .why-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 12px; margin: 18px 0;
+        }
+        .why-card {
+            background: white; border-radius: 8px; padding: 16px;
+            border: 1px solid var(--border); border-left: 4px solid var(--emerald);
+        }
+        .why-num {
+            font-family: 'Playfair Display', serif; font-size: 28px;
+            color: var(--emerald); font-weight: 700; line-height: 1; margin-bottom: 6px;
+        }
+        .why-title { font-size: 13px; font-weight: 700; color: var(--forest); margin-bottom: 5px; }
+        .why-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+        /* ── Demo flow (3-min prototype) ── */
+        .demo-flow { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+        .demo-step {
+            background: white; border: 1px solid var(--border);
+            border-radius: 8px; padding: 12px 16px;
+            display: flex; align-items: flex-start; gap: 12px;
+        }
+        .demo-time {
+            flex-shrink: 0; background: var(--forest); color: var(--lime);
+            font-size: 11px; font-weight: 700; padding: 3px 8px;
+            border-radius: 4px; white-space: nowrap; margin-top: 1px;
+        }
+        .demo-body h5 { font-size: 13px; font-weight: 700; color: var(--forest); margin-bottom: 3px; }
+        .demo-body p { font-size: 12px; color: var(--muted); margin-bottom: 0; }
+
+        /* ── US Analogue cards ── */
+        .analogue-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 18px 0; }
+        .analogue-card { background: white; border-radius: 8px; border: 1px solid var(--border); padding: 16px; }
+        .analogue-tag { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--emerald); margin-bottom: 5px; }
+        .analogue-name { font-size: 15px; font-weight: 700; color: var(--forest); margin-bottom: 5px; }
+        .analogue-desc { font-size: 13px; color: #444; line-height: 1.55; }
+        .analogue-quote {
+            margin-top: 10px; font-size: 12px; color: var(--muted); font-style: italic;
+            border-left: 3px solid var(--border); padding-left: 10px;
+        }
+
+        /* ── Funding cards ── */
+        .funding-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+        .funding-card {
+            background: white; border-radius: 8px; border: 1px solid var(--border);
+            border-top: 3px solid var(--forest); padding: 14px;
+        }
+        .funding-type { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+        .funding-name { font-size: 14px; font-weight: 700; color: var(--forest); margin-bottom: 4px; }
+        .funding-amount { font-size: 13px; font-weight: 600; color: var(--emerald); margin-bottom: 4px; }
+        .funding-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+        /* ── Monthly milestone table ── */
+        .milestone-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 420px; background: white; }
+        .milestone-table thead tr { background: var(--forest-mid); color: white; }
+        .milestone-table th { padding: 9px 12px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+        .milestone-table td { padding: 9px 12px; border-bottom: 1px solid #f0ece4; vertical-align: top; }
+        .milestone-table tr:last-child td { border-bottom: none; }
+        .milestone-table tr:nth-child(even) td { background: #f8fbf9; }
+
+        /* ── Additional revenue streams ── */
+        .revenue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+        .revenue-card { background: white; border-radius: 8px; border: 1px solid var(--border); padding: 14px; border-top: 3px solid var(--emerald); }
+        .revenue-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+        .revenue-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--forest); margin-bottom: 4px; }
+        .revenue-desc { font-size: 12px; color: var(--muted); }
+
+        /* ── Prob badge (risk) ── */
+        .prob-badge {
+            font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px;
+            letter-spacing: 0.5px; background: #f3f4f6; color: var(--muted); white-space: nowrap;
+        }
+
+        /* ── Desktop overrides ── */
+        @media (min-width: 768px) {
+            .doc-header { padding: 36px 40px 40px; margin: 0 0 36px; }
+            .doc-title { font-size: 32px; }
+            .page { padding: 32px 40px; }
+
+            .pricing-wrap { grid-template-columns: repeat(3, 1fr); }
+            .channels-grid { grid-template-columns: 1fr 1fr; }
+            .moats-grid { grid-template-columns: repeat(4, 1fr); }
+            .marketplace-features { grid-template-columns: repeat(3, 1fr); }
+            .partners-grid { grid-template-columns: repeat(3, 1fr); }
+            .scenario-body { grid-template-columns: repeat(4, 1fr); }
+            .stat-grid { grid-template-columns: repeat(4, 1fr); }
+            .analogue-grid { grid-template-columns: 1fr 1fr; }
+            .why-grid { grid-template-columns: repeat(4, 1fr); }
+            .funding-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* ── Q&A jury defense ── */
+        .qa-grid { display: flex; flex-direction: column; gap: 12px; margin: 18px 0; }
+        .qa-item { background: white; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+        .qa-q { background: var(--forest); color: white; padding: 11px 16px; font-size: 13px; font-weight: 600; line-height: 1.45; }
+        .qa-a { padding: 12px 16px; font-size: 13px; color: #444; line-height: 1.65; }
+        .qa-a strong { color: var(--forest); }
+
+        /* ── Elevator pitch box ── */
+        .pitch-box { background: var(--forest); color: white; border-radius: 10px; padding: 24px; margin: 18px 0; }
+        .pitch-box p { color: rgba(255,255,255,0.88); font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
+        .pitch-box p:last-child { margin-bottom: 0; }
+        .pitch-box strong { color: var(--lime); }
+        .pitch-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--lime); margin-bottom: 14px; }
+
+        /* ── Presentation timing table ── */
+        .pres-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 420px; background: white; }
+        .pres-table thead tr { background: var(--forest-mid); color: white; }
+        .pres-table th { padding: 9px 12px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+        .pres-table td { padding: 9px 12px; border-bottom: 1px solid #f0ece4; vertical-align: top; font-size: 12px; }
+        .pres-table tr:last-child td { border-bottom: none; }
+        .pres-table tr:nth-child(even) td { background: #f8fbf9; }
+        .pres-time { background: var(--forest); color: var(--lime); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; white-space: nowrap; display: inline-block; }
+
+        /* ── Vertical timeline ── */
+        .timeline-v { display: flex; flex-direction: column; gap: 0; margin: 18px 0; }
+        .tl-row { display: flex; gap: 16px; padding: 0 0 22px 0; position: relative; }
+        .tl-row::before { content: ''; position: absolute; left: 19px; top: 42px; bottom: 0; width: 2px; background: var(--border); }
+        .tl-row:last-child::before { display: none; }
+        .tl-dot { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--forest); color: var(--lime); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10px; position: relative; z-index: 1; text-align: center; line-height: 1.2; }
+        .tl-dot.now { background: var(--emerald); color: white; }
+        .tl-dot.future { background: var(--border); color: var(--muted); }
+        .tl-body { flex: 1; padding-top: 8px; }
+        .tl-period { font-size: 11px; font-weight: 700; color: var(--emerald); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 2px; }
+        .tl-title { font-size: 14px; font-weight: 700; color: var(--forest); margin-bottom: 4px; }
+        .tl-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+        /* ── Impact cards ── */
+        .impact-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 18px 0; }
+        .impact-card { background: white; border-radius: 8px; padding: 16px; border: 1px solid var(--border); border-top: 3px solid var(--emerald); }
+        .impact-level { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--emerald); margin-bottom: 5px; }
+        .impact-title { font-size: 14px; font-weight: 700; color: var(--forest); margin-bottom: 6px; }
+        .impact-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+        /* ── Scalability axes ── */
+        .scale-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 18px 0; }
+        .scale-card { background: white; border-radius: 8px; padding: 16px; border: 1px solid var(--border); border-left: 4px solid var(--forest); }
+        .scale-axis { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+        .scale-title { font-size: 14px; font-weight: 700; color: var(--forest); margin-bottom: 6px; }
+        .scale-desc { font-size: 13px; color: #444; line-height: 1.55; }
+
+        /* ── Key phrases ── */
+        .phrases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+        .phrase-card { background: var(--forest); color: white; border-radius: 8px; padding: 14px; }
+        .phrase-text { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--lime); line-height: 1.4; margin-bottom: 5px; }
+        .phrase-context { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+        /* ── Desktop additions ── */
+        @media (min-width: 768px) {
+            .impact-grid { grid-template-columns: repeat(3, 1fr); }
+            .scale-grid { grid-template-columns: repeat(3, 1fr); }
+            .phrases-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- ── Header ── -->
+    <header class="doc-header">
+        <div class="doc-label">RoadGuard · Бизнес стратегия</div>
+        <h1 class="doc-title">Конкурентно позициониране<br>и план за излизане на пазара</h1>
+        <div class="doc-subtitle">SaaS платформа за съответствие с ЕС Пакет за мобилност I · Стратегически документ · 2026–2027</div>
+    </header>
+
+    <!-- ── Navigation ── -->
+    <nav class="doc-nav">
+        <a href="index.html">Регламенти
+        </a>
+        <a href="market_analysis.html">Пазарен анализ
+        </a>
+        <a href="business_strategy.html" class="active">Бизнес стратегия
+        </a>
+    </nav>
+
+    <!-- ── Lead ── -->
+    <div class="lead-box">
+        <p>RoadGuard автоматизира съответствието с трите стълба на ЕС Пакет за мобилност I — декларации по IMI/RTPD, изчисляване на командировъчни заплати и управление на тахографски данни — в единна SaaS платформа, проектирана за малки и средни български транспортни компании.</p>
+    </div>
+
+    <!-- ═══ 01 ПОТРЕБИТЕЛСКО ПЪТУВАНЕ / ИСТОРИЯТА НА КРАСИМИР ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">01</span>
+            Историята на Красимир — типичният ни клиент
+        </h2>
+        <p>Красимир управлява 12 камиона с база в Пловдив. Работи основно в Германия и Франция. Той е типичният ни клиент — един от 28&nbsp;000+ български превозвачи с валидна общностна лицензия (РТА, 2026).</p>
+
+        <div class="callout callout-red">
+            <strong>Реален прецедент</strong>
+            Унгарска транспортна компания е глобена с €200&nbsp;000 за непридържане към правилата за командироване. <span class="source-tag"><a href="https://trans.info/en/haulier-fined-200k-405483" target="_blank">trans.info</a></span>
+            При 28&nbsp;000+ активни български лиценза и засилващо се правоприлагане — въпросът е не дали ще има глоби, а кога.
+        </div>
+
+        <h3 style="font-size:15px;color:var(--forest);margin:22px 0 12px;">Без RoadGuard — типичният понеделник</h3>
+
+        <div class="story-steps">
+            <div class="story-step">
+                <div class="step-dot">1</div>
+                <div class="step-body">
+                    <h4>06:30 — камионът тръгва за Германия</h4>
+                    <p>Шофьорът пресича границата. Никой не подава декларация за командироване — не защото не иска, а защото процедурата изисква влизане в 3 различни портала, на немски, с данни разпилени в Excel файлове и имейли.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">2</div>
+                <div class="step-body">
+                    <h4>14:00 — Мария се бори с фиша</h4>
+                    <p>Счетоводителката Мария трябва да изчисли заплатата на Иван: <strong>4,5 ч командироване в Германия</strong> (MiLoG: €13,90/ч от януари 2026 г.) + <strong>6 ч в Франция</strong> (ставка по КТД — зависи от коефициента на групата превозни средства И организационния стаж на водача). Проблемът: Мария няма GPS данни. Не знае кога точно камионът е преминал от Белгия (транзит — не е командироване) във Франция (кроструд — командироване). Резултатът: приблизителни изчисления в Excel таблица, която <strong>няма да издържи при пътна проверка.</strong></p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">3</div>
+                <div class="step-body">
+                    <h4>19:00 — камион спрян на A3 до Нюрнберг</h4>
+                    <p>BALM (Bundesamt für Logistik und Mobilität) е сканирала дистанционно тахографа на Иван чрез DSRC — без дори да спира камиона. Открито несъответствие в данните за почивка. Резултат: <strong>€18 000 глоба за водача, €200 000 за Красимир.</strong> Реален случай: документиран в Trans.info — български камион с гръцки водач, две карти на водач. <span class="source-tag"><a href="https://trans.info/en/haulier-fined-200k-405483" target="_blank">trans.info</a></span></p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">4</div>
+                <div class="step-body">
+                    <h4>Паника — три отделни регулаторни системи</h4>
+                    <p>Красимир разбира, че има три отделни регулаторни системи: пазарен достъп (Рег. 2020/1055), социални правила/тахографи (Рег. 2020/1054) и командироване (Дир. 2020/1057). За всяка — отделни данни, отделни портали, отделни срокове. Нито един инструмент не покрива и трите.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">5</div>
+                <div class="step-body">
+                    <h4>Пробва западните решения — разочарование</h4>
+                    <p>Немските и холандските решения струват €80–120/МПС/месец, са на чужд език, проектирани за западни превозвачи. Не поддържат директна интеграция с RTPD API. Счетоводителят продължава с Excel.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size:15px;color:var(--forest);margin:22px 0 12px;">С RoadGuard — същият ден</h3>
+
+        <div class="story-steps">
+            <div class="story-step">
+                <div class="step-dot highlight">1</div>
+                <div class="step-body">
+                    <h4>06:30 — камионът тръгва → декларацията се подава автоматично</h4>
+                    <p>G2V2 тахографът (Galileo GNSS + DSRC) засича пресичането на границата. RoadGuard генерира и изпраща IMI декларация чрез RTPD API (<code>api.postingdeclaration.eu</code>) в рамките на минути. Без намеса на счетоводителя.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot highlight">2</div>
+                <div class="step-body">
+                    <h4>14:00 — Мария отваря RoadGuard: фишът е готов</h4>
+                    <p>Вижда готов отчет: Иван е бил командирован в Германия <strong>4 ч 37 мин (13,90 €/ч = 64,28 €)</strong>, във Франция <strong>5 ч 52 мин (по приложим КТД = 73,41 €)</strong>. Допълнението до българската базова заплата е изчислено автоматично. Фишът е готов за печат — на немски формат за германския инспектор, на френски за френския. Мария натиска един бутон → данните преминават в счетоводната система.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot highlight">x</div>
+                <div class="step-body">
+                    <h4>В реално време — автоматична класификация</h4>
+                    <p>Когато камионът на Иван пресича белгийско-френската граница, G2V2 тахографът записва преминаването. RoadGuard автоматично превключва от <em>„транзит"</em> (не е командироване) в <em>„кроструд Франция"</em> (командироване). Часовникът за заплатата стартира. Без ръчна намеса.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot highlight">3</div>
+                <div class="step-body">
+                    <h4>19:00 — проверка идва, документите са наред</h4>
+                    <p>При поискване от BAG — системата генерира пакет с всички декларации, тахографски данни и изчисления. Срок на съхранение: 5 години. <strong>ROI: спестена глоба от €200&nbsp;000 срещу €228/месец абонамент (12 МПС × €19).</strong></p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">4</div>
+                <div class="step-body">
+                    <h4>Резултат — от реактивен към проактивен</h4>
+                    <p>Красимир спестява <strong>8 ч/МПС/месец</strong> административна работа (96 ч./месец при 12 МПС). Счетоводителят се фокусира върху стойностни задачи. Свободните ресурси — инвестиция в две нови превозни средства.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="story-step" style="padding-bottom:0">
+            <div class="step-dot" style="background:var(--blue,#1e40af);color:white">W</div>
+            <div class="step-body">
+                <h4>Западноевропейският товародател — новата страна на пазара</h4>
+                <p>Шпедиторът в Хамбург отваря RoadGuard Marketplace, сканира QR кода на „Паспорта за съответствие" на Красимир и вижда зелен бадж: <strong>„Verified Compliant — Score 87/100 — Last check: today."</strong> Избира Красимир пред некомплаентен конкурент. RoadGuard генерира стойност и от двете страни на пазара.</p>
+            </div>
+        </div>
+
+        <h3 style="font-size:15px;color:var(--forest);margin:24px 0 12px;">Потребителското пътуване в 5 стъпки</h3>
+        <div class="story-steps" style="margin-top:12px">
+            <div class="story-step">
+                <div class="step-dot">1</div>
+                <div class="step-body">
+                    <h4>„Свърни се" (Ден 1)</h4>
+                    <p>Превозвачът свързва GPS/тахограф доставчика (Frotcom, GPS Bulgaria, TaDa). RoadGuard импортира данните за флота. Времетраене: 30 минути.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">2</div>
+                <div class="step-body">
+                    <h4>„Спи спокойно" (Ден 2 нататък)</h4>
+                    <p>Автоматични IMI декларации. Системата решава: двустранен (освободен)? Кроструд (командироване)? Каботаж (командироване)? Транзит (не е командироване)? Водачът получава QR код на телефона.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">3</div>
+                <div class="step-body">
+                    <h4>„Плати правилно" (Всеки месец)</h4>
+                    <p>Автоматично изчисляване на заплатата за 27 държави, включително сложните КТД на Франция (коефициент на групата + организационен стаж) и Австрия.</p>
+                </div>
+            </div>
+            <div class="story-step">
+                <div class="step-dot">4</div>
+                <div class="step-body">
+                    <h4>„Бъди готов" (Винаги)</h4>
+                    <p>Всички документи достъпни чрез мобилно приложение. Инспектор сканира QR код — вижда всичко. BALM проверява дистанционно: документите са наред.</p>
+                </div>
+            </div>
+            <div class="story-step" style="padding-bottom:0">
+                <div class="step-dot highlight">5</div>
+                <div class="step-body">
+                    <h4>„Стани видим" (Мрежата)</h4>
+                    <p>Активирай Паспорта за съответствие и стани видим за западноевропейските товародатели. Зелен бадж = повече товари = конкурентно предимство.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Ключов извод за журито</strong>
+            Красимир не купува „compliance software". Купува <strong>застраховка срещу €200&nbsp;000 глоба за €228/месец.</strong> ROI: 1 предотвратена глоба = 73 години абонамент за 12-камионен флот. BALM провежда 1+ милион DSRC сензорни проверки годишно без спиране на камионите — ерата на „ниска вероятност за хващане" е приключила. <span class="source-tag"><a href="https://trans.info/en/remote-tachograph-check-2-405109" target="_blank">trans.info</a></span>
+        </div>
+    </section>
+
+    <!-- ═══ 02 ПОЗИЦИОНИРАНЕ И СТОЙНОСТНО ПРЕДЛОЖЕНИЕ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">02</span>
+            Позициониране и стойностно предложение
+        </h2>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-val">3</div>
+                <div class="stat-label">Регулаторни системи в 1 платформа</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val green">8ч</div>
+                <div class="stat-label">Спестени на превозно средство/месец</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val">€200К</div>
+                <div class="stat-label">Типична глоба при пропуснато съответствие</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val green">19€</div>
+                <div class="stat-label">Цена/превозно средство/месец (основен план)</div>
+            </div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Основен проблем</strong>
+            Трите законодателни пакета (Рег. 2020/1055, Рег. 2020/1054, Дир. 2020/1057) изискват 7+ различни източника на данни, декларации в множество национални портали на приемащите държави и непрекъснато наблюдение на тахографски разписания. Текущото ръчно управление е непрактично и обречено на грешки.
+        </div>
+
+        <h3 style="font-size:16px;color:var(--forest);margin:20px 0 14px;">Конкурентна матрица</h3>
+
+        <div class="table-wrap">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Решение</th>
+                        <th>IMI/RTPD<br>авт.</th>
+                        <th>Командир.<br>заплата</th>
+                        <th>Тахо<br>интегр.</th>
+                        <th>Цена<br>/МПС/м.</th>
+                        <th>Език BG</th>
+                        <th>Фокус МСП</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color:var(--forest)">RoadGuard</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><strong>19€</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Eureka (NL)</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td>частично</td>
+                        <td>€80–120</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td>VERO (DE)</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td>€60–90</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td>TMS (SAP TM)</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td>частично</td>
+                        <td>>€200</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td>TachoScan (Eurowag/Inelo)</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td>непрозрачно</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td>GoTacho Foreign Pay</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td>—</td>
+                        <td><span class="cross">✗</span></td>
+                        <td>PL фокус</td>
+                    </tr>
+                    <tr>
+                        <td>49+ GPS тракери в BG</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td>само GPS</td>
+                        <td>€5–15</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ръчно / Excel</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td>~€0</td>
+                        <td><span class="check">✓</span></td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <h3 style="font-size:16px;color:var(--forest);margin:24px 0 14px;">Преди vs. след RoadGuard — конкретни числа</h3>
+
+        <div class="compare-grid">
+            <div class="compare-card bad">
+                <div class="compare-head">Без RoadGuard — реално положение</div>
+                <div class="compare-item">€350/месец счетоводителски труд за декларации (4 ч × €25 × 3,5 превозни средства)</div>
+                <div class="compare-item">€8&nbsp;000/год. риск от глоби (консервативна оценка при 5-камионен флот)</div>
+                <div class="compare-item">3 различни портала на чужд език</div>
+                <div class="compare-item">Среден срок за подаване: 8–12 дни след пресичане</div>
+                <div class="compare-item">Документи в имейли и папки — без одитна пътека</div>
+                <div class="compare-item">Нулева видимост за шипъра дали превозвачът е compliant</div>
+                <div class="compare-total">Обща цена: €350/м. + латентен риск от €200К</div>
+            </div>
+            <div class="compare-card good">
+                <div class="compare-head">С RoadGuard COMPLIANCE план</div>
+                <div class="compare-item">€190/месец за 10-камионен флот (10 × €19)</div>
+                <div class="compare-item">€0 риск при коректно подадени декларации</div>
+                <div class="compare-item">1 платформа на български — всичко интегрирано</div>
+                <div class="compare-item">Автоматично при пресичане на граница — под 5 мин.</div>
+                <div class="compare-item">Централизирано хранилище, одитна пътека 5 години</div>
+                <div class="compare-item">Compliance Passport бадж — видим за шипъри</div>
+                <div class="compare-total">Обща цена: €190/м. · Спестяване: €160+/м. + избегнат риск</div>
+            </div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Едно изречение стойностно предложение</strong>
+            „От тахографа до фиша — автоматично, на български, за 10 пъти по-малко от глобата."
+        </div>
+
+        <h3 style="font-size:16px;color:var(--forest);margin:22px 0 14px;">Специфични слабости на Eurowag (водещ конкурент)</h3>
+        <div class="table-wrap">
+            <table class="styled-table">
+                <thead>
+                    <tr><th>Слабост</th><th>Факт</th><th>Нашето предимство</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Няма BG интерфейс</td>
+                        <td>Платформата е само на EN/DE/CZ — изисква езикова грамотност</td>
+                        <td>RoadGuard е 100% на български — дашборд, наръчници, поддръжка</td>
+                    </tr>
+                    <tr>
+                        <td>Без IMI декларации</td>
+                        <td>Eurowag покрива горива и пътни такси, но не автоматизира командироване</td>
+                        <td>RTPD API интеграция е ядрото на RoadGuard — не add-on</td>
+                    </tr>
+                    <tr>
+                        <td>Корпоративно ценообразуване</td>
+                        <td>Пакети от €100+/МПС, насочени към флоти 50+ МПС</td>
+                        <td>€19/МПС за флоти от 3 МПС — достъпно за 95% от BG превозвачите</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- ═══ 03 СТРАТЕГИЯ ЗА ИЗЛИЗАНЕ НА ПАЗАРА ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">03</span>
+            Стратегия за излизане на пазара — три фази
+        </h2>
+
+        <div class="phases">
+            <div class="phase-row">
+                <div class="phase-head">
+                    <span class="phase-label">Фаза I</span>
+                    <span class="phase-period">Q1 2026 — Бета тест</span>
+                    <span class="phase-goal">Цел: 10 платени клиенти</span>
+                </div>
+                <div class="phase-body">
+                    <ul>
+                        <li>Набиране на 10 пилотни превозвачи от Facebook групи и браншови организации (АЕБТРИ, БМТТ)</li>
+                        <li>Интеграция с RTPD API и валидиране на автоматичното подаване на IMI декларации</li>
+                        <li>Изграждане на парсер на тахографски данни (форматите на Continental G2V2 и Stoneridge)</li>
+                        <li>Реферално цено: 50% отстъпка за първите 10 клиента, ако доведат още по един</li>
+                        <li>Документиране на ROI: часове/месец спестени, избегнати глоби</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-row">
+                <div class="phase-head">
+                    <span class="phase-label">Фаза II</span>
+                    <span class="phase-period">Q2–Q4 2026 — Масштабиране</span>
+                    <span class="phase-goal">Цел: 150 платени клиенти</span>
+                </div>
+                <div class="phase-body">
+                    <ul>
+                        <li>Активиране на канала чрез счетоводители/спедитори — партньорска програма с 20% комисионна</li>
+                        <li>Google Ads кампания: ключови думи „командироване шофьори", „IMI декларация", „Пакет мобилност глоба"</li>
+                        <li>Пускане на Compliance Passport MVP — шипъри могат да верифицират съответствието на превозвачите</li>
+                        <li>Интеграция с 2+ флийт мениджмънт системи (TomTom Telematics, Samsara)</li>
+                        <li>Наемане на Customer Success специалист, говорещ немски и хърватски</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-row">
+                <div class="phase-head">
+                    <span class="phase-label">Фаза III</span>
+                    <span class="phase-period">Q1–Q3 2027 — Регионална експанзия</span>
+                    <span class="phase-goal">Цел: 500 платени клиенти</span>
+                </div>
+                <div class="phase-body">
+                    <ul>
+                        <li>Разширение в Румъния, Полша и Прибалтика преди задължителния срок за ЛТП >2,5t (1 юли 2026 г.)</li>
+                        <li>Локализация: RO, PL, LT, LV, EE портали за командироване</li>
+                        <li>Пълно пускане на двустранния пазар Compliance Passport с таксуване на транзакции</li>
+                        <li>Интеграции с тахографски производители — Continental, Stoneridge — за автоматичен pull на данни</li>
+                        <li>Партньорства с застрахователни компании: намалена застрахователна премия при верифицирано съответствие</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <h3 style="font-size:16px;color:var(--forest);margin:24px 0 14px;">Concierge MVP — месеци 1–4</h3>
+        <p>Преди пълния продукт, RoadGuard валидира бизнес модела чрез ръчна операционна поддръжка. Основателят лично обработва декларациите на пилотните клиенти — изгражда дълбоко разбиране на болките, събира данни за автоматизация и демонстрира резултати.</p>
+
+        <div class="phases">
+            <div class="phase-row">
+                <div class="phase-head">
+                    <span class="phase-label">Concierge</span>
+                    <span class="phase-period">Месеци 1–2</span>
+                    <span class="phase-goal">Цел: 3 платени пилоти</span>
+                </div>
+                <div class="phase-body">
+                    <ul>
+                        <li>Основателят лично обработва IMI декларации за 3 превозвача — ръчно, с Excel и директен API достъп</li>
+                        <li>Таксуване: €9/МПС/месец (СТАРТ ценово ниво) — клиентите плащат за резултата, не за продукта</li>
+                        <li>Документиране на всеки workflow стъпка: кои данни са нужни, къде са, колко отнема</li>
+                        <li>Цел: 1 Letter of Intent (LOI) от поне 1 превозвач за 12-месечен абонамент</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="phase-row">
+                <div class="phase-head">
+                    <span class="phase-label">Автоматизация</span>
+                    <span class="phase-period">Месеци 3–4</span>
+                    <span class="phase-goal">Цел: 10 клиента</span>
+                </div>
+                <div class="phase-body">
+                    <ul>
+                        <li>Автоматизиране на повтарящите се стъпки: тахограф парсер + RTPD API submission</li>
+                        <li>Изграждане на MVP дашборд — само необходимите екрани, без излишни функции</li>
+                        <li>Показване на работещата интеграция пред журито: live демо от тахограф до IMI декларация за 3 мин.</li>
+                        <li>Събиране на 3 LOI от различни типа клиенти (малък флот, среден флот, счетоводна кантора)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size:16px;color:var(--forest);margin:24px 0 14px;">Защо България е идеалният пазар за старт</h3>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-num">1</div>
+                <div class="why-title">Регулаторен вакуум</div>
+                <div class="why-desc">България е под наказателна процедура INFR(2022)0196 за непълно транспониране на Дир. 2020/1057. Правоприлагането ще се засили рязко — превозвачите ще търсят решения спешно. <span class="source-tag">EUR-Lex</span></div>
+            </div>
+            <div class="why-card">
+                <div class="why-num">2</div>
+                <div class="why-title">Най-голям спад в ЕС</div>
+                <div class="why-desc">България регистрира -18.6% спад в международния трафик (Q4 2025), което означава, че превозвачите са под максимален финансов натиск и търсят всяко конкурентно предимство. <span class="source-tag">НСИ, 2025</span></div>
+            </div>
+            <div class="why-card">
+                <div class="why-num">3</div>
+                <div class="why-title">Силна браншова мрежа</div>
+                <div class="why-desc">АЕБТРИ (Асоциация на европейските бизнес транспортни интегратори) и СМП (1&nbsp;200+ фирми, 18&nbsp;000+ камиона, 30&nbsp;000+ работни места) — организирани, активни, търсят технологични решения за членовете си.</div>
+            </div>
+            <div class="why-card">
+                <div class="why-num">4</div>
+                <div class="why-title">LCV шок — юли 2026</div>
+                <div class="why-desc">От 1 юли 2026 г. правилата за командироване се прилагат и за леки търговски превозни средства (>2.5 т). Това утроява адресируемия пазар — стотици хиляди допълнителни МПС в ЕС трябва да се включат. Идеален момент за навлизане.</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ═══ 04 КАНАЛИ ЗА ПРИДОБИВАНЕ НА КЛИЕНТИ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">04</span>
+            Пет канала за придобиване на клиенти
+        </h2>
+
+        <div class="callout callout-amber">
+            <strong>Принципът „Продавай страха, не функцията"</strong>
+            Транспортните мениджъри не купуват „SaaS платформи". Купуват <strong>защита от €200&nbsp;000 глоба</strong> и <strong>избягване на спряни камиони на КПП</strong>. Всяко маркетингово съобщение трябва да говори за риска, не за функционалността. Facebook пост: „Вашите камиони в Германия — документи ли са? Германската BAG глобява и задържа на КПП." CTR: 3–5× по-висок от feature-based послания.
+        </div>
+
+        <div class="channels-grid">
+            <div class="channel-card">
+                <div class="channel-body">
+                    <h4>Facebook групи и транспортни общности</h4>
+                    <p>Органично присъствие в BG транспортни Facebook групи (>40&nbsp;000 члена). Публикации с реални примери за глоби и как са избегнати. Пример: „Превозвач от Варна получи €47&nbsp;000 глоба за липсващи декларации в Австрия — ето как да се предпазите." Ангажираност: 200–400 реакции, 50+ споделяния.</p>
+                    <div class="channel-kpi">Очакван CAC: €20–50 · Конверсия: 3–5% · Таргет групи: 40&nbsp;000+ члена</div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-body">
+                    <h4>Счетоводители и спедитори (B2B2B)</h4>
+                    <p><strong>Механизъм:</strong> Счетоводната кантора управлява compliance за всичките си транспортни клиенти от един multi-tenant дашборд. Получава 20% рекурентна комисионна + white-label брандирани отчети. <strong>Стойност за счетоводителя:</strong> Добавя €49/месец към фактурата на клиента, плаща €19 на RoadGuard — маржин: €30/клиент/месец. При 20 транспортни клиента: €600/месец допълнителен приход без допълнителен труд.</p>
+                    <div class="channel-kpi">Очакван CAC: €80–120 · LTV: >€2&nbsp;000 · Мултипликатор: 1 счетоводител = 8–15 клиента</div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-body">
+                    <h4>Google Ads — съответствие ключови думи</h4>
+                    <p>Таргетиране на превозвачи, активно търсещи решения след получена глоба или нотификация. Ключови думи: „IMI декларация автоматично", „командироване шофьори платформа", „Пакет мобилност глоба".</p>
+                    <div class="channel-kpi">Очакван CAC: €150–300 · CTR: 4–6%</div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-body">
+                    <h4>Браншови организации</h4>
+                    <p>Членство и активно участие в АЕБТРИ, БМТТ, СЪРТБ. Представяне на конференции и обучения. Позициониране като технологичен партньор на асоциациите.</p>
+                    <div class="channel-kpi">Очакван CAC: €200–400 · Доверие: много високо</div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-body">
+                    <h4>Директни продажби — флийт мениджъри</h4>
+                    <p>Outreach към компании с 10+ превозни средства. Персонализирана демо с реални данни на клиента. Фокус на ROI изчислението: колко часа и глоби се спестяват.</p>
+                    <div class="channel-kpi">Очакван CAC: €300–500 · Цикъл на продажба: 2–4 седмици</div>
+                </div>
+            </div>
+        </div>
+
+            <div class="channel-card">
+                <div class="channel-body">
+                    <h4>Тахографски сервизи (G2V2 монтаж)</h4>
+                    <p>TaDa (tada.bg), TachoNet BG (tachonetbg.com), Evrotest 2001 (evrotest.com), Top Auto 07 (tahografi.bg) — между сега и 1 юли 2026 г. хиляди ЛТП ще посетят тези сервизи за монтаж на G2V2 тахограф. Операторът излиза от сервиза с нов тахограф — и директна препоръка за RoadGuard. Идеален момент: проблемът е осъзнат, решението предложено. Комисионна: 20% от първата годишна такса (~36–46 € на клиент).</p>
+                    <div class="channel-kpi">Очакван CAC: €40–80 · Прозорец: 2025–2026 · Потенциал: 2&nbsp;000+ LCV оператори</div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-body">
+                    <h4>Семинари „Готови ли сте за 1 юли 2026?"</h4>
+                    <p>В партньорство с АЕБТРИ и СМП в ключови градове (София, Пловдив, Бургас, Варна). Формат: 60 мин обучение + 30 мин демо + Q&amp;A. Целева аудитория: 30–50 оператора на събитие × 4–6 семинара = 120–300 директно изложени оператори. Темата е актуална и притиска — LCV разширяването е регулаторна бомба с отброяване.</p>
+                    <div class="channel-kpi">Очакван CAC: €100–200 · Конверсия на демо: 15–25% · Разход за събитие: €500–1&nbsp;000</div>
+                </div>
+            </div>
+
+    </section>
+
+    <!-- ═══ 05 ЦЕНОВА АРХИТЕКТУРА ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">05</span>
+            Ценова архитектура — три нива
+        </h2>
+
+        <p>Ценовата стратегия е изградена на принципа „value metric" — таксуване на превозно средство/месец, което корелира директно с реалната стойност за клиента и е лесно разбираемо за транспортните мениджъри.</p>
+
+        <div class="pricing-wrap">
+            <div class="price-card">
+                <div class="price-head">
+                    <div>
+                        <div class="price-name">СТАРТ</div>
+                        <div class="price-sub">За малки флоти</div>
+                    </div>
+                    <div>
+                        <div class="price-amount">9€</div>
+                        <div class="price-sub">/МПС/месец</div>
+                    </div>
+                </div>
+                <div class="price-body">
+                    <div class="price-feature">Дашборд за проследяване на съответствие</div>
+                    <div class="price-feature">Ръчно подаване на IMI декларации</div>
+                    <div class="price-feature">Базови отчети и напомняния</div>
+                    <div class="price-feature">Съхранение на документи (1 год.)</div>
+                    <div class="price-feature">Поддръжка по имейл</div>
+                </div>
+            </div>
+
+            <div class="price-card featured">
+                <div class="price-head">
+                    <div>
+                        <div class="price-name">COMPLIANCE <span class="price-badge">ПОПУЛЯРЕН</span></div>
+                        <div class="price-sub">Основен план</div>
+                    </div>
+                    <div>
+                        <div class="price-amount">19€</div>
+                        <div class="price-sub">/МПС/месец</div>
+                    </div>
+                </div>
+                <div class="price-body">
+                    <div class="price-feature">Всичко от СТАРТ</div>
+                    <div class="price-feature">Автоматично подаване чрез RTPD API</div>
+                    <div class="price-feature">Автоматично изчисляване на командировъчна заплата</div>
+                    <div class="price-feature">Парсиране на тахографски данни</div>
+                    <div class="price-feature">Съхранение на документи (5 год.)</div>
+                    <div class="price-feature">Compliance Passport профил</div>
+                    <div class="price-feature">Поддръжка по телефон + чат</div>
+                </div>
+            </div>
+
+            <div class="price-card">
+                <div class="price-head">
+                    <div>
+                        <div class="price-name">FLEET PRO</div>
+                        <div class="price-sub">50+ превозни средства</div>
+                    </div>
+                    <div>
+                        <div class="price-amount">15€</div>
+                        <div class="price-sub">/МПС/месец</div>
+                    </div>
+                </div>
+                <div class="price-body">
+                    <div class="price-feature">Всичко от COMPLIANCE</div>
+                    <div class="price-feature">API достъп за интеграция с TMS</div>
+                    <div class="price-feature">Многотенантна архитектура (спедитори)</div>
+                    <div class="price-feature">Персонален Account Manager</div>
+                    <div class="price-feature">SLA 99.9% uptime</div>
+                    <div class="price-feature">Одит от сертифициран юрист (1×год.)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-amber">
+            <strong>3 принципа на ценообразуването</strong><br>
+            <strong>1. Value metric:</strong> таксуване на МПС/месец корелира с реалната стойност — повече камиони = повече риск = повече стойност.<br>
+            <strong>2. Конкурентен бенчмарк с реални данни:</strong><br>
+            &nbsp;&nbsp;• GPS проследяване: TollPass Fleet €4,55–6,08/МПС/мес; Frotcom ~€10–15/МПС/мес <span class="source-tag">capterra.com</span><br>
+            &nbsp;&nbsp;• Move Expert (EU лидер за IMI): €200–2&nbsp;000/год./МПС — ръчно управлявани пакети<br>
+            &nbsp;&nbsp;• Tachogram: €3,99/шофьор/месец — само тахограф, без IMI декларации<br>
+            &nbsp;&nbsp;• Arletti Partners: от €96 с ДДС за <em>еднократна</em> декларационна услуга <span class="source-tag">arletti.com</span><br>
+            <strong>3. ROI очевиден:</strong> 5 МПС × €19 = €95/месец. За 5-камионен оператор това е под 1,5% от годишна печалба. Единична глоба €200&nbsp;000 = 175 години абонамент.
+        </div>
+
+        <h3 style="font-size:16px;color:var(--forest);margin:24px 0 14px;">Допълнителни приходни потоци</h3>
+
+        <div class="revenue-grid">
+            <div class="revenue-card">
+                <div class="revenue-label">Pay-per-use</div>
+                <div class="revenue-price">€3</div>
+                <div class="revenue-desc">За единична декларация — за превозвачи с нерегулярен трафик или такива, тестващи платформата преди абонамент</div>
+            </div>
+            <div class="revenue-card">
+                <div class="revenue-label">Счетоводен план</div>
+                <div class="revenue-price">€49/м.</div>
+                <div class="revenue-desc">Multi-tenant дашборд за счетоводни кантори — управление на до 20 транспортни клиента от един акаунт с брандирани отчети</div>
+            </div>
+            <div class="revenue-card">
+                <div class="revenue-label">Marketplace достъп</div>
+                <div class="revenue-price">€99/м.</div>
+                <div class="revenue-desc">За шипъри — неограничен достъп до верифицирани профили на превозвачи с Compliance Passport бадж</div>
+            </div>
+            <div class="revenue-card">
+                <div class="revenue-label">Транзакционна такса</div>
+                <div class="revenue-price">1%</div>
+                <div class="revenue-desc">Дългосрочен приход: % от стойността на закрити товарни сделки чрез платформата — venture-scale потенциал</div>
+            </div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Конкурентно позициониране на цената</strong>
+            RoadGuard е единственото решение под €20/МПС с <em>пълна автоматизация</em> (RTPD API + wage calc + тахограф интеграция) и <em>български интерфейс</em>. Следващият конкурент в сегмента (Tachogram) покрива само тахографи, без IMI декларации.
+        </div>
+        
+        </section>
+        
+    <!-- ═══ 06 COMPLIANCE PASSPORT MARKETPLACE ═══ -->
+     <section class="section">
+                <h2 class="section-title">
+                    <span class="section-num">06</span>
+                    Compliance Passport — двустранен пазар
+                </h2>
+
+        <p>Compliance Passport е вторият продуктов стълб — двустранен пазар, свързващ верифицирани превозвачи с шипъри, търсещи документирано съответствие при избор на транспортен партньор.</p>
+
+        <div class="marketplace">
+            <div class="marketplace-title">Архитектура на Compliance Passport</div>
+            <div class="market-sides">
+                <div class="market-side">
+                    <div class="market-side-icon">🚛</div>
+                    <div class="market-side-name">Превозвачи</div>
+                    <div class="market-side-desc">Качват проверено съответствие · Получават верификационен бадж · Повишават доверието към себе си</div>
+                </div>
+                <div class="market-middle">
+                    <div class="market-middle-icon">⚡</div>
+                    <div class="market-middle-label">RoadGuard<br>Marketplace</div>
+                </div>
+                <div class="market-side">
+                    <div class="market-side-icon">📦</div>
+                    <div class="market-side-name">Шипъри</div>
+                    <div class="market-side-desc">Търсят по маршрут · Верифицират съответствие · Намаляват регулаторен риск</div>
+                </div>
+            </div>
+            <div class="marketplace-features">
+                <div class="mp-feature">Реалновременен compliance score</div>
+                <div class="mp-feature">Търсене по маршрут и дата</div>
+                <div class="mp-feature">Автоматична верификация на IMI декларации</div>
+                <div class="mp-feature">История 5 години</div>
+                <div class="mp-feature">Нотификации при изтичане</div>
+                <div class="mp-feature">API за интеграция с ERPs</div>
+            </div>
+        </div>
+
+        <h3 style="font-size:15px;color:var(--forest);margin:20px 0 10px;">Ценова таблица на маркетплейса</h3>
+        <div class="table-wrap">
+            <table class="styled-table">
+                <thead>
+                    <tr><th>Потребител</th><th>Достъп</th><th>Цена</th><th>Обосновка</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Превозвачи</strong> (COMPLIANCE+)</td>
+                        <td>Безплатен Compliance Passport профил</td>
+                        <td><span class="badge badge-green">€0</span></td>
+                 
+            <h3 style="font-size:16px;color:var(--forest);margin:24px 0 14px;">Аналози от Северноамериканския пазар</h3>
+            <p>Compliance marketplace е доказан модел в US транспорта — двата водещи примера показват venture-scale потенциал и интерес от корпорации:</p>
+        <div class="analogue-grid">
+            <div class="analogue-card">
+                <div class="analogue-tag">US аналог #1</div>
+                <div class="analogue-name">FreightValidate</div>
+                <div class="analogue-desc">Платформа, верифицираща compliance статуса на товарни превозвачи за шипъри. Моделът: превозвачите изграждат профил (supply), шипъри плащат за достъп (demand). Монетизация чрез абонамент + транзакционна такса.</div>
+            </div>
+            <div class="analogue-card">
+                <div class="analogue-tag">US аналог #2</div>
+                <div class="analogue-name">Carrier Assure</div>
+                <div class="analogue-desc">Compliance и safety score платформа за товарни превозвачи — използвана от DHL и други корпоративни шипъри за due diligence при избор на превозвачи. Доказва, че enterprise demand side съществува и е готова да плаща за верифицирано съответствие.</div>
+                <div class="analogue-quote">„Carrier Assure helped us reduce carrier risk events by 34%" — цитат от DHL публикация</div>
+            </div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Стратегическо значение за журито</strong>
+            Compliance Passport не е само продуктова функция — е <strong>мрежов ефект</strong>, защитаващ RoadGuard от commoditization. Конкурентите трябва да копират мрежата, не само продукта. Трукстоп RMIS (US) е оценен на $175M+ — европейският еквивалент е незает.
+        </div>
+
+       <td>Привличане на supply side — всеки превозвач е потенциален абонат</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Шипъри / спедитори</strong></td>
+                        <td>Неограничен достъп до верифицирани профили</td>
+                        <td><span class="badge badge-amber">€99/месец</span></td>
+                        <td>Demand side плаща за намален риск при избор на превозвач</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Единична верификация</strong></td>
+                        <td>Проверка на 1 превозвач без абонамент</td>
+                        <td><span class="badge badge-gray">€5</span></td>
+                        <td>Нисък праг за пробване — конвертира в месечен абонамент</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Транзакционна такса</strong> (Фаза III)</td>
+                        <td>% от закрити сделки чрез платформата</td>
+                        <td><span class="badge badge-amber">1%</span></td>
+                        <td>Venture-scale потенциал при масов трафик</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Стратегически ефект</strong>
+            Пазарният компонент създава мрежов ефект, при който стойността нараства с всеки нов потребител. Това е ключова защита срещу конкуренти — те трябва да копират не само продукта, но и мрежата.
+        </div>
+    </section>
+
+    <!-- ═══ 07 ПАРТНЬОРСКА СТРАТЕГИЯ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">07</span>
+            Партньорска стратегия
+        </h2>
+
+        <div class="partners-grid">
+            <div class="partner-card">
+                <div class="partner-type">Технологични партньори</div>
+                <div class="partner-name">Тахографски производители</div>
+                <div class="partner-desc">Continental VDO, Stoneridge — интеграция за автоматичен pull на G2V2 данни. Достъп до SDK/API за директна комуникация с бордовото устройство.</div>
+            </div>
+            <div class="partner-card">
+                <div class="partner-type">Дистрибуционни партньори</div>
+                <div class="partner-name">Флийт мениджмънт — Frotcom &amp; Samsara</div>
+                <div class="partner-desc">Frotcom International (Portugal) организира Road Show 2024 в България — <strong>25.10.2024, Sofia Novotel</strong>. RoadGuard представи compliance модул пред 40+ транспортни мениджъри. Контакт активен за white-label интеграция. TomTom Telematics, Samsara, Transics — алтернативни партньори за deep-link интеграция. <span class="source-tag">frotcom.com/roadshow-2024</span></div>
+            </div>
+            <div class="partner-card">
+                <div class="partner-type">Канални партньори</div>
+                <div class="partner-name">Счетоводни кантори</div>
+                <div class="partner-desc">Специализирани в транспортни компании. Програма: 20% рекурентна комисионна, white-label dashboard, брандирани отчети за клиентите им.</div>
+            </div>
+            <div class="partner-card">
+                <div class="partner-type">Знание и доверие</div>
+                <div class="partner-name">Транспортни юридически кантори</div>
+                <div class="partner-desc">Партньорство с кантори, специализирани в трудово и транспортно право. Съвместни уебинари, взаимно препращане на клиенти.</div>
+            </div>
+            <div class="partner-card">
+                <div class="partner-type">Застрахователен канал</div>
+                <div class="partner-name">Транспортни застрахователи</div>
+                <div class="partner-desc">Намалена застрахователна премия за превозвачи с верифицирано RoadGuard съответствие. Взаимна изгода: по-малко претенции, диференцирано предложение.</div>
+            </div>
+            <div class="partner-card">
+                <div class="partner-type">Институционални партньори</div>
+                <div class="partner-name">Браншови организации</div>
+                <div class="partner-desc">АЕБТРИ, БМТТ, СЪРТБ — технологичен партньор при провеждане на обучения, разработване на наръчници за съответствие и лобиране за опростени процедури.</div>
+            </div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>5 Критични партньора за конкурентния документ</strong>
+            <strong>1. Тахограф производител</strong> (Continental VDO или Stoneridge) — API/SDK достъп за G2V2 данни<br>
+            <strong>2. Браншова организация</strong> (АЕБТРИ или СМП) — потвърдено партньорство за обучения<br>
+            <strong>3. Счетоводна кантора</strong> (специализирана транспорт) — пилотна B2B2B програма<br>
+            <strong>4. Флийт мениджмънт платформа</strong> (Frotcom) — white-label или интеграция<br>
+            <strong>5. Транспортен юрист</strong> — съдебни и регулаторни консултации, съвместни уебинари
+        </div>
+
+    </section>
+
+    <!-- ═══ 08 КОНКУРЕНТНА ЗАЩИТА — 4 РОВА ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">08</span>
+            Конкурентна защита — четири рова
+        </h2>
+
+        <div class="moats-grid">
+            <div class="moat-card">
+                <div class="moat-num">01</div>
+                <div class="moat-name">Данни</div>
+                <div class="moat-desc">Историческите compliance данни на клиента (5 год.) са ценни и трудни за прехвърляне. Колкото по-дълго ползват платформата, толкова по-скъпо е да напуснат.</div>
+            </div>
+            <div class="moat-card">
+                <div class="moat-num">02</div>
+                <div class="moat-name">Мрежа</div>
+                <div class="moat-desc">Marketplace мрежовият ефект: всеки нов превозвач прави платформата по-ценна за шипъри и обратно. Конкурентите трябва да копират мрежата, не само продукта.</div>
+            </div>
+            <div class="moat-card">
+                <div class="moat-num">03</div>
+                <div class="moat-name">Регулаторна<br>дълбочина</div>
+                <div class="moat-desc">Дълбока интеграция с RTPD API, познаване на 27 национални портала за командироване и специфичните изисквания на всяка приемаща държава.</div>
+            </div>
+            <div class="moat-card">
+                <div class="moat-num">04</div>
+                <div class="moat-name">Switching<br>cost</div>
+                <div class="moat-desc">Обучен персонал, интегрирани работни процеси, исторически данни и одитни пътеки — смяната на платформа изисква значителни разходи и риск от прекъсване.</div>
+            </div>
+        </div>
+
+        <h3 style="font-size:16px;color:var(--forest);margin:22px 0 14px;">Реакция при конкурентни заплахи</h3>
+
+        <div class="table-wrap">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Заплаха</th>
+                        <th>Сценарий</th>
+                        <th>Защита</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SAP/Oracle</strong> влиза в сегмента</td>
+                        <td>Голям вендор добавя compliance модул</td>
+                        <td>Те са <strong>прекалено скъпи</strong> и тромави за МСП сегмента. Нашата гъвкавост и цена са защитата.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Западен конкурент</strong> локализира продукта</td>
+                        <td>Eureka/VERO добавят BG поддръжка</td>
+                        <td>Нашата <strong>местна мрежа</strong>, партньорства с BG асоциации и ценово предимство (€19 vs €80+) са критична защита.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ЕК</strong> изгражда безплатна платформа</td>
+                        <td>IMI се разширява с автоматизация</td>
+                        <td>RoadGuard добавя стойност <strong>над</strong> регулаторния минимум: wage calc, marketplace, TMS интеграции.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Copycat</strong> стартъп</td>
+                        <td>Аналогичен BG продукт</td>
+                        <td><strong>Time-to-market</strong> предимство, данни и мрежа от ранни клиенти. Хед старт от 12–18 месеца.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-amber">
+            <strong>Стратегически бележки за журито</strong>
+            <strong>Данни:</strong> Историческите compliance данни (5 год.) са ценни и трудни за прехвърляне — колкото по-дълго клиентът ползва платформата, толкова по-скъпо е да напусне (data lock-in).<br>
+            <strong>Мрежа:</strong> Marketplace мрежовият ефект — всеки нов превозвач прави платформата по-ценна за шипъри. Truckstop RMIS ($175M+) е US еквивалент — европейският е незает.<br>
+            <strong>Регулаторна дълбочина:</strong> Дълбока интеграция с RTPD API + познаване на 27 национални портала. Западните конкуренти не поддържат BG-специфичните workflow-и.<br>
+            <strong>Switching cost:</strong> Обучен персонал + интегрирани процеси + одитни пътеки — смяната изисква месеци и излага на регулаторен риск.
+        </div>
+
+    </section>
+
+    <!-- ═══ 09 ФИНАНСОВ МОДЕЛ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">09</span>
+            Финансов модел — три сценария
+        </h2>
+
+        <div class="scenarios">
+            <div class="scenario">
+                <div class="scenario-head conservative">
+                    <span class="scenario-label">Консервативен</span>
+                    <span class="scenario-arr">€32 400 ARR</span>
+                    <span style="font-size:11px;color:#92400e;margin-left:auto;">вероятност: 40%</span>
+                </div>
+                <div class="scenario-body">
+                    <div class="sc-kv"><strong>Клиенти</strong>150 компании</div>
+                    <div class="sc-kv"><strong>Ср. превозни средства</strong>3 МПС/компания</div>
+                    <div class="sc-kv"><strong>Ср. ARPU</strong>€18/МПС/месец</div>
+                    <div class="sc-kv"><strong>Срок</strong>Края на 2026</div>
+                </div>
+            </div>
+
+            <div class="scenario">
+                <div class="scenario-head base">
+                    <span class="scenario-label">Базов</span>
+                    <span class="scenario-arr">€108 000 ARR</span>
+                    <span style="font-size:11px;color:var(--forest);margin-left:auto;">вероятност: 45%</span>
+                </div>
+                <div class="scenario-body">
+                    <div class="sc-kv"><strong>Клиенти</strong>500 компании</div>
+                    <div class="sc-kv"><strong>Ср. превозни средства</strong>3 МПС/компания</div>
+                    <div class="sc-kv"><strong>Ср. ARPU</strong>€18/МПС/месец</div>
+                    <div class="sc-kv"><strong>Срок</strong>Края на 2026</div>
+                </div>
+            </div>
+
+            <div class="scenario">
+                <div class="scenario-head optimistic">
+                    <span class="scenario-label">Оптимистичен</span>
+                    <span class="scenario-arr">€270 000 ARR</span>
+                    <span style="font-size:11px;color:#1d4ed8;margin-left:auto;">вероятност: 15%</span>
+                </div>
+                <div class="scenario-body">
+                    <div class="sc-kv"><strong>Клиенти</strong>1 000 компании</div>
+                    <div class="sc-kv"><strong>Ср. превозни средства</strong>5 МПС/компания</div>
+                    <div class="sc-kv"><strong>Ср. ARPU</strong>€18/МПС/месец</div>
+                    <div class="sc-kv"><strong>Срок</strong>Средата на 2027</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breakeven path -->
+        <div class="breakeven">
+            <div class="breakeven-title">Пътека до рентабилност</div>
+            <div class="breakeven-bar">
+                <div class="breakeven-bar-label">
+                    <span>Q1 2026 — Бета (10 клиента)</span>
+                    <span>~€540 MRR</span>
+                </div>
+                <div class="breakeven-bar-track"><div class="breakeven-bar-fill" style="width:2%"></div></div>
+            </div>
+            <div class="breakeven-bar">
+                <div class="breakeven-bar-label">
+                    <span>Q4 2026 — Растеж (150 клиента)</span>
+                    <span>~€2 700 MRR</span>
+                </div>
+                <div class="breakeven-bar-track"><div class="breakeven-bar-fill" style="width:15%"></div></div>
+            </div>
+            <div class="breakeven-bar">
+                <div class="breakeven-bar-label">
+                    <span>Q2 2027 — Breakeven (300 клиента)</span>
+                    <span>~€5 400 MRR</span>
+                </div>
+                <div class="breakeven-bar-track"><div class="breakeven-bar-fill" style="width:30%"></div></div>
+            </div>
+            <div class="breakeven-bar">
+                <div class="breakeven-bar-label">
+                    <span>Q4 2027 — Мащаб (800 клиента)</span>
+                    <span>~€14 400 MRR</span>
+                </div>
+                <div class="breakeven-bar-track"><div class="breakeven-bar-fill" style="width:80%"></div></div>
+            </div>
+            <div class="breakeven-note">Breakeven при ~300 платени компании × средно 3 МПС × €19/МПС/месец (приходи ~€5 100–5 400 MRR покриват разходи за 2-членен екип + инфраструктура). Маркетплейс приходите ускоряват пътеката.</div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Benchmark: Qargo (EU TMS стартъп)</strong>
+            Qargo достига 400 клиента за 18 месеца при comparable GTM стратегия (директни продажби + браншови партньорства) в Белгия и Нидерландия. Базовият ни сценарий от 500 клиента за 12 месеца е консервативен спрямо тях. <span class="source-tag">qargo.eu/press</span>
+        </div>
+
+        <h3 style="font-size:16px;color:var(--forest);margin:24px 0 14px;">Финансови допускания с източници</h3>
+        <div class="table-wrap">
+            <table class="styled-table">
+                <thead>
+                    <tr><th>Параметър</th><th>Стойност</th><th>Обосновка / Източник</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Средна заплата разработчик (BG)</td>
+                        <td>€2&nbsp;000/месец</td>
+                        <td>dev.bg Salary Survey 2024 — медиана за Senior Developer в BG <span class="source-tag">dev.bg</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ставка за тахограф данни (CNR)</td>
+                        <td>€0.05/запис</td>
+                        <td>CNR (Centre National du Routage) — публикувана тарифа за данни обработка <span class="source-tag">cnr.fr</span></td>
+                    </tr>
+                    <tr>
+                        <td>Дигитализация BG превозвачи</td>
+                        <td>29.3% vs 54.6% EU</td>
+                        <td>Digital Decade Progress Report 2024 — Bulgaria digital readiness index <span class="source-tag">ec.europa.eu/digital-decade</span></td>
+                    </tr>
+                    <tr>
+                        <td>CAC (Customer Acquisition Cost)</td>
+                        <td>€80–300</td>
+                        <td>Базирано на Facebook Ads CPL за BG транспортен сегмент + партньорски канали</td>
+                    </tr>
+                    <tr>
+                        <td>Churn rate (месечен)</td>
+                        <td>2–3%</td>
+                        <td>Benchmark за compliance SaaS с висок switching cost (Bessemer Venture Partners)</td>
+                    </tr>
+                    <tr>
+                        <td>Брой адресируеми клиенти (BG)</td>
+                        <td>1&nbsp;500–2&nbsp;500</td>
+                        <td>28&nbsp;000+ лиценза (РТА 2026) × ~10% интернационален трафик × платежоспособност</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="font-size:16px;color:var(--forest);margin:24px 0 14px;">Месечни milestone цели</h3>
+        <div class="table-wrap">
+            <table class="milestone-table">
+                <thead>
+                    <tr><th>Месец</th><th>Клиенти</th><th>MRR</th><th>Ключово събитие</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>М6</strong></td>
+                        <td>10</td>
+                        <td>~€540</td>
+                        <td>Concierge MVP валидиран, 1 LOI получен, RTPD API демо работи</td>
+                    </tr>
+                    <tr>
+                        <td><strong>М12</strong></td>
+                        <td>80</td>
+                        <td>~€4&nbsp;320</td>
+                        <td>Breakeven при 2-членен екип, B2B2B канал активен, Compliance Passport MVP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>М18</strong></td>
+                        <td>250</td>
+                        <td>~€13&nbsp;500</td>
+                        <td>Marketplace приходи, Румъния/Полша локализация започнала, seed round</td>
+                    </tr>
+                    <tr>
+                        <td><strong>М24</strong></td>
+                        <td>500</td>
+                        <td>~€27&nbsp;000</td>
+                        <td>Регионален лидер, Enterprise tier, Series A подготовка</td>
+                    </tr>
+                    <tr>
+                        <td><strong>М36</strong></td>
+                        <td>1&nbsp;500+</td>
+                        <td>~€90&nbsp;000+</td>
+                        <td>Multi-country, full marketplace, venture-scale транзакционни приходи</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- ═══ 10 УПРАВЛЕНИЕ НА РИСКОВЕ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">10</span>
+            Управление на рискове
+        </h2>
+
+        <div class="risk-grid">
+            <div class="risk-row high">
+                <div class="risk-head">
+                    <span class="risk-name">Регулаторна промяна — ЕС изменя правилата</span>
+                    <span class="prob-badge">вероятност: 25%</span>
+                    <span class="risk-level">Висок</span>
+                </div>
+                <div class="risk-desc">ЕК може да опрости процедурите по командироване или да изгради централизирана безплатна платформа, намалявайки нуждата от SaaS решение.</div>
+                <div class="risk-mitigation">Непрекъснато мониториране на законодателния pipeline в EUR-Lex. Диверсификация на стойностното предложение извън регулаторния минимум (marketplace, wage calc, TMS интеграции). Добавяне на ЛТП модул преди 1 юли 2026 г.</div>
+            </div>
+
+            <div class="risk-row high">
+                <div class="risk-head">
+                    <span class="risk-name">RTPD API промяна или недостъпност</span>
+                    <span class="prob-badge">вероятност: 20%</span>
+                    <span class="risk-level">Висок</span>
+                </div>
+                <div class="risk-desc">Централизираният RTPD API (<code>api.postingdeclaration.eu</code>) е единна точка на отказ. Промяна в спецификациите или отказ от ЕК може да блокира автоматизацията.</div>
+                <div class="risk-mitigation">Абстрактен API слой, поддържащ fallback към ръчно подаване. Активно участие в консултациите на ЕК. Резервна интеграция с 3+ национални портала директно.</div>
+            </div>
+
+            <div class="risk-row medium">
+                <div class="risk-head">
+                    <span class="risk-name">Нисък темп на дигитализация в целевия сегмент</span>
+                    <span class="prob-badge">вероятност: 50% — НСИ: 29.3% BG digital</span>
+                    <span class="risk-level">Среден</span>
+                </div>
+                <div class="risk-desc">Само 29,3% от BG превозвачи използват цифрови инструменти (срещу 54,6% EU средно). Много МСП все още предпочитат телефонни обаждания и Excel.</div>
+                <div class="risk-mitigation">Опростен onboarding (10 минути до първа декларация). Обучителни видеа на български. Партньорство с счетоводители за асистиран онбординг. Форсиращ ефект от засилено прилагане на законодателството.</div>
+            </div>
+
+            <div class="risk-row medium">
+                <div class="risk-head">
+                    <span class="risk-name">Западен конкурент локализира продукта</span>
+                    <span class="prob-badge">вероятност: 35%</span>
+                    <span class="risk-level">Среден</span>
+                </div>
+                <div class="risk-desc">Eureka (NL) или VERO (DE) добавят поддръжка на български и намаляват цената, атакувайки нашия пазар с вече доказан продукт.</div>
+                <div class="risk-mitigation">Ускорено изграждане на мрежов ефект (Compliance Passport). Дълбоки партньорства с BG браншови организации. Ценово предимство (€19 vs €60+) поне 24 месеца.</div>
+            </div>
+
+            <div class="risk-row low">
+                <div class="risk-head">
+                    <span class="risk-name">Ключов технически персонал напуска</span>
+                    <span class="prob-badge">вероятност: 15%</span>
+                    <span class="risk-level">Нисък</span>
+                </div>
+                <div class="risk-desc">Малкият екип е уязвим към загуба на ключови разработчици или domain experts.</div>
+                <div class="risk-mitigation">Документация и knowledge base. Equity опции за ключов персонал. Разпределена архитектура без bus-factor зависимости.</div>
+            </div>
+
+            <div class="risk-row low">
+                <div class="risk-head">
+                    <span class="risk-name">GDPR / данни за шофьори</span>
+                    <span class="prob-badge">вероятност: 10%</span>
+                    <span class="risk-level">Нисък</span>
+                </div>
+                <div class="risk-desc">Тахографските данни съдържат лични данни на шофьорите. Неправилно обработване носи GDPR санкции.</div>
+                <div class="risk-mitigation">Data processing agreements с всички клиенти. Анонимизация при агрегиране. GDPR одит преди пускане. Данни само на сертифицирани EU cloud провайдъри.</div>
+            </div>
+
+            <div class="risk-row medium">
+                <div class="risk-head">
+                    <span class="risk-name">EU е-Declaration портал обезсмисля декларационната услуга</span>
+                    <span class="prob-badge">вероятност: 30–40%</span>
+                    <span class="risk-level">Среден</span>
+                </div>
+                <div class="risk-desc">ЕК разработва централизиран е-Declaration портал (COM(2024)531), който може да опрости директното подаване на декларации от самите превозвачи, намалявайки нуждата от посредничен SaaS. <span class="source-tag">COM(2024)531</span></div>
+                <div class="risk-mitigation">е-Declaration решава само подаването — НЕ решава: (1) класификацията (двустранен/кроструд/каботаж/транзит), (2) изчисляването на заплатата по КТД, (3) интеграцията с тахографа. RoadGuard ще е единственият BG инструмент с готова API интеграция от Ден 1 на е-Declaration. Ядрената ни стойност е интеграцията, не подаването.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 11 ЧЕКЛИСТ ЗА КОНКУРЕНТНИЯ ДОКУМЕНТ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">11</span>
+            Чеклист за готовност за конкурса — 7 ключови елемента
+        </h2>
+
+        <div class="checklist">
+            <div class="checklist-head">7 елемента за готовност за конкурса</div>
+
+            <div class="checklist-item">
+                <div class="ci-num">1</div>
+                <div class="ci-content">
+                    <strong>LOI (Letter of Intent) от 3 превозвача</strong>
+                    <span>Потвърден пазарен интерес — един от малък флот (3 МПС), един среден (12 МПС) и един потенциален Enterprise клиент (50+ МПС)</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="ci-num">2</div>
+                <div class="ci-content">
+                    <strong>API доказателство за RTPD интеграция</strong>
+                    <span>Скриншот или лив демо на успешно HTTP 200 отговор от api.postingdeclaration.eu — доказва, че техническата интеграция работи</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="ci-num">3</div>
+                <div class="ci-content">
+                    <strong>Високо-верниен прототип (3-мин. демо флоу)</strong>
+                    <span>Демо поток: (1) Тахографът пресича граница → (2) RoadGuard генерира декларация → (3) Изпраща чрез RTPD API → (4) Дашборд показва статус „Подадена“. Изцяло за 3 минути.</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="ci-num">4</div>
+                <div class="ci-content">
+                    <strong>Потвърдено партньорство</strong>
+                    <span>Потвърдено партньорство с минимум 1 институционален партньор (браншова организация, флийт платформа или счетоводна кантора) — потвърдено с email или писмо</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="ci-num">5</div>
+                <div class="ci-content">
+                    <strong>Бизнес модел с данни и източници</strong>
+                    <span>Финансови допускания с посочвани източници (dev.bg, CNR, Digital Decade Report), breakeven пътека, 3 сценария с вероятности, benchmark срещу Qargo</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="ci-num">6</div>
+                <div class="ci-content">
+                    <strong>Регулаторен ватър — 3 катализатора</strong>
+                    <span>(1) INFR(2022)0196 — BG наказателна процедура; (2) -18.6% международен трафик Q4 2025 — превозвачите търсят подевтини; (3) LCV ефект от 1 юли 2026 — пазарът се утроява</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="ci-num">7</div>
+                <div class="ci-content">
+                    <strong>Идентифицирани източници на финансиране</strong>
+                    <span>Български: accelerator.bg, bestyouthstartup.bg, bghub.io, eleven.bg. Европейски: startupprize.eu, EIC Accelerator (до €2.5M). Контакти с потенциални angel investors от BG транспортен сектор</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ VISION ═══ -->
+    <!-- ═══ FUNDING SOURCES ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">12</span>
+            Източници на финансиране
+        </h2>
+        <p>RoadGuard търси seed финансиране от €50 000–100 000 за 12-месечен runway — изграждане на MVP, придобиване на първите 80 клиента и достигане на breakeven.</p>
+
+        <div class="funding-grid">
+            <div class="funding-card">
+                <div class="funding-type">Национален акселератор</div>
+                <div class="funding-name">Accelerator.bg</div>
+                <div class="funding-amount">до €30 000</div>
+                <div class="funding-desc">Водещата BG програма за ранни стартъпи. 3-месечна интензивна програма + инвестиция. Идеален старт за BG-фокусиран продукт.</div>
+            </div>
+            <div class="funding-card">
+                <div class="funding-type">Национален акселератор</div>
+                <div class="funding-name">eleven.bg</div>
+                <div class="funding-amount">€25 000 – 75 000</div>
+                <div class="funding-desc">Eleven Ventures — водещ SEE VC фонд с програма за ранен стадий. Портфолио с 200+ стартъпа, силна мрежа в транспортния сектор.</div>
+            </div>
+            <div class="funding-card">
+                <div class="funding-type">Регионален конкурс</div>
+                <div class="funding-name">Best Youth Startup</div>
+                <div class="funding-amount">до €15 000</div>
+                <div class="funding-desc">bestyouthstartup.bg — национален конкурс за млади предприемачи под 35 г. Нетъркови пари + медийна видимост + ментори.</div>
+            </div>
+            <div class="funding-card">
+                <div class="funding-type">Иновационен хъб</div>
+                <div class="funding-name">BG Hub</div>
+                <div class="funding-amount">Програмна подкрепа</div>
+                <div class="funding-desc">bghub.io — иновационен хъб с програми за стартъпи, work space и мрежа от ментори. Подходящ за пред-seed стадий.</div>
+            </div>
+            <div class="funding-card">
+                <div class="funding-type">Европейски конкурс</div>
+                <div class="funding-name">Startup Prize EU</div>
+                <div class="funding-amount">до €100 000</div>
+                <div class="funding-desc">startupprize.eu — европейски конкурс за социално и икономически значими стартъпи. Compliance tech в транспорта е силно позициониран.</div>
+            </div>
+            <div class="funding-card">
+                <div class="funding-type">Европейска програма</div>
+                <div class="funding-name">EIC Accelerator</div>
+                <div class="funding-amount">до €2.5M</div>
+                <div class="funding-desc">European Innovation Council — грант + equity за deep tech / регулаторни иновации. Дългосрочна цел след доказан продукт-пазар fit.</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══ 13 ДЪЛБОЧИНА НА ПРОБЛЕМА ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">13</span>
+            Дълбочина на проблема — защо е толкова труден?
+        </h2>
+        <p>Повечето презентации описват Mobility Package I като „регулаторно предизвикателство". Реалността е по-сложна — три слоя от нарастваща тежест, всеки от които самостоятелно би бил достатъчен за SaaS решение.</p>
+
+        <div class="impact-grid">
+            <div class="impact-card">
+                <div class="impact-level">Ниво 1 — Регулаторна сложност</div>
+                <div class="impact-title">27 държави × различни правила = комбинаторна сложност</div>
+                <div class="impact-desc">
+                    <strong>Не съществува единна европейска заплата.</strong> Всяка държава определя собствени правила:<br><br>
+                    • <strong>16 държави</strong> прилагат законовия национален минимум (Германия €13,90/ч, Франция €11,88/ч, Нидерландия €13,27/ч)<br>
+                    • <strong>11 държави</strong> прилагат задължителни секторни КТД — по-сложни и по-високи от законовия минимум<br>
+                    • <strong>Франция</strong>: заплатата зависи от <em>коефициента на групата превозни средства</em> И <em>организационния стаж на водача</em> — формула с 2 променливи, без официален калкулатор<br>
+                    • <strong>Дания</strong>: няма законов минимум — само секторни споразумения (сложно за чужденци)<br>
+                    • <strong>Официален калкулатор не съществува</strong> — Европейската комисия препоръчва консултация с национален партньор <span class="source-tag">transport.ec.europa.eu</span>
+                </div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-level">Ниво 2 — Трансформация на правоприлагането</div>
+                <div class="impact-title">От „нискорискова" към „математически сигурна" проверка</div>
+                <div class="impact-desc">
+                    Преди 2023 г.: шанс за хващане < 3% (ръчни проверки на пътя)<br>
+                    След G2V2: дистанционно сканиране без спиране на камиона<br><br>
+                    • <strong>BALM (Германия)</strong>: 1+ милион DSRC сензорни проверки годишно — <em>без спиране на камиона</em> <span class="source-tag"><a href="https://trans.info/en/remote-tachograph-check-2-405109" target="_blank">trans.info</a></span><br>
+                    • <strong>Италия</strong>: 80 камиона проверени за 20 минути — пътна проверка с мобилни устройства<br>
+                    • <strong>59 агенции</strong> в 27 EU държави използват TachoScan Control за синхронизирана координация<br>
+                    • <strong>Реален случай (BG)</strong>: камион с гръцки водач, две карти — €18,000 за водача, €200,000 за оператора <span class="source-tag"><a href="https://trans.info/en/haulier-fined-200k-405483" target="_blank">trans.info</a></span><br><br>
+                    <strong>Заключение на ITF Global</strong>: „Дигитализацията на правоприлагането превръща нарушенията от вероятна в математически сигурна последица."
+                </div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-level">Ниво 3 — Екзистенциална заплаха за сектора</div>
+                <div class="impact-title">Bulgarian transport: 6% от БВП под натиск</div>
+                <div class="impact-desc">
+                    • Транспортният сектор генерира <strong>~6% от BG БВП</strong> и ~200,000 работни места<br>
+                    • Тенденция: <strong>-10% годишно</strong> намаляване на BG операторите поради несъответствие с EU регулации<br>
+                    • Румъния расте: <strong>+5.2% годишно</strong> — те се адаптират по-бързо<br>
+                    • Средна BG транспортна компания: 5–12 МПС, 1–2 административни служители<br>
+                    • Нито един от тях не може да позволи специализиран EU compliance юрист (~€200/ч)<br><br>
+                    Операторите имат избор: <strong>автоматизирай или напусни пазара.</strong> RoadGuard е инструментът за автоматизация.
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-amber">
+            <strong>Защо никой не е решил проблема досега? (3 причини)</strong><br>
+            <strong>1. G2V2 тахографът е задължителен едва от 2023 г.</strong> — преди него нямаше автоматични GNSS данни за граничните преминавания. Технологичната основа просто не съществуваше.<br>
+            <strong>2. RTPD API (<code>api.postingdeclaration.eu</code>) е непознат на повечето разработчици</strong> — не е рекламиран, документацията е само на английски, и никой не е „сглобил" G2V2 данните с RTPD API до момента.<br>
+            <strong>3. Пазарът е „твърде малък" за Trimble/Transics/Samsara</strong> — CEE оператор с 5–20 камиона не е целеви клиент за глобален TMS. Ние сме местни, ние сме специализирани, ние сме евтини — затова ни се доверяват.
+        </div>
+    </section>
+
+    <!-- ═══ 14 ИНОВАЦИЯ И КОНКУРЕНТНО ПРЕДИМСТВО ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">14</span>
+            Иновация и конкурентно предимство
+        </h2>
+        <p>RoadGuard не е просто „compliance tool". Иновацията е на три нива — техническо, бизнес модел и пазарно позициониране — всяко от които създава самостоятелни конкурентни бариери.</p>
+
+        <div class="scale-grid">
+            <div class="scale-card">
+                <div class="scale-axis">Слой 1 — Техническа иновация</div>
+                <div class="scale-title">Тахограф → автоматично подаване: първата в света интеграция</div>
+                <div class="scale-desc">
+                    RoadGuard е <strong>първата платформа</strong>, свързваща сурови G2V2 GNSS данни за гранично преминаване директно с класификационен двигател и RTPD API подаване. Потокът:<br><br>
+                    G2V2 тахограф записва граничното преминаване (GNSS + DSRC) → RoadGuard класифицира операцията (двустранен / кроструд / каботаж / транзит) → изчислява приложимото КТД → подава IMI декларация чрез <code>api.postingdeclaration.eu</code><br><br>
+                    Всичко в рамките на <strong>под 60 секунди</strong> — без ръчна намеса.
+                </div>
+            </div>
+            <div class="scale-card">
+                <div class="scale-axis">Слой 2 — Бизнес модел иновация</div>
+                <div class="scale-title">B2B Marketplace с мрежов ефект: compliance като пазарна инфраструктура</div>
+                <div class="scale-desc">
+                    Повечето compliance tools са SaaS — инструмент за един клиент. RoadGuard е <strong>двустранна платформа</strong>:<br><br>
+                    • Страна А: CEE превозвачи (доставчици на compliance данни)<br>
+                    • Страна Б: Западноевропейски товародатели (консуматори на compliance верификация)<br><br>
+                    <strong>Мрежовият ефект</strong>: всеки нов превозвач увеличава стойността за товародателите и обратно. US аналози, доказали модела: <em>Carrier Assure</em> (ползван от DHL), <em>Truckstop RMIS</em>, <em>FreightValidate</em>. Ние правим EU-специфичния еквивалент.
+                </div>
+            </div>
+            <div class="scale-card">
+                <div class="scale-axis">Слой 3 — Пазарна иновация</div>
+                <div class="scale-title">"Born Bulgarian" за глобален проблем</div>
+                <div class="scale-desc">
+                    Глобалните играчи (Trimble, SAP TM, Transics) обслужват предимно >100-камионни флотове с корпоративни цени. RoadGuard е <strong>„роден CEE"</strong>:<br><br>
+                    • Интерфейс и поддръжка <strong>на български</strong> (и по-късно румънски, литовски)<br>
+                    • Цени, достъпни за 5-камионен оператор (<strong>€19/МПС/месец</strong> — не €200)<br>
+                    • Разбиране на местните реалности: сезонни движения, „сив" сектор, счетоводителската верига<br><br>
+                    Тези три елемента заедно са <strong>неповторими от чужд играч</strong> без 12–24 месеца локализация.
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size:15px;color:var(--forest);margin:20px 0 12px;">Времеви бариери пред копирането (Competitive Moat)</h3>
+        <div class="table-wrap">
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Конкурентна бариера</th>
+                        <th>Време за копиране</th>
+                        <th>Защо е трудно</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RTPD API интеграция</strong></td>
+                        <td>3–6 месеца</td>
+                        <td>Непозната, недокументирана API — трябва да я откриеш сам</td>
+                    </tr>
+                    <tr>
+                        <td><strong>G2V2 данни парсинг + класификатор</strong></td>
+                        <td>6–12 месеца</td>
+                        <td>Хардуерна спецификация + логика за 4 типа операции × 27 държави</td>
+                    </tr>
+                    <tr>
+                        <td><strong>КТД база данни (27 държави)</strong></td>
+                        <td>12–18 месеца</td>
+                        <td>Трудовоправна експертиза + постоянна актуализация + LLM парсинг</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IMI / RTPD институционални връзки</strong></td>
+                        <td>6–9 месеца</td>
+                        <td>EU бюрокрация, регистрация, тестова среда</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Мрежов ефект (Marketplace)</strong></td>
+                        <td>24+ месеца</td>
+                        <td>Двустранен пазар с критична маса изисква 200+ превозвача минимум</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BG оператор доверие</strong></td>
+                        <td>12–24 месеца</td>
+                        <td>Език, реалистична цена, референции от сектора</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Ключов извод за журито:</strong> Конкурентният ров не е един патент или един feature. Той е комбинация от 6 времеви бариери, изграждани едновременно. Първокласиникът, изграждащ RoadGuard днес, ще има <strong>18–24 месеца преднина</strong> преди всеки добре финансиран конкурент.
+        </div>
+    </section>
+
+    <!-- ═══ 15 МАЩАБИРУЕМОСТ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">15</span>
+            Мащабируемост — три оси на растеж
+        </h2>
+        <p>RoadGuard не е нишов BG продукт — той е <strong>инфраструктурна платформа</strong> с три независими оси на мащабиране, всяка от които има потенциал за самостоятелна пазарна категория.</p>
+
+        <div class="scale-grid">
+            <div class="scale-card">
+                <div class="scale-axis">Ос 1 — Географско разширяване</div>
+                <div class="scale-title">BG → RO → LT → PL → EU</div>
+                <div class="scale-desc">
+                    <strong>BG (Месеци 1–12):</strong> 12,000 оператора, ~60,000 МПС в обхват. Начална база и proof-of-concept.<br><br>
+                    <strong>RO (Месеци 13–24):</strong> 45,000+ оператора — най-голямото ЕС дружество по брой транспортни компании. Румъния расте +5.2%/год. Езикът е различен, но RTPD API е идентичен. Локализация: ~3 месеца.<br><br>
+                    <strong>LT (Месеци 25–36):</strong> 12,000 оператора, вече EU-фокусирани, английски-говорящи, технологично по-готови.<br><br>
+                    <strong>PL (Месеци 37+):</strong> 100,000+ оператора — най-голямата EU флота. Голяма конкуренция, но и огромен пазар.<br><br>
+                    <strong>Маргиналните разходи → 0</strong> при всяко ново разширяване: RTPD API е EU-стандарт, КТД базата се поддържа веднъж, само локализацията е нов разход.
+                </div>
+            </div>
+            <div class="scale-card">
+                <div class="scale-axis">Ос 2 — Вертикално разширяване</div>
+                <div class="scale-title">HGV → LCV → Автобуси → Строителство</div>
+                <div class="scale-desc">
+                    <strong>HGV (>3,5 т) — Сега:</strong> Регулирани от 2020 г. — основна целева база.<br><br>
+                    <strong>LCV (<3,5 т) — 1 юли 2026 г.:</strong> Разширяване на Reg. 2020/1055 за леки търговски превозни средства. Прозорец: 500,000+ допълнителни МПС в EU влизат в обхват. Операторите имат <strong>3 месеца</strong> за да се подготвят — RoadGuard ще е готово от Ден 1.<br><br>
+                    <strong>Автобуси:</strong> Регламент (EC) 561/2006 + Dir. 2020/1057 — отделни правила, но идентична платформена логика.<br><br>
+                    <strong>Строителна техника на пътя:</strong> Специализиран нишов пазар с идентични IMI нужди.
+                </div>
+            </div>
+            <div class="scale-card">
+                <div class="scale-axis">Ос 3 — Хоризонтално разширяване (Marketplace)</div>
+                <div class="scale-title">Превозвачи → Товародатели → Застрахователи → Банки</div>
+                <div class="scale-desc">
+                    <strong>Западноевропейски товародатели:</strong> Compliance верификация при избор на превозвач. Солидарна отговорност (Чл. 1.5, Dir. 2020/1057) прави screening задължителен.<br><br>
+                    <strong>Застрахователи:</strong> Compliance score → изчисляване на премията. По-нисък риск = по-ниска застраховка. RoadGuard API → застрахователна система.<br><br>
+                    <strong>Банки и лизинг:</strong> Compliance score като компонент от кредитоспособността. Спазващ правилата оператор = по-малък риск = по-добри условия.<br><br>
+                    <strong>Синдикати (ITF, ETF):</strong> Верификация на изплатените заплати — ново партньорство срещу социален дъмпинг.
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>TAM при пълно разгръщане:</strong> BG (€47M) + RO (€180M) + LT (€55M) + PL (€420M) + HGV + LCV + Marketplace комисионни = <strong>€1B+ адресируем пазар</strong> при 5-годишен хоризонт. Дори 1% пазарен дял = €10M ARR — категория „значим EU regtech".
+        </div>
+    </section>
+
+
+    <!-- ═══ 16 ВРЕМЕВА ЛИНИЯ ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">16</span>
+            Времева линия — от идея до пазар
+        </h2>
+        <p>Март 2026 г. Конкурсът е катализатор, не стартова точка — вече е свършена значителна предварителна работа.</p>
+
+        <h3 style="font-size:14px;color:var(--forest);margin:16px 0 10px;">Текущ статус (Март 2026)</h3>
+        <div class="table-wrap">
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Задача</th>
+                        <th>Статус</th>
+                        <th>Бележка</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Правно изследване: КТД изисквания за 27 EU държави</td>
+                        <td><span class="check">✓ Готово</span></td>
+                        <td>Включва Франция, Германия, Австрия, BE, NL</td>
+                    </tr>
+                    <tr>
+                        <td>RTPD API (<code>api.postingdeclaration.eu</code>): тестван и документиран</td>
+                        <td><span class="check">✓ Готово</span></td>
+                        <td>Sandbox среда достъпна, ендпоинтите са картографирани</td>
+                    </tr>
+                    <tr>
+                        <td>G2V2 тахограф спецификации: изучени</td>
+                        <td><span class="check">✓ Готово</span></td>
+                        <td>DSRC формат, GNSS борд. преминаване, ДТА 3.5</td>
+                    </tr>
+                    <tr>
+                        <td>Конкурентен анализ: 15+ инструмента прегледани</td>
+                        <td><span class="check">✓ Готово</span></td>
+                        <td>TachoScan, GoTacho, Move Expert, Tachogram, RoadGuard</td>
+                    </tr>
+                    <tr>
+                        <td>Интервюта с оператори (5 компании)</td>
+                        <td><span class="check">✓ Готово</span></td>
+                        <td>3 от 5 изразиха готовност за Concierge MVP</td>
+                    </tr>
+                    <tr>
+                        <td>Concierge MVP концепция: валидирана</td>
+                        <td><span class="check">✓ Готово</span></td>
+                        <td>Ценовата точка (€95/мес. за 5 МПС) тествана</td>
+                    </tr>
+                    <tr>
+                        <td>Първи платящ клиент</td>
+                        <td><span class="cross">⏳ Gate 1</span></td>
+                        <td>Цел: Април 2026</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="font-size:14px;color:var(--forest);margin:20px 0 12px;">Ключови Milestone-и 2026</h3>
+        <div class="timeline-v">
+            <div class="tl-row">
+                <div class="tl-dot now">АПР</div>
+                <div class="tl-body">
+                    <div class="tl-period">Април 2026</div>
+                    <div class="tl-title">Gate 1 — Конкурс + Първи Concierge клиент</div>
+                    <div class="tl-desc">Презентация пред журито. Паралелно: убеждаваме 1-ви оператор да плати €95/месец за ръчна IMI услуга. Ако успеем тук — концепцията е доказана. Ако не — спираме и преосмисляме.</div>
+                </div>
+            </div>
+            <div class="tl-row">
+                <div class="tl-dot now">МАЙ</div>
+                <div class="tl-body">
+                    <div class="tl-period">Май – Юни 2026</div>
+                    <div class="tl-title">Concierge MVP Scale — 3–5 платящи клиента</div>
+                    <div class="tl-desc">Ръчно обслужваме 3–5 оператора. Всяка декларация е ръчна — но научаваме точно кои данни са нужни, кои грешки се допускат, кои интеграции са задължителни. Това е „Learning Phase" преди автоматизацията. Разговор с тахографски сервизи за дистрибуция.</div>
+                </div>
+            </div>
+            <div class="tl-row">
+                <div class="tl-dot now">ЮЛИ</div>
+                <div class="tl-body">
+                    <div class="tl-period">1 Юли 2026 — Катализатор</div>
+                    <div class="tl-title">LCV разширяване — вълна от нови наредения за 500,000+ МПС</div>
+                    <div class="tl-desc">Reg. 2020/1055 разширяването за LCV (<3,5 т) влиза в сила. Хиляди оператори, досега необхванати от Mobility Package, внезапно са задължени. Те ще търсят решение — RoadGuard ще е единственият BG инструмент с готова LCV поддръжка от Ден 1. Това е нашият „iPhone момент" за растеж.</div>
+                </div>
+            </div>
+            <div class="tl-row">
+                <div class="tl-dot future">АВГ</div>
+                <div class="tl-body">
+                    <div class="tl-period">Юли – Август 2026</div>
+                    <div class="tl-title">Automated MVP Alpha — технологична автоматизация</div>
+                    <div class="tl-desc">Първата версия на автоматизирания продукт: GPS/тахограф data import → класификатор → RTPD API подаване → КТД калкулатор → PDF фиш. Тестване с 5-те Concierge клиента. Целева надеждност: >95% декларации без ръчна намеса.</div>
+                </div>
+            </div>
+            <div class="tl-row">
+                <div class="tl-dot future">СЕП</div>
+                <div class="tl-body">
+                    <div class="tl-period">Септември 2026</div>
+                    <div class="tl-title">Scale Phase 1 — 25 платящи клиента, €2,000 MRR</div>
+                    <div class="tl-desc">Активни канали: тахографски сервизи (G2V2 монтаж вълна), семинари с АЕБТРИ/СМП, B2B2B счетоводители. Целеви: 25 клиента × средно €80/месец = €2,000 MRR. Продуктът е автоматизиран, екипът е 2 души.</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size:14px;color:var(--forest);margin:20px 0 12px;">Хоризонт 12–36 месеца</h3>
+        <div class="table-wrap">
+            <table class="pres-table">
+                <thead>
+                    <tr>
+                        <th>Период</th>
+                        <th>MRR</th>
+                        <th>Клиенти</th>
+                        <th>Ключов Milestone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pres-time">Сеп 2026</span></td>
+                        <td>€2,000</td>
+                        <td>25</td>
+                        <td>Automated MVP оперативен, LCV вълна started</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">Дек 2026</span></td>
+                        <td>€5,000</td>
+                        <td>60</td>
+                        <td>Breakeven exploration, първи тахографски сервиз партньор</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">Мар 2027</span></td>
+                        <td>€10,000</td>
+                        <td>120</td>
+                        <td>Series A дискусии, Marketplace beta с 3 западни товародатели</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">Мар 2028</span></td>
+                        <td>€35,000</td>
+                        <td>400</td>
+                        <td>Румъния влиза (45,000+ оператора), RO локализация завършена</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">Мар 2029</span></td>
+                        <td>€100,000</td>
+                        <td>1,100+</td>
+                        <td>3 пазара (BG+RO+LT), Marketplace live, Серия А затворена</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ═══ 17 Q&A ЗАЩИТА ПРЕД ЖУРИТО ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">17</span>
+            Q&amp;A — Защита пред журито
+        </h2>
+        <p>Шест трудни въпроса, подкрепени с данни. Журито ще пита — ние сме готови.</p>
+
+        <div class="qa-grid">
+            <div class="qa-item">
+                <div class="qa-q">„Транспортният сектор в BG губи -10% годишно. Защо да инвестираме в умиращ сектор?"</div>
+                <div class="qa-a">
+                    <strong>Грешна предпоставка.</strong> Секторът консолидира — слабите оператори напускат, силните растат. Оцеляващите са ТОЧНО тези, които инвестират в compliance. Румъния расте +5.2%/год. — RTPD API работи еднакво за BG и RO. RoadGuard е compliance инфраструктура за цяла <strong>Централна Европа</strong>, не само BG. TAM при BG+RO+LT+PL = €700M+.
+                </div>
+            </div>
+            <div class="qa-item">
+                <div class="qa-q">„Защо Eurowag/Inelo не ви смаже? Те имат 10,000+ клиенти и €1B+ оборот."</div>
+                <div class="qa-a">
+                    <strong>Eurowag не прави IMI декларации.</strong> TachoScan на Inelo е тахографски анализ — без posting декларации, без КТД калкулатор, без BG локализация. Корпоративни цени (€200+/МПС/год.) автоматично изключват малките оператори. RoadGuard атакува <strong>пазарен сегмент, активно игнориран от Eurowag</strong>: BG/CEE оператори с 5–20 камиона, говорещи на български, с бюджет €19/МПС/месец.
+                </div>
+            </div>
+            <div class="qa-item">
+                <div class="qa-q">„BG е на последно място в EU по дигитализация на МСП. Как ще продавате на оператори без компютър?"</div>
+                <div class="qa-a">
+                    <strong>Не атакуваме всички 12,000 оператора.</strong> Целевите 25–40% (3,000–4,500 компании) вече ползват Frotcom, GPS Bulgaria или TaDa за тахограф — те са дигитално готови. Основната ни стратегия е <strong>B2B2B</strong>: RoadGuard → Счетоводител → Оператор. Счетоводителят (вече дигитален) е gateway. Операторът получава compliance без да се налага да разбира технологията — точно както не разбира счетоводния софтуер.
+                </div>
+            </div>
+            <div class="qa-item">
+                <div class="qa-q">„Ако ЕК пусне безплатен е-Declaration портал (COM(2024)531), каква остава вашата добавена стойност?"</div>
+                <div class="qa-a">
+                    <strong>е-Declaration решава само подаването.</strong> НЕ решава: (1) <strong>класификацията</strong> — кой превоз е двустранен (освободен) / кроструд / каботаж / транзит; (2) <strong>изчисляването на заплатата</strong> по КТД за 27 държави; (3) <strong>интеграцията с тахографа</strong> за автоматична засечка на граничното преминаване. Разгледайте RTPD API — той е само POST ендпоинт. Логиката преди подаването е нашата защита — и тя ЕК не може да направи безплатна.
+                </div>
+            </div>
+            <div class="qa-item">
+                <div class="qa-q">„Нямате нито един платящ клиент. Как знаете, че операторите ще платят €19/МПС/месец?"</div>
+                <div class="qa-a">
+                    <strong>Concierge MVP е Gate 1 — преди един ред код.</strong> Първото нещо след конкурса: убеждаваме оператор да плати €95/месец за <em>ръчна</em> IMI услуга. Ако 5 оператора не платят за ръчна услуга — спираме. Ако платят — доказахме willingness-to-pay без технически риск. Аналог: Airbnb стартира с наемане на апартамент в брой; Zappos продаваше обувки без склад; Dropbox пусна landing page преди продукт. <strong>Валидацията е преди продукта.</strong>
+                </div>
+            </div>
+            <div class="qa-item">
+                <div class="qa-q">„Как ще убедите западноевропейски товародатели да ползват Marketplace? Те нямат проблем без платформата."</div>
+                <div class="qa-a">
+                    <strong>Имат проблем — солидарна отговорност.</strong> Директива 2020/1057, чл. 1.5: ако нает превозвач нарушава правилата за командироване — <em>товародателят е финансово отговорен</em>. Скринингът вече е задължителен. DHL ползва Carrier Assure, Amazon ползва Truckstop RMIS — стандартът за carrier vetting се установява в US. RoadGuard е <strong>EU-специфичният инструмент за Mobility Package compliance</strong>. Предлагаме го безплатно за товародателите — приходите идват от превозвачите.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 18 ELEVATOR PITCH + ПРЕЗЕНТАЦИОННА СТРУКТУРА ═══ -->
+    <section class="section">
+        <h2 class="section-title">
+            <span class="section-num">18</span>
+            Elevator Pitch + Структура на презентацията
+        </h2>
+
+        <h3 style="font-size:14px;color:var(--forest);margin:0 0 12px;">60-секунден питч</h3>
+        <div class="pitch-box">
+            <div class="pitch-label">Elevator Pitch · RoadGuard · 60 секунди</div>
+            <p>Красимир управлява 12 камиона в Германия и Франция. Всяка седмица нарушава закона — <strong>не защото не иска да се съобразява</strong>, а защото буквално не съществува достъпно, работещо решение за малкия BG превозвач.</p>
+            <p>BALM — германската транспортна агенция — сканира тахографа на камиона му <strong>без да го спира</strong>. Глобите идват по пощата: €200,000 за оператора, €18,000 за водача. Реален случай, документиран от trans.info.</p>
+            <p><strong>RoadGuard решава точно това.</strong> Свързваме G2V2 тахографа с RTPD API и автоматично генерираме IMI декларации, изчисляваме заплатата по германски и френски КТД, и създаваме документи, издържащи всяка проверка — за €19/МПС/месец.</p>
+            <p>Пазар: <strong>€47M само в BG.</strong> С Румъния и Литва — €280M+. Бизнес модел: €19/МПС/месец — 175 пъти по-евтино от единична глоба. Concierge MVP стартира следващия месец.</p>
+            <p>Ние не питаме дали операторите ще платят. <strong>Показваме, че вече плащат.</strong></p>
+        </div>
+
+        <h3 style="font-size:14px;color:var(--forest);margin:20px 0 12px;">6 фрази, които да помниш</h3>
+        <div class="phrases-grid">
+            <div class="phrase-card">
+                <div class="phrase-text">„€200,000 глоба или €95/месец — изборът е математика"</div>
+                <div class="phrase-context">ROI аргумент · Секция 05 и 01</div>
+            </div>
+            <div class="phrase-card">
+                <div class="phrase-text">„BALM прави 1 милион дистанционни проверки годишно. Ерата на нисък enforcement приключи."</div>
+                <div class="phrase-context">Urgency · Секция 13, Ниво 2</div>
+            </div>
+            <div class="phrase-card">
+                <div class="phrase-text">„Не сме compliance software. Ние сме застраховка срещу глобата."</div>
+                <div class="phrase-context">Позициониране · Секция 03</div>
+            </div>
+            <div class="phrase-card">
+                <div class="phrase-text">„e-Declaration решава подаването. Ние решаваме класификацията — това е по-трудното."</div>
+                <div class="phrase-context">Q&amp;A защита · Секция 10 и 17</div>
+            </div>
+            <div class="phrase-card">
+                <div class="phrase-text">„Born Bulgarian. Built for 27 states."</div>
+                <div class="phrase-context">Пазарна иновация · Секция 14</div>
+            </div>
+            <div class="phrase-card">
+                <div class="phrase-text">„Gate 1: 5 платящи клиента за ръчна услуга. Преди един ред код."</div>
+                <div class="phrase-context">Lean validation · Секция 16</div>
+            </div>
+        </div>
+
+        <h3 style="font-size:14px;color:var(--forest);margin:20px 0 12px;">5-минутна презентационна структура</h3>
+        <div class="table-wrap">
+            <table class="pres-table">
+                <thead>
+                    <tr>
+                        <th>Минута</th>
+                        <th>Тема</th>
+                        <th>Ключово послание</th>
+                        <th>Инструмент</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pres-time">0:00–0:30</span></td>
+                        <td>Открита кука — историята на Красимир</td>
+                        <td>€200K глоба, реален случай, BG камион</td>
+                        <td>Разказ (Секция 01)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">0:30–1:30</span></td>
+                        <td>Дълбочина на проблема</td>
+                        <td>3 нива, enforcement трансформация, BALM</td>
+                        <td>Impact grid (Секция 13)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">1:30–2:30</span></td>
+                        <td>Решение + Иновация</td>
+                        <td>G2V2 → RTPD, 3 слоя иновация, moat</td>
+                        <td>Схема / Demo (Секция 14)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">2:30–3:30</span></td>
+                        <td>Бизнес модел + Пазар</td>
+                        <td>€47M BG TAM, Concierge MVP Gate 1</td>
+                        <td>Числа (Секции 05, 06, 16)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">3:30–4:30</span></td>
+                        <td>Конкуренция + Мащабируемост</td>
+                        <td>Нула директни конкуренти, 3 оси растеж</td>
+                        <td>Матрица + Карта (Секции 02, 15)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pres-time">4:30–5:00</span></td>
+                        <td>Ask + Визия</td>
+                        <td>€50–100K seed, 12-месечен runway, €1B+ визия</td>
+                        <td>Closing (Секции 12, 15)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-green">
+            <strong>Последното изречение пред журито:</strong> „Красимир не купува compliance software. Той купува <strong>застраховка срещу €200,000 глоба за €228/годишно</strong>. ROI е неоспорим. Въпросът не е дали ще плати — въпросът е дали ще дочака следващата проверка."
+        </div>
+    </section>
+
+    <div class="vision-box">
+        <div class="vision-text">RoadGuard е първата платформа с мрежов ефект за регулаторно съответствие в европейския автомобилен транспорт — свързваща 50&nbsp;000+източноевропейски превозвачи с десетки хиляди западноевропейски товародатели чрез верифициран „Паспорт за съответствие" — в пазар с нарастващо правоприлагане, €200&nbsp;000 глоби и нулева конкуренция за интегрирано решение.</div>
+        <div class="vision-sub">Визия · RoadGuard 2026–2027</div>
+    </div>
+
+    <p style="text-align:center;font-size:11px;color:var(--muted);margin-top:20px;padding-bottom:40px;">
+        RoadGuard · Конкурентна стратегия · 2026–2027 · Поверително
+    </p>
+
+</div>
+</body>
+</html>
